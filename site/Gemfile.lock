@@ -1,0 +1,87 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.2.8)
+    backports (2.6.1)
+    bcrypt-ruby (3.0.1)
+    daemons (1.1.8)
+    datamapper (1.2.0)
+      dm-aggregates (~> 1.2.0)
+      dm-constraints (~> 1.2.0)
+      dm-core (~> 1.2.0)
+      dm-migrations (~> 1.2.0)
+      dm-serializer (~> 1.2.0)
+      dm-timestamps (~> 1.2.0)
+      dm-transactions (~> 1.2.0)
+      dm-types (~> 1.2.0)
+      dm-validations (~> 1.2.0)
+    dm-aggregates (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-constraints (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-core (1.2.0)
+      addressable (~> 2.2.6)
+    dm-migrations (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-serializer (1.2.1)
+      dm-core (~> 1.2.0)
+      fastercsv (~> 1.5.4)
+      json (~> 1.6.1)
+      json_pure (~> 1.6.1)
+      multi_json (~> 1.0.3)
+    dm-timestamps (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-transactions (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-types (1.2.1)
+      bcrypt-ruby (~> 3.0.0)
+      dm-core (~> 1.2.0)
+      fastercsv (~> 1.5.4)
+      json (~> 1.6.1)
+      multi_json (~> 1.0.3)
+      stringex (~> 1.3.0)
+      uuidtools (~> 2.1.2)
+    dm-validations (1.2.0)
+      dm-core (~> 1.2.0)
+    eventmachine (0.12.10)
+    fastercsv (1.5.4)
+    json (1.6.6)
+    json_pure (1.6.1)
+    multi_json (1.0.4)
+    rack (1.4.1)
+    rack-protection (1.2.0)
+      rack
+    rack-test (0.6.1)
+      rack (>= 1.0)
+    sinatra (1.3.2)
+      rack (~> 1.3, >= 1.3.6)
+      rack-protection (~> 1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    sinatra-contrib (1.3.1)
+      backports (>= 2.0)
+      eventmachine
+      rack-protection
+      rack-test
+      sinatra (~> 1.3.0)
+      tilt (~> 1.3)
+    slim (1.2.2)
+      temple (~> 0.4.0)
+      tilt (~> 1.3.3)
+    stringex (1.3.3)
+    temple (0.4.0)
+    thin (1.4.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    tilt (1.3.3)
+    uuidtools (2.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  datamapper
+  sinatra
+  sinatra-contrib
+  slim
+  thin
