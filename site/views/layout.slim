@@ -1,13 +1,95 @@
 doctype html
 html
   head
-    title Рейтинг доверия
-    meta name="keywords" content="Рейтинг доверия Народный рейтинг общественных деятелей политик политика"
-    meta property="fb:app_id" content="273684999345723"
-    link rel="author" href="humans.txt"
+    title Телемаркет
+    meta name="keywords" content="???"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="description" content=""
+    meta name="author" content=""
 
-  body
-    div#main.container
+    link rel="author" href="humans.txt"
+    link rel="stylesheet" href="css/bootstrap.css"
+    link rel="stylesheet" href="css/bootstrap-responsive.css"
+
+    script src="js/bootstrap.js"
+
+    link rel="shortcut icon" href="img/favicon.ico"
+
+  body data-spy="scroll" data-target=".subnav" data-offset="50"
+    div.navbar.navbar-fixed-top
+      div.navbar-inner
+        div.container
+          button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          
+          a.brand href="./index.html"
+            | Bootstrap
+          div.nav-collapse.collapse
+            ul.nav
+              li
+                a href="./index.html"
+                  | Overview
+              li
+                a href="./scaffolding.html"
+                  | Scaffolding
+              li.active
+                a href="./base-css.html"
+                  | Base CSS
+              li
+                a href="./components.html"
+                  | Components
+              li.divider-vertical
+              li
+                a href="./download.html"
+                  | Customize
+              li
+                a href="./examples.html"
+                  | Examples
+
+    div.container
+
+      header.subhead
+        h1
+          | Base CSS
+        p.lead
+          | On top of the scaffolding, basic HTML elements are styled and enhanced with extensible classes to provide a fresh, consistent look and feel.
+        div.subnav
+          ul.nav.nav-pills
+            li
+              a href="#typography"
+                | Typography
+            li
+              a href="#code"
+                | Code
+            li
+              a href="#tables"
+                | Tables
+            li
+              a href="#forms"
+                | Forms
+            li
+              a href="#buttons"
+                | Buttons
+            li
+              a href="#icons"
+                | Icons by Glyphicons
+
+      div.alert
+        | sdfgsdfgdsf
+
       == yield
 
-    div#footer.container
+      footer.footer
+        p.pull-right
+          a href="#"
+            | Back to top
+        p
+          | Designed and built with all the love in the world
+          a href="http://twitter.com/twitter" target="_blank"
+            | twitter
+        p
+          | Code licensed under the
+        p
+          | Icons from
