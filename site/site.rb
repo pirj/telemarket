@@ -8,16 +8,32 @@ require 'sinatra/reloader'
 require 'sinatra/namespace'
 require 'sinatra/reloader' if development?
 
+Dir['*.rb'].each { |con| require File.join Dir.pwd, con }
+
 class Site < Sinatra::Base
   register Sinatra::Contrib
   register Sinatra::Namespace
+  register Sinatra::Flash
+
+  use Rack::Session::Pool
+  use Rack::Protection
 
   configure :development do
     register Sinatra::Reloader
     also_reload './*.rb'
-    also_reload './cons/*.rb'
   end
 
   enable :logging
+  # enable :authentication
+
+  set :sessions, true
+
+  not_found do
+    'Не найдено.'
+  end
+
+  error do
+    'Произошло нечто ужасное: ' + env['sinatra.error'].name
+  end
 
 end
