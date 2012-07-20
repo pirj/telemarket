@@ -19,11 +19,10 @@ html
 
     link rel="shortcut icon" href="img/favicon.ico"
 
-  body data-spy="scroll" data-target=".subnav" data-offset="50"
+  body data-spy="scroll" data-target="#navbar" data-offset="60"
     == slim :nav
 
     div#main.container
-
       div.alert.alert-info
         a.close data-dismiss="alert" href="#"
           | ×
@@ -31,6 +30,4 @@ html
 
       == yield
 
-    footer.footer
-      p
-        | Designed and built with all the love in the world
+      == slim :footer

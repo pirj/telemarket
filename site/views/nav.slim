@@ -1,4 +1,4 @@
-div.navbar.navbar-fixed-top
+div#navbar.navbar.navbar-fixed-top
   div.navbar-inner
     div.container
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
@@ -11,12 +11,24 @@ div.navbar.navbar-fixed-top
 
       div.nav-collapse.collapse
         ul.nav
-          li.active
-            a href="/"
-              | Наши преимущества
           li
-            a href="./base-css.html"
-              | Цены
+            a href="#easy"
+              | Просто
+          li
+            a href="#fast"
+              | Быстро
+          li
+            a href="#reliably"
+              | Надёжно
+          li
+            a href="#soundly"
+              | Качественно
+          li
+            a href="#cheap"
+              | Недорого
+          li
+            a href="#convenient"
+              | Удобно
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
               | Контакты
@@ -48,13 +60,3 @@ div.navbar.navbar-fixed-top
             li
               a
                 | Выйти
-
-        ul.nav.pull-right
-          li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | Администрирование
-              b.caret
-            ul.dropdown-menu
-              li
-                a
-                  | Что-то там
