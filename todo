@@ -1,6 +1,7 @@
 1. freeswitch + ? kamailio
 2. zadarma / telphin
 3. thin/goliath + cramp/async-sinatra = план-звонки
+ . faye + https://github.com/ryanb/private_pub http://habrahabr.ru/post/124066/#comment_4078558
 4. 2 клиента на коробках
 5. 2 клиента на софтфонах
 
