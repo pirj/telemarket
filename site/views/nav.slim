@@ -1,0 +1,60 @@
+div.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      
+      a.brand href="/"
+        | Телемаркет
+
+      div.nav-collapse.collapse
+        ul.nav
+          li.active
+            a href="/"
+              | Наши преимущества
+          li
+            a href="./base-css.html"
+              | Цены
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Контакты
+              b.caret
+            ul.dropdown-menu
+              li
+                a
+                  | Емейл
+              li
+                a
+                  | Телефон
+              li
+                a
+                  | Скайп
+          li.divider-vertical
+          li
+            a href="./scaffolding.html"
+              | Работа у нас
+
+        ul.nav.pull-right
+          - unless false
+            li
+              a
+                | Зарегистрироваться
+            li
+              a
+                | Войти
+          - if false
+            li
+              a
+                | Выйти
+
+        ul.nav.pull-right
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Администрирование
+              b.caret
+            ul.dropdown-menu
+              li
+                a
+                  | Что-то там

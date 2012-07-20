@@ -2,94 +2,35 @@ doctype html
 html
   head
     title Телемаркет
-    meta name="keywords" content="???"
+    meta name="keywords" content="телемаркетинг, аутсорсинг, прозвон, поиск клиентов, клиентская база"
+    meta name="description" content="телемаргетинг аутсорсинг"
+    meta name="robots" content="index, follow"
+
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    meta name="description" content=""
     meta name="author" content=""
 
-    link rel="author" href="humans.txt"
     link rel="stylesheet" href="css/bootstrap.css"
     link rel="stylesheet" href="css/bootstrap-responsive.css"
+    link rel="stylesheet" href="css/app.css"
 
+    script src="js/jquery-1.7.2.min.js"
     script src="js/bootstrap.js"
+    script src="js/app.js"
 
     link rel="shortcut icon" href="img/favicon.ico"
 
   body data-spy="scroll" data-target=".subnav" data-offset="50"
-    div.navbar.navbar-fixed-top
-      div.navbar-inner
-        div.container
-          button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          
-          a.brand href="./index.html"
-            | Bootstrap
-          div.nav-collapse.collapse
-            ul.nav
-              li
-                a href="./index.html"
-                  | Overview
-              li
-                a href="./scaffolding.html"
-                  | Scaffolding
-              li.active
-                a href="./base-css.html"
-                  | Base CSS
-              li
-                a href="./components.html"
-                  | Components
-              li.divider-vertical
-              li
-                a href="./download.html"
-                  | Customize
-              li
-                a href="./examples.html"
-                  | Examples
+    == slim :nav
 
-    div.container
+    div#main.container
 
-      header.subhead
-        h1
-          | Base CSS
-        p.lead
-          | On top of the scaffolding, basic HTML elements are styled and enhanced with extensible classes to provide a fresh, consistent look and feel.
-        div.subnav
-          ul.nav.nav-pills
-            li
-              a href="#typography"
-                | Typography
-            li
-              a href="#code"
-                | Code
-            li
-              a href="#tables"
-                | Tables
-            li
-              a href="#forms"
-                | Forms
-            li
-              a href="#buttons"
-                | Buttons
-            li
-              a href="#icons"
-                | Icons by Glyphicons
-
-      div.alert
+      div.alert.alert-info
+        a.close data-dismiss="alert" href="#"
+          | ×
         | sdfgsdfgdsf
 
       == yield
 
-      footer.footer
-        p.pull-right
-          a href="#"
-            | Back to top
-        p
-          | Designed and built with all the love in the world
-          a href="http://twitter.com/twitter" target="_blank"
-            | twitter
-        p
-          | Code licensed under the
-        p
-          | Icons from
+    footer.footer
+      p
+        | Designed and built with all the love in the world
