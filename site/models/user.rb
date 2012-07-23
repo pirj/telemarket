@@ -15,7 +15,7 @@ class User
   property :deleted_at, ParanoidDateTime
   timestamps :at
 
-  belongs_to :account
+  belongs_to :company
 
   # Validations
   validates_presence_of      :email, :role
@@ -30,9 +30,9 @@ class User
   # This method is for authentication purpose
   #
   def self.authenticate(email, password)
-    account = first(:conditions => { :email => email }) if email.present?
+    user = first(:conditions => { :email => email }) if email.present?
     return false if crypted_password.nil?
-    account && account.has_password?(password) ? account : nil rescue nil
+    user && user.has_password?(password) ? user : nil rescue nil
   end
 
   ##

@@ -4,7 +4,7 @@ class Plan
 
   property :name, String, :length => 128
 
-  belongs_to :account
+  belongs_to :company
   has n, :target_groups
   has n, :calls
 

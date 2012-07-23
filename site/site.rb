@@ -18,7 +18,7 @@ class Site < Sinatra::Base
   use Rack::Session::Pool
   use Rack::Protection
 
-  DataMapper.setup(:default, 'sqlite://#{Dir.pwd}/development.db')
+  DataMapper.setup(:default, "sqlite://#{Dir.pwd}/development.db")
 
   configure :development do
     register Sinatra::Reloader

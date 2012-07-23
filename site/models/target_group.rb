@@ -4,7 +4,7 @@ class TargetGroup
 
   property :name, String, :length => 128
 
-  belongs_to :account
+  belongs_to :company
   has n, :targets
 
   property :deleted_at, ParanoidDateTime
