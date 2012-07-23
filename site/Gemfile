@@ -16,3 +16,7 @@ gem 'datamapper'
   gem 'dm-' + g
 end
 gem 'bcrypt-ruby', :require => "bcrypt"
+
+group :development do
+  gem 'pry'
+end
