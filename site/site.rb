@@ -8,7 +8,7 @@ require 'sinatra/reloader'
 require 'sinatra/namespace'
 require 'sinatra/reloader' if development?
 
-Dir['*.rb'].each { |con| require File.join Dir.pwd, con }
+Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
 
 class Site < Sinatra::Base
   register Sinatra::Contrib
@@ -18,9 +18,12 @@ class Site < Sinatra::Base
   use Rack::Session::Pool
   use Rack::Protection
 
+  DataMapper.setup(:default, 'sqlite://#{Dir.pwd}/development.db')
+
   configure :development do
     register Sinatra::Reloader
     also_reload './*.rb'
+    also_reload './models.rb'
   end
 
   enable :logging
