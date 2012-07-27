@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/intridea/omniauth-identity.git
+  revision: 1cbbb2acbdcf66fbe490e207fb95e7e4c9555c45
+  specs:
+    omniauth-identity (1.0.0)
+      bcrypt-ruby (~> 3.0)
+      omniauth (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,10 +74,14 @@ GEM
       data_objects (= 0.10.8)
     eventmachine (0.12.10)
     fastercsv (1.5.5)
+    hashie (1.2.0)
     json (1.6.7)
     json_pure (1.6.7)
     method_source (0.7.1)
     multi_json (1.0.4)
+    omniauth (1.1.0)
+      hashie (~> 1.2)
+      rack
     pg (0.14.0)
     pry (0.9.9.6)
       coderay (~> 1.0.5)
@@ -123,6 +135,7 @@ DEPENDENCIES
   dm-timestamps
   dm-types
   dm-validations
+  omniauth-identity!
   pg
   pry
   rack-protection

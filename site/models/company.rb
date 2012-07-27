@@ -4,7 +4,7 @@ class Company
 
   property :name, String, :length => 128
 
-  has n, :users, :constraint => :destroy
+  has n, :identities, :constraint => :destroy
   has n, :plans, :constraint => :destroy
   has n, :target_groups, :constraint => :destroy
 

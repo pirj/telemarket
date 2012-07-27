@@ -21,3 +21,5 @@ group :development do
   gem 'pry'
   gem 'dm-sqlite-adapter'
 end
+
+gem 'omniauth-identity', :git => 'git://github.com/intridea/omniauth-identity.git'

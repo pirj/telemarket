@@ -1,0 +1,19 @@
+p
+  a href='/register'
+    | Ещё не зарегистрированы?
+
+form.form-horizontal action="/auth/identity/callback"
+  fieldset
+    div.control-group
+      label.control-label for='auth_key'
+        | Электронная почта
+      div.controls
+        input name='auth_key' type='text'
+    div.control-group
+      label.control-label for='password'
+        | Пароль
+      div.controls
+        input name='password' type='password'
+
+  div.form-actions
+    input type='submit' value='Войти' class='btn btn-primary'
