@@ -1,0 +1,14 @@
+Run:
+
+sudo pacman -S autoconf automake libtool make pkg-config unixodbc unixodbc-dev php
+aurget -S freeswitch-get bluebox-git # modify freeswitch pkgbuild to include mod_spidermonkey
+
+You MUST change the default_password in /etc/freeswitch/vars.xml
+        Failure to do so will leave your default extension 1000 vulnerable
+FreeSWITCH's default configuration is available in
+        /usr/share/doc/freeswitch/examples/conf.default, with this package's modified
+        version in /usr/share/doc/freeswitch/examples/conf.archlinux
+The running configuration directory is symlinked as /etc/freeswitch
+
+FreeSWITCH can be  started with rc.d freeswitch start or /etc/sv/freeswitch/run
+
