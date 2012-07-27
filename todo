@@ -2,6 +2,9 @@
 2. zadarma / telphin
 3. thin/goliath + cramp/async-sinatra = план-звонки
  . faye + https://github.com/ryanb/private_pub http://habrahabr.ru/post/124066/#comment_4078558
+виджет звонка на сайт http://code.google.com/p/siprtmp/
+http://code.google.com/p/red5phone
+
 4. 2 клиента на коробках
 5. 2 клиента на софтфонах
 
