@@ -2,7 +2,7 @@ p
   a href='/sessions/new'
     | Уже зарегистрированы?
 
-form.form-horizontal action="/auth/identity/callback"
+form.form-horizontal method='post' action='/register'
   fieldset
     div.control-group
       label.control-label for='auth_key'
