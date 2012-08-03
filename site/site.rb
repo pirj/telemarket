@@ -6,6 +6,7 @@ Bundler.require
 require 'sinatra/contrib'
 require 'sinatra/reloader'
 require 'sinatra/namespace'
+require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 
 Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
@@ -14,6 +15,8 @@ class Site < Sinatra::Base
   register Sinatra::Contrib
   register Sinatra::Namespace
   register Sinatra::Flash
+
+  helpers Sinatra::ContentFor
 
   use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
   use Rack::Protection

@@ -20,7 +20,7 @@ html
     script src="/js/app.js"
 
   body data-spy="scroll" data-target="#navbar" data-offset="60"
-    == slim :nav
+    == yield_content :nav
 
     div#main.container
       - if session[:flash]

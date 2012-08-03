@@ -1,7 +1,7 @@
 class Site < Sinatra::Base
   get '/' do
     # logger.info "HA"
-    slim :home
+    slim :'home/index'
   end
 
   # namespace '/live' do

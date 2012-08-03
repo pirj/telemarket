@@ -9,7 +9,7 @@ class Site < Sinatra::Base
     return redirect 'sessions/new' unless identity
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"
-    redirect '/'
+    redirect '/company'
   end
 
   get '/sessions/logout' do
@@ -24,7 +24,8 @@ class Site < Sinatra::Base
   post '/register' do
     company = Company.new name: params[:company]
     identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], company: company, :role => 'customer'
-    puts company.errors.inspect, identity.errors.inspect
-    redirect '/'
+    session[:user_id] = identity.id
+    flash[:info] = "Добро пожаловать!"
+    redirect '/company'
   end
 end

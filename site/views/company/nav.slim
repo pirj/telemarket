@@ -1,0 +1,44 @@
+div#navbar.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      
+      a.scroll.brand href="#top"
+        | Телемаркет
+
+      div.nav-collapse.collapse
+        ul.nav
+          li
+            a.scroll href="#easy"
+              | Аудитория
+          li
+            a.scroll href="#fast"
+              | Группы
+          li
+            a.scroll href="#reliably"
+              | Пользователи
+          li
+            a.scroll href="#soundly"
+              | Планы
+          li
+            a.scroll href="#cheap"
+              | Звонки
+
+        ul.nav.pull-right
+          - if current_user
+            li
+              a href="/sessions/logout"
+                | Выйти
+          - unless current_user
+            a.btn.btn-primary href="/register"
+              | Зарегистрироваться
+            li
+              a href="/sessions/new"
+                | Войти
+          - if false
+            li
+              a href="#"
+                | Выйти
