@@ -1,0 +1,24 @@
+- content_for :nav do
+  == slim :'company/nav'
+section
+  div.page-header
+    h2
+      | Планы
+    table.table
+      th
+        | Наименование
+      th
+        | Таргет-группы
+      th
+        | Звонки
+      th
+        | Контакты
+      -@company.plans.each do |plan|
+        tr
+          = plan.name
+        tr
+          = plan.target_groups.inspect
+        tr
+          = plan.calls.size
+        tr
+          = plan.calls.contacts.size
