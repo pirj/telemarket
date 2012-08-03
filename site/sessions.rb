@@ -16,16 +16,4 @@ class Site < Sinatra::Base
     session[:user_id] = nil
     redirect '/'
   end
-
-  get '/register' do
-    slim :'sessions/register'
-  end
-
-  post '/register' do
-    company = Company.new name: params[:company]
-    identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], company: company, :role => 'customer'
-    session[:user_id] = identity.id
-    flash[:info] = "Добро пожаловать!"
-    redirect '/company'
-  end
 end

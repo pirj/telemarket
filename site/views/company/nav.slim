@@ -6,39 +6,52 @@ div#navbar.navbar.navbar-fixed-top
         span.icon-bar
         span.icon-bar
       
-      a.scroll.brand href="#top"
+      a.brand href="#top"
         | Телемаркет
 
       div.nav-collapse.collapse
         ul.nav
           li
-            a.scroll href="#easy"
-              | Аудитория
+            a href="#soundly"
+              | Планы (
+              = @company.plans.size
+              | )
           li
-            a.scroll href="#fast"
-              | Группы
+            a href="#fast"
+              | Группы (
+              = @company.target_groups.size
+              | )
           li
-            a.scroll href="#reliably"
-              | Пользователи
+            a href="#easy"
+              | Аудитория (
+              = @company.target_groups.targets.size
+              | )
           li
-            a.scroll href="#soundly"
-              | Планы
+            a href="#reliably"
+              | Пользователи (
+              = @company.employees.size
+              | )
           li
-            a.scroll href="#cheap"
-              | Звонки
+            a href="#cheap"
+              | Звонки (
+              = @company.plans.size
+              | )
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Баланс (
+              = @company.balance
+              |  руб.)
+              b.caret
+            ul.dropdown-menu
+              li
+                a href="#"
+                  | Пополнить
+              li
+                a href="#"
+                  | История операций
 
         ul.nav.pull-right
           - if current_user
             li
               a href="/sessions/logout"
-                | Выйти
-          - unless current_user
-            a.btn.btn-primary href="/register"
-              | Зарегистрироваться
-            li
-              a href="/sessions/new"
-                | Войти
-          - if false
-            li
-              a href="#"
                 | Выйти

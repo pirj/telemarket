@@ -10,11 +10,11 @@ class Identity
 
   property :role,            String
 
+  has 1, :employee
+
   validates_presence_of      :email,    :role
   validates_format_of        :email,    :with => :email_address
   validates_format_of        :role,     :with => /[A-Za-z]/
-
-  belongs_to :company
 
   property :deleted_at,      ParanoidDateTime
   timestamps :at
