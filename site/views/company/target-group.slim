@@ -1,0 +1,24 @@
+- content_for :nav do
+  == slim :'company/nav'
+section
+  div.page-header
+    h2
+      | Таргет-группа 
+      = @group.name
+    table.table
+      thead
+        tr
+          th
+            | Наименование
+          th
+            | Контакты
+      -@group.targets.each do |target|
+        tr
+          td
+            = target.name
+          td
+            = target.contacts.size
+    form.form-inline method='post' action="/company/add-target/#{@group.id}"
+      input name='name' type='text' placeholder="Наименование"
+      input name='phone' type='text' placeholder="Телефон"
+      input.btn type='submit' value='Добавить'

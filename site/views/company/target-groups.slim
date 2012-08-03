@@ -4,21 +4,24 @@ section
   div.page-header
     h2
       | Таргет-группы
-    table.table
-      th
-        | Наименование
-      th
-        | Таргеты
-      th
-        | Планы
-      th
-        | Контакты
+    table#groups.table
+      thead
+        tr
+          th
+            | Наименование
+          th
+            | Таргеты
+          th
+            | Планы
       -@company.target_groups.each do |group|
         tr
-          = group.name
-        tr
-          = plan.target_groups.inspect
-        tr
-          = plan.calls.size
-        tr
-          = plan.calls.contacts.size
+          td
+            a href="/company/target-group/#{group.id}"
+              = group.name
+          td
+            = group.targets.size
+          td
+            = group.plans.inspect
+    form.form-inline method='post' action='/company/add-group'
+      input name='name' type='text' placeholder="Наименование"
+      input.btn type='submit' value='Добавить'

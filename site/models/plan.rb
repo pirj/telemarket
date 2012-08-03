@@ -3,9 +3,10 @@ class Plan
   property :id, Serial
 
   property :name, String, :length => 128
+  property :description, Text
 
   belongs_to :company
-  has n, :target_groups
+  has n, :target_groups, :through => Resource
   has n, :calls
 
   property :deleted_at, ParanoidDateTime

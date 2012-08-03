@@ -5,20 +5,42 @@ section
     h2
       | Планы
     table.table
-      th
-        | Наименование
-      th
-        | Таргет-группы
-      th
-        | Звонки
-      th
-        | Контакты
+      thead
+        tr
+          th
+            | Наименование
+          th
+            | Таргет-группы
+          th
+            | Звонки
+          th
+            | Контакты
       -@company.plans.each do |plan|
         tr
-          = plan.name
-        tr
-          = plan.target_groups.inspect
-        tr
-          = plan.calls.size
-        tr
-          = plan.calls.contacts.size
+          td
+            = plan.name
+          td
+            = plan.target_groups.inspect
+          td
+            = plan.calls.size
+          td
+            = plan.calls.contacts.size
+    form.form-horizontal method='post' action='/company/add-plan'
+      div.control-group
+        label.control-label for='name'
+          | Наименование
+        div.controls
+          input name='name' type='text' placeholder="Наименование"
+      div.control-group
+        label.control-label for='description'
+          | Инструкции
+        div.controls
+          textarea name='description' placeholder="Инструкции"
+      div.control-group
+        label.control-label for='groups'
+          | Таргет-группы
+        div.controls
+          -@company.target_groups.each do |group|
+            input type='checkbox' name="group[#{group.id}]"
+              = group.name
+      input.btn type='submit' value='Добавить'
