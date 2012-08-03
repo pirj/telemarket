@@ -19,16 +19,16 @@ html
     script src="http://zadarma.com/swfobject.js"
     script src="/js/app.js"
 
-    link rel="shortcut icon" href="/img/favicon.ico"
-
   body data-spy="scroll" data-target="#navbar" data-offset="60"
     == slim :nav
 
     div#main.container
-      div.alert.alert-info
-        a.close data-dismiss="alert" href="#"
-          | ×
-        | sdfgsdfgdsf
+      - if session[:flash]
+        - session[:flash].each do |type, message|
+          div.alert class="alert-#{type}"
+            a.close data-dismiss=type href="#"
+              | ×
+            =message
 
       == yield
 

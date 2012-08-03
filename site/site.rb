@@ -15,10 +15,10 @@ class Site < Sinatra::Base
   register Sinatra::Namespace
   register Sinatra::Flash
 
-  use Rack::Session::Cookie #, 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
+  use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
   use Rack::Protection
 
-  use Rack::CommonLogger
+  use Rack::CommonLogger #, Logger.new(STDOUT)
 
   use OmniAuth::Builder do
     provider :identity, :fields => [:email]
@@ -30,11 +30,12 @@ class Site < Sinatra::Base
 
   [403, 404, 405, 500].each do |code|
     error code do
-      slim "errors/#{code}"
+      slim "errors/#{code}.slim"
     end
   end
 
   DataMapper.setup(:default, "sqlite://#{Dir.pwd}/development.db")
+  DataMapper.finalize
 
   configure :development do
     register Sinatra::Reloader
@@ -51,5 +52,9 @@ class Site < Sinatra::Base
 
   error do
     'Произошло нечто ужасное: ' + env['sinatra.error'].name
+  end
+
+  def current_user
+    @current_user ||= Identity.get(session[:user_id]) if session[:user_id]
   end
 end
