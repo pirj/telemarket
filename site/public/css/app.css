@@ -19,3 +19,7 @@ section img {
   min-width: 100px;
   min-height: 100px;
 }
+
+.navbar .nav > li > a.work {
+  color: lightblue;
+}

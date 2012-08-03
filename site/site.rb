@@ -14,6 +14,8 @@ Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
 class Site < Sinatra::Base
   register Sinatra::Contrib
   register Sinatra::Namespace
+
+  enable :sessions
   register Sinatra::Flash
 
   helpers Sinatra::ContentFor
@@ -21,6 +23,7 @@ class Site < Sinatra::Base
   use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
   use Rack::Protection
 
+  enable :logging
   use Rack::CommonLogger #, Logger.new(STDOUT)
 
   use OmniAuth::Builder do
@@ -45,9 +48,6 @@ class Site < Sinatra::Base
     also_reload './*.rb'
     also_reload './models/*.rb'
   end
-
-  enable :logging
-  set :sessions, true
 
   not_found do
     'Не найдено.'
