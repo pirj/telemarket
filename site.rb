@@ -40,7 +40,7 @@ class Site < Sinatra::Base
     end
   end
 
-  DataMapper.setup(:default, "sqlite://#{Dir.pwd}/development.db")
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
   DataMapper.finalize
 
   configure :development do
