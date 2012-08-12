@@ -4,6 +4,7 @@ require 'logger'
 Bundler.require
 
 require 'sinatra/contrib'
+require 'sinatra/streaming'
 require 'sinatra/reloader'
 require 'sinatra/namespace'
 require 'sinatra/content_for'
@@ -19,6 +20,7 @@ class Site < Sinatra::Base
   register Sinatra::Flash
 
   helpers Sinatra::ContentFor
+  helpers Sinatra::Streaming
 
   use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
   use Rack::Protection
