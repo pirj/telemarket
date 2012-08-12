@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/intridea/omniauth-identity.git
-  revision: 1cbbb2acbdcf66fbe490e207fb95e7e4c9555c45
+  revision: ac63d4ec6538e6e919a43867d278374a2b04048c
   specs:
-    omniauth-identity (1.0.0)
+    omniauth-identity (1.1.0)
       bcrypt-ruby (~> 3.0)
       omniauth (~> 1.0)
 
@@ -13,7 +13,7 @@ GEM
     backports (2.6.2)
     bcrypt-ruby (3.0.1)
     coderay (1.0.7)
-    daemons (1.1.8)
+    daemons (1.1.9)
     data_objects (0.10.8)
       addressable (~> 2.1)
     datamapper (1.2.0)
@@ -72,7 +72,7 @@ GEM
       data_objects (= 0.10.8)
     do_sqlite3 (0.10.8)
       data_objects (= 0.10.8)
-    eventmachine (1.0.0.beta.4)
+    eventmachine (1.0.0.rc.4)
     fastercsv (1.5.5)
     hashie (1.2.0)
     json (1.7.4)
@@ -135,7 +135,7 @@ DEPENDENCIES
   dm-timestamps
   dm-types
   dm-validations
-  eventmachine (= 1.0.0.beta.4)
+  eventmachine (= 1.0.0.rc.4)
   omniauth-identity!
   pg
   pry
