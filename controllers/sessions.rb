@@ -5,7 +5,7 @@ class Site < Sinatra::Base
   end
 
   get '/auth/:provider/callback' do
-    identity = Identity.authenticate params[:auth_key], params[:password]
+    identity = Identity.authenticate({:email => params[:auth_key]}, params[:password])
     return redirect 'sessions/new' unless identity
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"

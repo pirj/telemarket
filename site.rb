@@ -10,7 +10,7 @@ require 'sinatra/namespace'
 require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 
-Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
+Dir['*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
 
 class Site < Sinatra::Base
   register Sinatra::Contrib
@@ -27,6 +27,8 @@ class Site < Sinatra::Base
 
   enable :logging
   use Rack::CommonLogger #, Logger.new(STDOUT)
+
+  set :root, File.dirname(__FILE__)
 
   use OmniAuth::Builder do
     provider :identity, :fields => [:email]
@@ -49,6 +51,7 @@ class Site < Sinatra::Base
     register Sinatra::Reloader
     also_reload './*.rb'
     also_reload './models/*.rb'
+    also_reload './controllers/*.rb'
   end
 
   not_found do
