@@ -1,4 +1,4 @@
-div#navbar.navbar.navbar-fixed-top
+div#navbar.navbar.navbar-inverse.navbar-fixed-top
   div.navbar-inner
     div.container
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
@@ -23,11 +23,7 @@ div#navbar.navbar.navbar-fixed-top
                 | Выйти
           - unless current_user
             a.btn.btn-primary href="/company/register"
-              | Зарегистрироваться
+              | Попробовать
             li
               a href="/sessions/new"
                 | Войти
-          - if false
-            li
-              a href="#"
-                | Выйти

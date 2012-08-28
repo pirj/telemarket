@@ -1,4 +1,4 @@
-div#navbar.navbar.navbar-fixed-top
+div#navbar.navbar.navbar-inverse.navbar-fixed-top
   div.navbar-inner
     div.container
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
@@ -14,32 +14,32 @@ div#navbar.navbar.navbar-fixed-top
           li
             a href="/company/plans"
               | Планы (
-              = @company.plans.size
+              = company.plans.size
               | )
           li
             a href="/company/target-groups"
               | Группы (
-              = @company.target_groups.size
+              = company.target_groups.size
               | )
           li
             a href="#easy"
               | Аудитория (
-              = @company.target_groups.targets.size
+              = company.target_groups.targets.size
               | )
           li
             a href="#reliably"
               | Пользователи (
-              = @company.employees.size
+              = company.employees.size
               | )
           li
             a href="#cheap"
               | Звонки (
-              = @company.plans.size
+              = company.plans.size
               | )
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
               | Баланс (
-              = @company.balance
+              = company.balance
               |  руб.)
               b.caret
             ul.dropdown-menu

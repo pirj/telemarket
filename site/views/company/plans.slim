@@ -15,7 +15,7 @@ section
             | Звонки
           th
             | Контакты
-      -@company.plans.each do |plan|
+      -company.plans.each do |plan|
         tr
           td
             = plan.name
@@ -40,7 +40,7 @@ section
         label.control-label for='groups'
           | Таргет-группы
         div.controls
-          -@company.target_groups.each do |group|
+          -company.target_groups.each do |group|
             input type='checkbox' name="group[#{group.id}]"
               = group.name
       input.btn type='submit' value='Добавить'

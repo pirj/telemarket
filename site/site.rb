@@ -24,6 +24,8 @@ class Site < Sinatra::Base
 
   use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
   use Rack::Protection
+  
+  register Sinatra::Can
 
   enable :logging
   use Rack::CommonLogger #, Logger.new(STDOUT)

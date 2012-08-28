@@ -1,4 +1,4 @@
-div#navbar.navbar.navbar-fixed-top
+div#navbar.navbar.navbar-inverse.navbar-fixed-top
   div.navbar-inner
     div.container
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
@@ -11,24 +11,29 @@ div#navbar.navbar.navbar-fixed-top
 
       div.nav-collapse.collapse
         ul.nav
-          li
-            a.scroll href="#easy"
-              | Просто
-          li
-            a.scroll href="#fast"
-              | Быстро
-          li
-            a.scroll href="#reliably"
-              | Конфиденциально
-          li
-            a.scroll href="#soundly"
-              | Качественно
-          li
-            a.scroll href="#cheap"
-              | Недорого
-          li
-            a.scroll href="#convenient"
-              | Удобно
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Преимущества
+              b.caret
+            ul.dropdown-menu
+              li
+                a.scroll href="#easy"
+                  | Просто
+              li
+                a.scroll href="#fast"
+                  | Быстро
+              li
+                a.scroll href="#reliably"
+                  | Конфиденциально
+              li
+                a.scroll href="#soundly"
+                  | Качественно
+              li
+                a.scroll href="#cheap"
+                  | Недорого
+              li
+                a.scroll href="#convenient"
+                  | Удобно
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
               | Контакты
@@ -54,11 +59,7 @@ div#navbar.navbar.navbar-fixed-top
                 | Выйти
           - unless current_user
             a.btn.btn-primary href="/company/register"
-              | Зарегистрироваться
+              | Попробовать
             li
               a href="/sessions/new"
                 | Войти
-          - if false
-            li
-              a href="#"
-                | Выйти
