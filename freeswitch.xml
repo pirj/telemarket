@@ -209,12 +209,6 @@
           <action application="deflect" data="${destination_number}"/>
         </condition>
       </extension>
-      <extension name="echo">
-        <condition field="destination_number" expression="^2125551212$">
-          <action application="answer"/>
-          <action application="echo"/>
-        </condition>
-      </extension>
     </context>
 
     <context name="public">
@@ -224,15 +218,13 @@
           <action application="deflect" data="${destination_number}"/>
         </condition>
       </extension>
-      <extension name="speech">
-        <condition field="destination_number" expression="^6175551212$">
-          <action application="answer"/>
-          <action application="speak" data="cepstral|david|Hey, thanks for calling. While you're waiting, here's a little music for you."/>
-          <action application="playback" data="local_stream://moh"/>
+        <extension name="local_extensions">
+        <condition field="destination_number" expression="^\+1212555(10[01][0-9])$">
+          <action application="transfer" data="$1 XML default"/>
         </condition>
       </extension>
       <extension name="public_dids">
-        <condition field="destination_number" expression="^\+(\d{11})$">
+        <condition field="destination_number" expression="^+78126127046$">
           <action application="socket" data="localhost:8084"/>
         </condition>
       </extension>
@@ -281,6 +273,38 @@
                 <variable name="user_context" value="default"/>
                 <variable name="effective_caller_id_name" value="User 2"/>
                 <variable name="effective_caller_id_number" value="2"/>
+                <variable name="outbound_caller_id_name" value="$${outbound_caller_name}"/>
+                <variable name="outbound_caller_id_number" value="$${outbound_caller_id}"/>
+              </variables>
+            </user>
+
+            <user id="phone1">
+              <params>
+                <param name="password" value="$${default_password}"/>
+                <param name="vm-password" value="$${default_password}"/>
+              </params>
+              <variables>
+                <variable name="toll_allow" value="domestic,international,local"/>
+                <variable name="accountcode" value="phone1"/>
+                <variable name="user_context" value="default"/>
+                <variable name="effective_caller_id_name" value="Phone 1"/>
+                <variable name="effective_caller_id_number" value="21"/>
+                <variable name="outbound_caller_id_name" value="$${outbound_caller_name}"/>
+                <variable name="outbound_caller_id_number" value="$${outbound_caller_id}"/>
+              </variables>
+            </user>
+
+            <user id="phone2">
+              <params>
+                <param name="password" value="$${default_password}"/>
+                <param name="vm-password" value="$${default_password}"/>
+              </params>
+              <variables>
+                <variable name="toll_allow" value="domestic,international,local"/>
+                <variable name="accountcode" value="phone2"/>
+                <variable name="user_context" value="default"/>
+                <variable name="effective_caller_id_name" value="Phone 2"/>
+                <variable name="effective_caller_id_number" value="22"/>
                 <variable name="outbound_caller_id_name" value="$${outbound_caller_name}"/>
                 <variable name="outbound_caller_id_number" value="$${outbound_caller_id}"/>
               </variables>
