@@ -1,0 +1,51 @@
+<HTML>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+
+<!-- Кнопка позвонить -->
+
+	    <link href="/button/itsBtn.css" rel="stylesheet" type="text/css"/>
+   	    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <script language="javascript" content-type="text/javascript" src="http://www.it-sfera.com.ua/button/swfobject.js"></script>
+	    <script language="javascript" content-type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js" ></script>
+	    <script language="javascript" type="text/javascript" src="http://www.it-sfera.com.ua/button/jquery.query-2.1.7.js"></script>
+	    <script language="javascript" type="text/javascript" src="http://www.it-sfera.com.ua/button/jquery.tmpl.js"></script>
+	<script language="javascript" content-type="text/javascript">	
+		var btnSite = 'http://www.it-sfera.com.ua/button/';
+		var myNumber = 'phone1';
+	</script>
+	    <script language="javascript" type="text/javascript" src="/button/itsBtn.js"></script>
+
+		<div id="security" title="Настройка прав">
+        Вам необходимо разрешить использовать микрофон для данного сайта, чтобы осуществлять звонки
+			<div id="fake_flash" width="300" height="170"></div>
+		</div>
+		<div id="flash">
+			<h1>Alternative content</h1>
+			<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+		</div>
+
+		<div>
+			<a href="#" onClick="showSecurity();">Настройки динамика и микрофона</a><br />
+		</div>
+
+		</div>
+		<div id="account_container">
+			<div class="guest_account" id="guest_account">
+				<a onClick="newcall(myNumber,''); document.getElementById('call_button').style.display = 'none'; document.getElementById('hangup_button').style.display = '';" id="call_button">Позвонить</a>
+				<a onClick="hangup(get_uuid($(this))); document.getElementById('call_button').style.display = ''; document.getElementById('hangup_button').style.display = 'none';" id="hangup_button" style="display: none;">Закончить</a>
+             </div>
+                <div id="its">
+                        <a href="http://www.it-sfera.com.ua/">2012 &copy; IT-SFERA</a><br />
+                </div>
+
+		</div>
+
+<!-- Конец кнопки позвонить -->
+
+
+</html>

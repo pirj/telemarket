@@ -58,6 +58,7 @@
         <load module="mod_say_en"/>
         <load module="mod_sms"/>
         <!-- <load module="mod_lua"/> -->
+        <load module="mod_rtmp"/>
       </modules>
     </configuration>
 
@@ -107,6 +108,24 @@
       <settings>
         <!--<param name="odbc-dsn" value="dsn:user:pass"/>-->
       </settings>
+    </configuration>
+
+    <configuration name="rtmp.conf" description="RTMP Endpoint">
+      <profiles>
+        <profile name="default">
+          <settings>
+            <param name="bind-address" value="0.0.0.0:1935" />
+            <param name="context" value="public" />
+            <param name="dialplan" value="XML" />
+            <!-- If this is set to true, no unauthenticated inbound calls will be allowed -->
+            <param name="auth-calls" value="false" />
+            <!-- How much time should the clients buffer the media stream (miliseconds) -->
+            <param name="buffer-len" value="50" />
+            <!-- Sets the maximum size of outbound RTMP chunks -->
+            <param name="chunksize" value="512" />
+          </settings>
+        </profile>
+      </profiles>
     </configuration>
 
     <configuration name="sofia.conf" description="sofia Endpoint">
@@ -224,8 +243,14 @@
         </condition>
       </extension>
       <extension name="public_dids">
-        <condition field="destination_number" expression="^+78126127046$">
+        <condition field="destination_number" expression="^\+78126127046$">
           <action application="socket" data="localhost:8084"/>
+        </condition>
+      </extension>
+      
+      <extension name="rtmp_site_calls">
+        <condition field="destination_number" expression="^(.+)$">
+          <action application="bridge" data="user/user1@$${domain}"/>
         </condition>
       </extension>
     </context>
