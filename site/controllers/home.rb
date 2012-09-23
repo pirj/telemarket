@@ -1,6 +1,5 @@
 class Site < Sinatra::Base
   get '/' do
-    # logger.info "HA"
     slim :'home/index', layout: :'home/layout'
   end
 

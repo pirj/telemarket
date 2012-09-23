@@ -9,7 +9,7 @@ class Site < Sinatra::Base
     return redirect 'sessions/new' unless identity
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"
-    redirect '/company'
+    redirect identity.company.nil? ? '/operator' : '/company'
   end
 
   get '/sessions/logout' do

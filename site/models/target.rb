@@ -3,9 +3,7 @@ class Target
   property :id, Serial
 
   property :name, String, :length => 128
-
-  belongs_to :target_group
-  has n, :contacts
+  property :phone, String, :length => 128
 
   property :deleted_at, ParanoidDateTime
   timestamps :at

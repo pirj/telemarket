@@ -13,12 +13,7 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
         ul.nav
           li
             a href="/company/targets"
-              | Цели (
-              = current_user.company.targets.size
-              | )
-          li
-            a href="/company/instructions"
-              | Инструкции оператору
+              | Прозвон
 
         ul.nav.pull-right
           - if current_user

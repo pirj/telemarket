@@ -16,7 +16,7 @@ class Site < Sinatra::Base
   register Sinatra::Contrib
   register Sinatra::Namespace
 
-  enable :sessions
+  # enable :sessions
   register Sinatra::Flash
 
   helpers Sinatra::ContentFor
@@ -37,10 +37,14 @@ class Site < Sinatra::Base
   end
 
   error OmniAuth::Error do
-    403
+    401
   end
 
-  [403, 404, 405, 500].each do |code|
+  error 403 do
+    'not authorized'
+  end
+
+  [404, 405, 500].each do |code|
     error code do
       slim "errors/#{code}.slim"
     end
@@ -48,6 +52,7 @@ class Site < Sinatra::Base
 
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
   DataMapper.finalize
+  # DataMapper.auto_upgrade!
 
   configure :development do
     register Sinatra::Reloader

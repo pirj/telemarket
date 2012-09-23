@@ -2,14 +2,13 @@ class Company
   include DataMapper::Resource
   property :id, Serial
 
+  belongs_to :identity
+
   property :name, String, :length => 128
 
-  has n, :employees, :constraint => :destroy
-  has n, :plans, :constraint => :destroy
-  has n, :target_groups, :constraint => :destroy
+  property :instructions, String
 
-  has n, :operations, :constraint => :destroy
-  property :balance, Float, :default => 0
+  has n, :targets, :constraint => :destroy
 
   property :deleted_at, ParanoidDateTime
   timestamps :at

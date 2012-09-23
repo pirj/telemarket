@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title Телемаркет
+    meta name="keywords" content="телемаркетинг, аутсорсинг, прозвон, поиск клиентов, клиентская база"
+    meta name="description" content="телемаргетинг аутсорсинг"
+    meta name="robots" content="index, follow"
+
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="author" content=""
+
+    link rel="stylesheet" href="/css/bootstrap.css"
+    link rel="stylesheet" href="/css/bootstrap-responsive.css"
+    link rel="stylesheet" href="/css/app.css"
+
+    script src="/js/jquery-1.7.2.min.js"
+    script src="/js/jquery-anchorscroll.js"
+    script src="/js/bootstrap.js"
+    script src="http://zadarma.com/swfobject.js"
+    script src="/js/app.js"
+
+  body
+    == yield_content :nav
+
+    div#main.container
+      - if session[:flash]
+        - session[:flash].each do |type, message|
+          div.alert class="alert-#{type}"
+            a.close data-dismiss="alert" href="#"
+              | ×
+            =message
+
+      == yield
+
+      == slim :footer

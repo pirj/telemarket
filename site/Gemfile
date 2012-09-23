@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'thin'
 
-gem 'eventmachine', '1.0.0.rc.4'
+gem 'eventmachine', '~> 1.0.0'
 gem 'sinatra'
 gem 'sinatra-contrib', :require => 'sinatra/contrib'
 gem 'sinatra-flash', :require => 'sinatra/flash'
