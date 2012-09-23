@@ -12,10 +12,6 @@ class Site < Sinatra::Base
     #   end
     # end
 
-  get '/operator' do
-    slim :'operator/index'
-  end
-
   get '/operator/register' do
     slim :'operator/register'
   end
@@ -26,5 +22,17 @@ class Site < Sinatra::Base
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"
     redirect '/operator'
+  end
+
+  get '/operator' do
+    authorize! :list, :calls
+    companies = Target.all(status: nil).company
+    slim :'operator/index', locals: {companies: companies}
+  end
+
+  get '/operator/call/:company' do
+    authorize! :make, :calls
+    company = Company.get params[:company]
+    slim :'operator/call', locals: {company: company}
   end
 end
