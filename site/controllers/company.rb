@@ -13,7 +13,7 @@ class Site < Sinatra::Base
     puts company
 
     session[:user_id] = identity.id
-    flash[:info] = "Добро пожаловать!"
+    flash[:info] = "Добро пожаловать!  + #{Time.now}"
     redirect '/company'
   end
 
@@ -21,6 +21,21 @@ class Site < Sinatra::Base
     authorize! :view, Company
     company = current_user.company
     slim :'company/index', locals: {company: company}
+  end
+
+  get '/company/instructions' do
+    authorize! :view, Company
+    company = current_user.company
+    slim :'company/instructions', locals: {company: company}
+  end
+
+  post '/company/instructions' do
+    authorize! :edit, Company
+    company = current_user.company
+    company.instructions = params[:text]
+    company.save
+
+    redirect '/company'
   end
 
   get '/company/targets' do

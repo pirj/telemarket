@@ -8,8 +8,12 @@ class Site < Sinatra::Base
     identity = Identity.authenticate({:email => params[:auth_key]}, params[:password])
     return redirect 'sessions/new' unless identity
     session[:user_id] = identity.id
-    flash[:info] = "Добро пожаловать!"
-    redirect identity.company.nil? ? '/operator' : '/company'
+    flash[:info] = "Добро пожаловать! + #{Time.now}"
+    if identity.company.nil?
+      redirect '/operator'
+    else
+      redirect '/company'
+    end
   end
 
   get '/sessions/logout' do

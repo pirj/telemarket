@@ -28,7 +28,6 @@ class Site < Sinatra::Base
   register Sinatra::Can
 
   enable :logging
-  use Rack::CommonLogger #, Logger.new(STDOUT)
 
   set :root, File.dirname(__FILE__)
 
