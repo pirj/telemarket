@@ -23,3 +23,11 @@ section img {
 .navbar .nav > li > a.work {
   color: lightblue;
 }
+
+span.error {
+  color: darkred;
+}
+
+span.success {
+  color: green;
+}

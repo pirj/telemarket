@@ -1,4 +1,6 @@
 # coding: utf-8
+require 'csv'
+
 class Site < Sinatra::Base
   get '/company/register' do
     slim :'company/register'
@@ -46,6 +48,23 @@ class Site < Sinatra::Base
 
   post '/company/target/create' do
     authorize! :create, Target
-    target = Target.create name: params[:name], phone: params[:phone]
+    company = current_user.company
+
+    Target.create name: params[:name], phone: params[:phone], company: company
+    redirect '/company/targets'
+  end
+
+  post '/company/target/upload' do
+    authorize! :create, Target
+    company = current_user.company
+
+    puts params.inspect
+    file = File.new params[:file]
+
+    CSV.parse(file.read) do |row|
+      target = Target.create name: row[0], phone: row[1], company: company
+    end
+
+    redirect '/company/targets'
   end
 end
