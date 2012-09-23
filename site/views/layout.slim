@@ -23,12 +23,12 @@ html
     == yield_content :nav
 
     div#main.container
-      - if session[:flash]
-        - session[:flash].each do |type, message|
+      - if flash
+        - flash.keys.each do |type|
           div.alert class="alert-#{type}"
             a.close data-dismiss="alert" href="#"
               | ×
-            =message
+            =flash[type]
 
       == yield
 

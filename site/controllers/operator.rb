@@ -24,7 +24,7 @@ class Site < Sinatra::Base
     identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], :role => 'operator', :name => params[:name]
 
     session[:user_id] = identity.id
-    flash[:info] = "Добро пожаловать! + #{Time.now}"
+    flash[:info] = "Добро пожаловать!"
     redirect '/operator'
   end
 end

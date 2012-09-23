@@ -15,7 +15,7 @@ class Site < Sinatra::Base
     puts company
 
     session[:user_id] = identity.id
-    flash[:info] = "Добро пожаловать!  + #{Time.now}"
+    flash[:info] = "Добро пожаловать!"
     redirect '/company'
   end
 
