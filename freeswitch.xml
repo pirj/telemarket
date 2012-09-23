@@ -250,7 +250,7 @@
       
       <extension name="rtmp_site_calls">
         <condition field="destination_number" expression="^(.+)$">
-          <action application="bridge" data="user/user1@$${domain}"/>
+          <action application="bridge" data="user/phone1@$${domain}"/>
         </condition>
       </extension>
     </context>
