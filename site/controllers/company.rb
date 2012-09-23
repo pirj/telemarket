@@ -5,8 +5,12 @@ class Site < Sinatra::Base
   end
 
   post '/company/register' do
-    company = Company.new name: params[:company]
-    identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], :role => 'customer'
+    identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], :role => 'customer', :name => params[:name]
+    puts identity.errors.inspect
+    puts identity
+    company = Company.create name: params[:company], :identity => identity
+    puts company.errors.inspect
+    puts company
 
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"
@@ -15,7 +19,7 @@ class Site < Sinatra::Base
 
   get '/company' do
     authorize! :view, Company
-    company = current_user.employee.company
+    company = current_user.company
     slim :'company/index', locals: {company: company}
   end
 

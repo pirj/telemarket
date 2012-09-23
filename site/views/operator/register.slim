@@ -4,7 +4,7 @@ p
   a href='/sessions/new'
     | Уже зарегистрированы?
 
-form.form-horizontal method='post' action='/company/register'
+form.form-horizontal method='post' action='/operator/register'
   fieldset
     div.control-group
       label.control-label for='auth_key'
@@ -18,13 +18,6 @@ form.form-horizontal method='post' action='/company/register'
         input name='password' type='password'
 
   fieldset
-    div.control-group
-      label.control-label for='company'
-        | Название компании
-      div.controls
-        input name='company' type='text'
-        p.help-block
-          /| Supporting help text
     div.control-group
       label.control-label for='company'
         | Фамилия и имя

@@ -1,3 +1,4 @@
+# coding: utf-8
 class Site < Sinatra::Base
 
     # subscriber = EM::Hiredis.connect
@@ -13,5 +14,17 @@ class Site < Sinatra::Base
 
   get '/operator' do
     slim :'operator/index'
+  end
+
+  get '/operator/register' do
+    slim :'operator/register'
+  end
+
+  post '/operator/register' do
+    identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], :role => 'operator', :name => params[:name]
+
+    session[:user_id] = identity.id
+    flash[:info] = "Добро пожаловать!"
+    redirect '/operator'
   end
 end

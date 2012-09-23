@@ -10,6 +10,7 @@ class Identity
 
   property :role,            String
 
+  property :name, String
   has 1, :company
 
   validates_presence_of      :email,    :role
