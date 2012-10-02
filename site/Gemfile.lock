@@ -6,6 +6,13 @@ GIT
       bcrypt-ruby (~> 3.0)
       omniauth (~> 1.0)
 
+GIT
+  remote: git://github.com/pirj/librevox.git
+  revision: 683695a23755f26ec2a91c042ed5765cfbfc62f9
+  specs:
+    librevox (0.5)
+      eventmachine (>= 0.12.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -140,6 +147,7 @@ DEPENDENCIES
   dm-types
   dm-validations
   eventmachine (~> 1.0.0)
+  librevox!
   omniauth-identity!
   pg
   pry

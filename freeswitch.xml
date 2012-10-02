@@ -237,20 +237,11 @@
           <action application="deflect" data="${destination_number}"/>
         </condition>
       </extension>
-        <extension name="local_extensions">
-        <condition field="destination_number" expression="^\+1212555(10[01][0-9])$">
-          <action application="transfer" data="$1 XML default"/>
-        </condition>
-      </extension>
-      <extension name="public_dids">
-        <condition field="destination_number" expression="^\+78126127046$">
-          <action application="socket" data="localhost:8084"/>
-        </condition>
-      </extension>
       
       <extension name="rtmp_site_calls">
         <condition field="destination_number" expression="^(.+)$">
-          <action application="bridge" data="user/phone1@$${domain}"/>
+          <action application="socket" data="127.0.0.1:8084"/>
+          <!--action application="bridge" data="user/phone1@$${domain}"/-->
         </condition>
       </extension>
     </context>

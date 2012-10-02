@@ -13,15 +13,16 @@ section#top
         Заносите результаты звонка.
 
   div.row
-    div.accordion id="accordion2"
-      - companies.each do |company|
-        div.accordion-group
-          div.accordion-heading
-            a.accordion-toggle data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-              = company.name
-          div.accordion-body.collapse.in id="collapseOne" 
-            div.accordion-inner
-              = company.instructions
-              p
-                a.btn.btn-primary href="/operator/call/#{company.id}"
-                  | Это мне подходит
+    div.span12
+      div.accordion id="accordion2"
+        - companies.each do |company|
+          div.accordion-group
+            div.accordion-heading
+              a.accordion-toggle data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
+                = company.name
+            div.accordion-body.collapse.in id="collapseOne" 
+              div.accordion-inner
+                = company.instructions
+                p
+                  a.btn.btn-primary href="/operator/call/#{company.id}"
+                    | Это мне подходит

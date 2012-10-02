@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require 'bundler'
+require 'logger'
+Bundler.require
+
+Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
+
+class CallListener < Librevox::Listener::Outbound
+  event :channel_answer do |e|
+    puts "answered"
+    # playback "/home/pirj/file.wav" do
+    #   puts "playing"
+    # end
+  end
+
+  event :channel_bridge do |e|
+    puts "bridged!"
+  end
+
+  event :channel_unbridge do |e|
+    puts "unbridged!"
+    hangup
+  end
+
+  event :channel_hangup do |e|
+    puts "hup!"
+  end
+
+  # def on_event e
+  #   puts e.inspect
+  # end
+
+  def session_initiated
+    # puts "si #{session.inspect}"
+    bridge "sofia/external/+79643857131@sip.zadarma.com" do
+      puts "bridged"
+    end
+#    answer
+  end
+end
+
+EM.run do
+  Librevox.start CallListener, :host => '127.0.0.1', :port => '8084'
+end

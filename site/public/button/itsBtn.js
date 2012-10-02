@@ -256,7 +256,6 @@
 		$("#security").dialog('open');
 	}
 	
-	
 	function newcall(user,account) {
 		makeCall(user, account, '');
 	}

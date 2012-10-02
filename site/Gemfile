@@ -25,3 +25,5 @@ group :development do
 end
 
 gem 'omniauth-identity', :git => 'git://github.com/intridea/omniauth-identity.git'
+
+gem 'librevox', :git => 'git://github.com/pirj/librevox.git'
