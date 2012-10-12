@@ -9,6 +9,8 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     meta name="author" content=""
 
+    link rel="icon" href="/img/favicon.ico"
+
     link rel="stylesheet" href="/css/bootstrap.css"
     link rel="stylesheet" href="/css/bootstrap-responsive.css"
     link rel="stylesheet" href="/css/app.css"
@@ -17,7 +19,6 @@ html
     script src="/js/jquery-anchorscroll.js"
     script src="/js/bootstrap.js"
     script src="/js/app.js"
-
 
     link rel="stylesheet" href="http://dfcb.github.com/BigVideo.js/css/bigvideo.css"
 
@@ -32,7 +33,7 @@ html
         $(function() {
           var BV = new $.BigVideo();
           BV.init();
-          BV.show('http://video-js.zencoder.com/oceans-clip.mp4',{ambient:true});
+          BV.show('/lightbulb.mp4',{ambient:true});
         });
 
     link rel="stylesheet" href="css/demo.css"
@@ -47,7 +48,9 @@ html
         $(function() {
           $('#da-slider').cslider({
             //bgincrement : 0,
-            autoplay    : true
+            autoplay    : true,
+            interval    : 15000,
+            autoHover   : true
           });
         });
 
@@ -55,14 +58,15 @@ html
     == yield_content :nav
 
     div#transparent
-      div#main.container.main
-        - if session[:flash]
-          - session[:flash].each do |type, message|
-            div.alert class="alert-#{type}"
-              a.close data-dismiss="alert" href="#"
-                | ×
-              =message
 
-        == yield
+    div#main.container.main
+      - if session[:flash]
+        - session[:flash].each do |type, message|
+          div.alert class="alert-#{type}"
+            a.close data-dismiss="alert" href="#"
+              | ×
+            =message
 
-        == slim :footer
+      == yield
+
+    == slim :footer

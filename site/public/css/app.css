@@ -1,3 +1,47 @@
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+  margin:0;
+  padding:0;
+}
+html,body {
+  margin:0;
+  padding:0;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+fieldset,img { 
+  border:0;
+}
+address,caption,cite,code,dfn,th,var {
+  font-style:normal;
+  font-weight:normal;
+}
+ol,ul {
+  list-style:none;
+}
+caption,th {
+  text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+q:before,q:after {
+  content:'';
+}
+abbr,acronym { border:0;
+}
+section, header{
+  display: block;
+}
+
+/* App css */
+html, body {
+  overflow: hidden;
+}
+
 .navbar .logo {
   float: left;
   padding: 5px;
@@ -11,23 +55,40 @@ h2 small {
   padding-left: 1em;
 }
 
-#main.container {
+#main.container.main {
   color: #ddd;
+  padding-top: 60px;
+
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+#main.container {
+  padding-top: 60px;
 }
 
 #transparent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: #000;
-  opacity: 0.9;
-  height: 100% auto;
+  opacity: 0.8;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #aaa;
+  background: black;
 }
 
 section img {
   min-width: 100px;
   min-height: 100px;
-}
-
-.navbar {
-  /*box-shadow: 0px 20px 15px #111;*/
 }
 
 .navbar .nav > li > a.work {
@@ -40,4 +101,19 @@ span.error {
 
 span.success {
   color: green;
+}
+
+div.registertoday {
+  font-size: 110%;
+  width: 25em;
+  margin: 0 auto;
+  padding: 1em;
+  background: black;
+  border-radius: 10px;
+  opacity: 0.75;
+}
+
+div.registertoday div {
+  width: 20em;
+  margin: 0 auto;
 }
