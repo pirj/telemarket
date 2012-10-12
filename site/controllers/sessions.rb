@@ -1,7 +1,13 @@
 # coding: utf-8
 class Site < Sinatra::Base
   get '/sessions/new' do
-    slim :'sessions/new'
+    if current_user.nil?
+      slim :'sessions/new'
+    elsif current_user.company
+      redirect '/company'
+    else
+      redirect '/operator'
+    end
   end
 
   get '/auth/:provider/callback' do

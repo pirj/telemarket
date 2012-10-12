@@ -12,6 +12,16 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
         | Телемаркет
 
       div.nav-collapse.collapse
+        ul.nav
+          - if current_user
+            -if current_user.company
+              li
+                a href="/company"
+                  | Главная
+            -unless current_user.company
+              li
+                a href="/operator"
+                  | Главная
         ul.nav.pull-right
           li
             a.work href="/operator/register"
@@ -23,7 +33,7 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
                 | Выйти
           - unless current_user
             a.btn.btn-primary href="/company/register"
-              | Попробовать
+              | Начать
             li
               a href="/sessions/new"
                 | Войти

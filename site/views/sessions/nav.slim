@@ -7,27 +7,18 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
       
       div.logo
-        img src="/img/HEADPHONE.png"
-        img src="/img/CHAT.png"
-        img src="/img/PHONE.png"
-      a.scroll.brand href="#top"
+        img src="/img/1350062423_09.call.png"
+      div.scroll.brand
         | Телемаркет
 
       div.nav-collapse.collapse
-        ul.nav
-          li.divider-vertical
-          li
-            a.work href="./scaffolding.html"
-              | Работа у нас
-
         ul.nav.pull-right
-          - if current_user
-            li
-              a href="/sessions/logout"
-                | Выйти
+          li.pull-right
+            a.work href="/operator/register"
+              | Работа у нас
           - unless current_user
             a.btn.btn-primary href="/company/register"
-              | Попробовать
+              | Начать
             li
               a href="/sessions/new"
                 | Войти

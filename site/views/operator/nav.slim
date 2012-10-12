@@ -8,10 +8,14 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
       
       div.logo
         img src="/img/1350062423_09.call.png"
-      a.brand href="/operator"
+      div.scroll.brand
         | Телемаркет
 
       div.nav-collapse.collapse
+        ul.nav
+          li
+            a href="/operator"
+              | Главная
 
         ul.nav.pull-right
           - if current_user
