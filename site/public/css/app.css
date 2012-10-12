@@ -80,11 +80,11 @@ h2 small {
 
 #transparent.loaded {
   opacity: 0.7;
-  -webkit-transition: opacity 2s ease-in-out;
-  -moz-transition: opacity 2s ease-in-out;
-  -o-transition: opacity 2s ease-in-out;
-  -ms-transition: opacity 2s ease-in-out;    
-  transition: opacity 2s ease-in-out;
+  -webkit-transition: opacity 5s ease-in-out;
+  -moz-transition: opacity 5s ease-in-out;
+  -o-transition: opacity 5s ease-in-out;
+  -ms-transition: opacity 5s ease-in-out;    
+  transition: opacity 5s ease-in-out;
 }
 
 section img {
