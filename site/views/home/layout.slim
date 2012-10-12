@@ -35,6 +35,21 @@ html
           BV.show('http://video-js.zencoder.com/oceans-clip.mp4',{ambient:true});
         });
 
+    link rel="stylesheet" href="css/demo.css"
+    link rel="stylesheet" href="css/style2.css"
+
+    script src="js/modernizr.custom.28468.js"
+    link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans+Caption'
+
+    script type="text/javascript" src="js/jquery.cslider.js"
+    script
+      |
+        $(function() {
+          $('#da-slider').cslider({
+            //bgincrement : 0,
+            autoplay    : true
+          });
+        });
 
   body data-spy="scroll" data-target="#navbar" data-offset="30"
     == yield_content :nav

@@ -10,42 +10,15 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
         img src="img/HEADPHONE.png"
         img src="img/CHAT.png"
         img src="img/PHONE.png"
-      a.scroll.brand href="#top"
+      div.scroll.brand
         | Телемаркет
 
       div.nav-collapse.collapse
-        ul.nav
-          li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | Преимущества
-              b.caret
-            ul.dropdown-menu
-              li
-                a.scroll href="#easy"
-                  | Просто
-              li
-                a.scroll href="#fast"
-                  | Быстро
-              li
-                a.scroll href="#reliably"
-                  | Конфиденциально
-              li
-                a.scroll href="#soundly"
-                  | Качественно
-              li
-                a.scroll href="#cheap"
-                  | Недорого
-              li
-                a.scroll href="#convenient"
-                  | Удобно
-          li
-            a href="#contacts"
-              | Контакты
+        ul.nav.pull-right
           li
             a.work href="/operator/register"
               | Работа у нас
 
-        ul.nav.pull-right
           - if current_user
             li
               a href="/sessions/logout"
