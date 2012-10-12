@@ -75,7 +75,7 @@ h2 small {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #000;
+  background-color: #060606;
 }
 
 #transparent.loaded {
@@ -111,8 +111,7 @@ div.registertoday {
   padding: 1em;
   background: black;
   border-radius: 10px;
-  opacity: 0.75;
-  box-shadow: 0 0 3em #060606;
+  opacity: 0.8;
 }
 
 div.registertoday div {
