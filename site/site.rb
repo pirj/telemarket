@@ -1,12 +1,9 @@
-# coding: utf-8
 require 'bundler'
 require 'logger'
 Bundler.require
 
 require 'sinatra/contrib'
 require 'sinatra/streaming'
-require 'sinatra/reloader'
-require 'sinatra/namespace'
 require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 
@@ -14,7 +11,6 @@ Dir['*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join D
 
 class Site < Sinatra::Base
   register Sinatra::Contrib
-  register Sinatra::Namespace
 
   # enable :sessions
   register Sinatra::Flash
@@ -39,13 +35,9 @@ class Site < Sinatra::Base
     401
   end
 
-  error 403 do
-    'not authorized'
-  end
-
-  [404, 405, 500].each do |code|
+  [401, 403, 404, 405, 500].each do |code|
     error code do
-      slim "errors/#{code}.slim"
+      slim :"errors/#{code}"
     end
   end
 
@@ -58,14 +50,6 @@ class Site < Sinatra::Base
     also_reload './*.rb'
     also_reload './models/*.rb'
     also_reload './controllers/*.rb'
-  end
-
-  not_found do
-    'Не найдено.'
-  end
-
-  error do
-    'Произошло нечто ужасное: ' + env['sinatra.error'].name
   end
 
   def current_user
