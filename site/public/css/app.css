@@ -78,14 +78,6 @@ h2 small {
   opacity: 0.8;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  color: #aaa;
-  background: black;
-}
-
 section img {
   min-width: 100px;
   min-height: 100px;
