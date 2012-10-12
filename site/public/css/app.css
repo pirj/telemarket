@@ -58,6 +58,7 @@ h2 small {
 #main.container.main {
   color: #ddd;
   padding-top: 60px;
+  padding-bottom: 60px;
 
   width: 100%;
   position: relative;
@@ -75,7 +76,15 @@ h2 small {
   left: 0;
   right: 0;
   background-color: #000;
-  opacity: 0.8;
+}
+
+#transparent.loaded {
+  opacity: 0.7;
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  -ms-transition: opacity 2s ease-in-out;    
+  transition: opacity 2s ease-in-out;
 }
 
 section img {
@@ -103,9 +112,11 @@ div.registertoday {
   background: black;
   border-radius: 10px;
   opacity: 0.75;
+  box-shadow: 0 0 3em #060606;
 }
 
 div.registertoday div {
   width: 20em;
   margin: 0 auto;
+  padding: 0.5em;
 }
