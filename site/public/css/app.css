@@ -1,23 +1,27 @@
-#main {
-  padding-top: 60px;
+.navbar .logo {
+  float: left;
+  padding: 5px;
+}
+
+.navbar .logo img {
+  height: 32px;
 }
 
 h2 small {
   padding-left: 1em;
 }
 
-section {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.footer {
+#main.container, section, .footer {
   padding-top: 40px;
 }
 
 section img {
   min-width: 100px;
   min-height: 100px;
+}
+
+.navbar {
+  box-shadow: 0px 15px 10px #fff;
 }
 
 .navbar .nav > li > a.work {
