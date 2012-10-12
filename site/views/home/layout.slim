@@ -16,20 +16,38 @@ html
     script src="/js/jquery-1.7.2.min.js"
     script src="/js/jquery-anchorscroll.js"
     script src="/js/bootstrap.js"
-    script src="http://zadarma.com/swfobject.js"
     script src="/js/app.js"
+
+
+    link rel="stylesheet" href="http://dfcb.github.com/BigVideo.js/css/bigvideo.css"
+
+    script src="http://dfcb.github.com/BigVideo.js/js/jquery-ui-1.8.22.custom.min.js"
+    script src="http://dfcb.github.com/BigVideo.js/js/jquery.imagesloaded.min.js"
+    script src="http://vjs.zencdn.net/c/video.js"
+
+    script src="http://dfcb.github.com/BigVideo.js/js/bigvideo.js"
+
+    script
+      |
+        $(function() {
+          var BV = new $.BigVideo();
+          BV.init();
+          BV.show('http://video-js.zencoder.com/oceans-clip.mp4',{ambient:true});
+        });
+
 
   body data-spy="scroll" data-target="#navbar" data-offset="30"
     == yield_content :nav
 
-    div#main.container
-      - if session[:flash]
-        - session[:flash].each do |type, message|
-          div.alert class="alert-#{type}"
-            a.close data-dismiss="alert" href="#"
-              | ×
-            =message
+    div#transparent
+      div#main.container.main
+        - if session[:flash]
+          - session[:flash].each do |type, message|
+            div.alert class="alert-#{type}"
+              a.close data-dismiss="alert" href="#"
+                | ×
+              =message
 
-      == yield
+        == yield
 
-      == slim :footer
+        == slim :footer

@@ -13,6 +13,12 @@ h2 small {
 
 #main.container, section, .footer {
   padding-top: 40px;
+  color: #eee;
+}
+
+#transparent {
+  background-color: #000;
+  opacity: 0.8;
 }
 
 section img {
@@ -21,7 +27,7 @@ section img {
 }
 
 .navbar {
-  box-shadow: 0px 15px 10px #fff;
+  box-shadow: 0px 20px 15px #111;
 }
 
 .navbar .nav > li > a.work {
@@ -34,4 +40,10 @@ span.error {
 
 span.success {
   color: green;
+}
+
+.main {
+  position:relative;
+  min-width:300px;
+  -webkit-transition-duration:0.6s;-moz-transition-duration:0.6s;-ms-transition-duration:0.6s;-o-transition-duration:0.6s;transition-duration:0.6s;
 }
