@@ -11,8 +11,6 @@ Dir['*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join D
 
 class Site < Sinatra::Base
   register Sinatra::Contrib
-
-  # enable :sessions
   register Sinatra::Flash
 
   helpers Sinatra::ContentFor
@@ -26,14 +24,6 @@ class Site < Sinatra::Base
   enable :logging
 
   set :root, File.dirname(__FILE__)
-
-  use OmniAuth::Builder do
-    provider :identity, :fields => [:email]
-  end
-
-  error OmniAuth::Error do
-    401
-  end
 
   [401, 403, 404, 405, 500].each do |code|
     error code do

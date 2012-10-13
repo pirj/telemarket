@@ -10,9 +10,12 @@ class Site < Sinatra::Base
     end
   end
 
-  get '/auth/:provider/callback' do
-    identity = Identity.authenticate({:email => params[:auth_key]}, params[:password])
-    return redirect 'sessions/new' unless identity
+  post '/sessions/create' do
+    identity = Identity.authenticate params[:auth_key], params[:password]
+    unless identity
+      flash[:error] = 'Неверные логин или пароль'
+      redirect 'sessions/new'
+    end
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"
     if identity.company.nil?

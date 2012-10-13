@@ -4,7 +4,7 @@ p
   a href='/company/register'
     | Ещё не зарегистрированы?
 
-form.form-horizontal action="/auth/identity/callback"
+form.form-horizontal action='/sessions/create' method='post'
   fieldset
     div.control-group
       label.control-label for='auth_key'

@@ -24,6 +24,4 @@ group :development do
   gem 'dm-sqlite-adapter'
 end
 
-gem 'omniauth-identity', :git => 'git://github.com/intridea/omniauth-identity.git'
-
 gem 'librevox', :git => 'git://github.com/pirj/librevox.git'
