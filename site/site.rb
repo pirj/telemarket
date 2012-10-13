@@ -10,6 +10,8 @@ require 'sinatra/reloader' if development?
 Dir['*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
 
 class Site < Sinatra::Base
+  use Rack::FiberPool
+
   register Sinatra::Contrib
   register Sinatra::Flash
 
