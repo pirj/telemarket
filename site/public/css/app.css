@@ -37,8 +37,15 @@ section, header{
   display: block;
 }
 
+/* Fonts */
+@font-face {
+  font-family: 'Roboto Light';
+  src: url('/css/fonts/Roboto-Light.ttf') format('truetype');
+}
+
 /* App css */
 html, body {
+  font-family: 'Roboto Light', sans-serif;
   overflow: hidden;
 }
 
