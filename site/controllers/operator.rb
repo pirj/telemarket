@@ -32,7 +32,7 @@ class Site < Sinatra::Base
   end
 
   post '/operator/register' do
-    identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], :role => 'operator', :name => params[:name]
+    identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'operator', :name => params[:name]
 
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"

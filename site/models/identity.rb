@@ -1,9 +1,7 @@
 class Identity
   include DataMapper::Resource
-
-  attr_accessor :password_confirmation
-
   property :id,               Serial
+
   property :email,            String
   property :crypted_password, String, :length => 60
 

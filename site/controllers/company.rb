@@ -7,7 +7,7 @@ class Site < Sinatra::Base
   end
 
   post '/company/register' do
-    identity = Identity.create email: params[:auth_key], password: params[:password], password_confirmation: params[:password], :role => 'customer', :name => params[:name]
+    identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'customer', :name => params[:name]
     puts identity.errors.inspect
     puts identity
     company = Company.create name: params[:company], :identity => identity
