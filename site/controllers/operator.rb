@@ -1,6 +1,21 @@
 # coding: utf-8
 class Site < Sinatra::Base
 
+  # namespace '/live' do
+  #   get do
+  #     stream do |out|
+  #       begin
+  #         loop do
+  #           out << "#{Time.now} #{rand(1000)}<br/>"
+  #           sleep rand 2
+  #         end
+  #       rescue IOError => e
+  #         # closed
+  #       end
+  #     end
+  #   end
+  # end
+
     # subscriber = EM::Hiredis.connect
     # subscriber.psubscribe '*'
 

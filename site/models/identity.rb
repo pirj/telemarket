@@ -12,6 +12,8 @@ class Identity
   property :name, String
   has 1, :company
 
+  has n, :invites, :constraint => :destroy
+
   validates_presence_of      :email,    :role
   validates_format_of        :email,    :with => :email_address
   validates_uniqueness_of    :email
@@ -21,6 +23,14 @@ class Identity
 
   property :deleted_at,      ParanoidDateTime
   timestamps :at
+
+  after :create do |identity|
+    3.times do
+      invite = Invite.new
+      invites << invite
+      invite.save
+    end
+  end
 
   def password= password
     self.crypted_password = BCrypt::Password.create password
