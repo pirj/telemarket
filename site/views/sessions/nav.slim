@@ -13,12 +13,10 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
 
       div.nav-collapse.collapse
         ul.nav.pull-right
-          li.pull-right
-            a.work href="/operator/register"
-              | Работа у нас
           - unless current_user
-            a.btn.btn-primary href="/company/register"
-              | Начать
+            li
+              a.work href="/operator/register"
+                | Работа у нас
             li
               a href="/sessions/new"
                 | Войти

@@ -14,26 +14,22 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
       div.nav-collapse.collapse
         ul.nav
           - if current_user
-            -if current_user.company
-              li
+            li
+              -if current_user.company
                 a href="/company"
                   | Главная
-            -unless current_user.company
-              li
+              -unless current_user.company
                 a href="/operator"
                   | Главная
         ul.nav.pull-right
-          li
-            a.work href="/operator/register"
-              | Работа у нас
-
           - if current_user
             li
               a href="/sessions/logout"
                 | Выйти
           - unless current_user
-            a.btn.btn-primary href="/company/register"
-              | Начать
+            li
+              a.work href="/operator/register"
+                | Работа у нас
             li
               a href="/sessions/new"
                 | Войти

@@ -13,8 +13,4 @@ $(function() {
     interval    : 15000,
     autoHover   : true
   });
-
-  $('.btn.register').click(function(){
-    $('#main').fadeOut('slow')
-  });
 });
