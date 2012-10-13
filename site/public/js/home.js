@@ -7,7 +7,6 @@ $(function() {
     $('#transparent').addClass('loaded');
   }, 1000);
 
-
   $('#da-slider').cslider({
     //bgincrement : 0,
     autoplay    : true,
@@ -15,7 +14,7 @@ $(function() {
     autoHover   : true
   });
 
-  // setTimeout(function(){
-  //   $('#main').fadeOut('slow')
-  // }, 5000);
+  $('.btn.register').click(function(){
+    $('#main').fadeOut('slow')
+  });
 });

@@ -43,6 +43,11 @@ section, header{
   src: url('/css/fonts/Roboto-Light.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Roboto Thin';
+  src: url('/css/fonts/Roboto-Thin.ttf') format('truetype');
+}
+
 /* App css */
 html, body {
   font-family: 'Roboto Light', sans-serif;
