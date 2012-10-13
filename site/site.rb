@@ -19,7 +19,7 @@ class Site < Sinatra::Base
   helpers Sinatra::Streaming
 
   use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
-  use Rack::Protection
+  use Rack::Protection, except: :session_hijacking
   
   register Sinatra::Can
 
