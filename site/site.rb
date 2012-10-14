@@ -10,6 +10,12 @@ require 'sinatra/reloader' if development?
 Dir['*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
 
 class Site < Sinatra::Base
+  class InviteRequired < StandardError
+    def code
+      402
+    end
+  end
+
   use Rack::FiberPool
 
   register Sinatra::Contrib
@@ -27,10 +33,14 @@ class Site < Sinatra::Base
 
   set :root, File.dirname(__FILE__)
 
-  [401, 403, 404, 405, 500].each do |code|
-    error code do
+  [401, 403, 404, 500].each do |code|
+    error(code) do
       slim :"errors/#{code}"
     end
+  end
+
+  error(InviteRequired) do
+    slim :"errors/noinvite"
   end
 
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
@@ -49,16 +59,11 @@ class Site < Sinatra::Base
   end
 
   user do
-    [current_identity, session]
+    current_identity
   end
 
-  ability do |user|
-    identity, session = user
+  ability do |identity|
     can :index, :home
-
-    unless session[:invite].nil?
-      can :create, Identity
-    end
 
     unless identity.nil?
       unless identity.company.nil?

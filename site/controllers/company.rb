@@ -3,12 +3,12 @@ require 'csv'
 
 class Site < Sinatra::Base
   get '/company/register' do
-    authorize! :create, Identity
+    raise InviteRequired, 'lololo' if session[:invite].nil?
     slim :'company/register'
   end
 
   post '/company/register' do
-    authorize! :create, Identity
+    raise InviteRequired.new if session[:invite].nil?
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'customer', :name => params[:name]
     puts identity.errors.inspect
     puts identity

@@ -28,12 +28,12 @@ class Site < Sinatra::Base
     # end
 
   get '/operator/register' do
-    authorize! :create, Identity
+    raise InviteRequired.new if session[:invite].nil?
     slim :'operator/register'
   end
 
   post '/operator/register' do
-    authorize! :create, Identity
+    raise InviteRequired.new if session[:invite].nil?
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'operator', :name => params[:name]
 
     session[:user_id] = identity.id
