@@ -1,9 +1,9 @@
 # coding: utf-8
 class Site < Sinatra::Base
   get '/sessions/new' do
-    if current_user.nil?
+    if current_identity.nil?
       slim :'sessions/new'
-    elsif current_user.company
+    elsif current_identity.company
       redirect '/company'
     else
       redirect '/operator'
@@ -26,6 +26,7 @@ class Site < Sinatra::Base
   end
 
   get '/sessions/logout' do
+    session[:invite] = nil
     session[:user_id] = nil
     redirect '/'
   end

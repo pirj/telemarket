@@ -3,10 +3,12 @@ require 'csv'
 
 class Site < Sinatra::Base
   get '/company/register' do
+    authorize! :create, Identity
     slim :'company/register'
   end
 
   post '/company/register' do
+    authorize! :create, Identity
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'customer', :name => params[:name]
     puts identity.errors.inspect
     puts identity
@@ -21,19 +23,19 @@ class Site < Sinatra::Base
 
   get '/company' do
     authorize! :view, Company
-    company = current_user.company
+    company = current_identity.company
     slim :'company/index', locals: {company: company}
   end
 
   get '/company/instructions' do
     authorize! :view, Company
-    company = current_user.company
+    company = current_identity.company
     slim :'company/instructions', locals: {company: company}
   end
 
   post '/company/instructions' do
     authorize! :edit, Company
-    company = current_user.company
+    company = current_identity.company
     company.instructions = params[:text]
     company.save
 
@@ -42,13 +44,13 @@ class Site < Sinatra::Base
 
   get '/company/targets' do
     authorize! :index, Target
-    company = current_user.company
+    company = current_identity.company
     slim :'company/targets', locals: {company: company}
   end
 
   post '/company/target/create' do
     authorize! :create, Target
-    company = current_user.company
+    company = current_identity.company
 
     Target.create name: params[:name], phone: params[:phone], company: company
     redirect '/company/targets'
@@ -56,7 +58,7 @@ class Site < Sinatra::Base
 
   post '/company/target/upload' do
     authorize! :create, Target
-    company = current_user.company
+    company = current_identity.company
 
     puts params.inspect
     file = File.new params[:file]

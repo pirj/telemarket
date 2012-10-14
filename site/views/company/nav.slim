@@ -20,12 +20,12 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
             a href="/company/targets"
               | Цели (
               span.success
-                = current_user.company.targets(:status => true).size
+                = current_identity.company.targets(:status => true).size
               | /
               span.error
-                = current_user.company.targets(:status => false).size
+                = current_identity.company.targets(:status => false).size
               | /
-              = current_user.company.targets.size
+              = current_identity.company.targets.size
               | )
           li
             a href="/company/instructions"

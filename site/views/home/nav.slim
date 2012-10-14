@@ -13,20 +13,20 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
 
       div.nav-collapse.collapse
         ul.nav
-          - if current_user
+          - if current_identity
             li
-              -if current_user.company
+              -if current_identity.company
                 a href="/company"
                   | Главная
-              -unless current_user.company
+              -unless current_identity.company
                 a href="/operator"
                   | Главная
         ul.nav.pull-right
-          - if current_user
+          - if current_identity
             li
               a href="/sessions/logout"
                 | Выйти
-          - unless current_user
+          - unless current_identity
             li
               a.work href="/operator/register"
                 | Работа у нас

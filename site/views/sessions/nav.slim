@@ -13,7 +13,7 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
 
       div.nav-collapse.collapse
         ul.nav.pull-right
-          - unless current_user
+          - unless current_identity
             li
               a.work href="/operator/register"
                 | Работа у нас

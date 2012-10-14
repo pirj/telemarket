@@ -20,7 +20,7 @@ class Site < Sinatra::Base
 
   use Rack::Session::Cookie, :secret => 'paimoo4Odoo3FeWiovaiVi9iYi0PoceeHaesho3azeiy3aVuahri5Shibio6ohCh'
   use Rack::Protection, except: :session_hijacking
-  
+
   register Sinatra::Can
 
   enable :logging
@@ -44,7 +44,30 @@ class Site < Sinatra::Base
     also_reload './controllers/*.rb'
   end
 
-  def current_user
-    @current_user ||= Identity.get(session[:user_id]) if session[:user_id]
+  def current_identity
+    @current_identity ||= Identity.get(session[:user_id]) if session[:user_id]
+  end
+
+  user do
+    [current_identity, session]
+  end
+
+  ability do |user|
+    identity, session = user
+    can :index, :home
+
+    unless session[:invite].nil?
+      can :create, Identity
+    end
+
+    unless identity.nil?
+      unless identity.company.nil?
+        can :manage, Company
+        can :manage, Target
+      end
+      if identity.role == 'operator'
+        can :manage, :calls
+      end
+    end
   end
 end

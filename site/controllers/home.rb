@@ -8,8 +8,8 @@ class Site < Sinatra::Base
     invite = params[:invite]
 
 
-    session[:invited] = true
-    flash['info'] = 'Вы были приглашены, воспользуйтесь регистрацией.'
+    session[:invite] = invite
+    flash['info'] = "Вы были приглашены, воспользуйтесь регистрацией. #{invite}"
     redirect '/'
   end
 end

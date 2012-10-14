@@ -18,7 +18,7 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
               | Главная
 
         ul.nav.pull-right
-          - if current_user
+          - if current_identity
             li
               a href="/sessions/logout"
                 | Выйти
