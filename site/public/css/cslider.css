@@ -56,14 +56,14 @@
 }
 .da-slide h2{
 	color: #dddddd;
-	font-size: 66px;
+	font-size: 4em;
 	width: 50%;
 	top: 60px;
 	white-space: nowrap;
 	z-index: 10;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 	font-family: 'Roboto Light';
-	font-weight: 700;
+	/*font-weight: 700;*/
 }
 .da-slide p{
 	width: 45%;
