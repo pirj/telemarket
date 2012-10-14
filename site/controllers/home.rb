@@ -5,11 +5,12 @@ class Site < Sinatra::Base
   end
 
   get '/invite/:invite' do
-    invite = params[:invite]
+    invite = Invite.first(:code => params[:invite])
+    raise InviteRequired.new('Неверный код приглашения') if invite.nil?
+    raise InviteRequired.new('Приглашение уже было использовано ранее') unless invite.invitee.nil?
 
-
-    session[:invite] = invite
-    flash['info'] = "Вы были приглашены, воспользуйтесь регистрацией. #{invite}"
+    session[:invite] = params[:invite]
+    flash['info'] = "Вы приглашены, воспользуйтесь регистрацией"
     redirect '/'
   end
 end

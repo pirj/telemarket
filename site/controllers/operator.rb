@@ -28,13 +28,19 @@ class Site < Sinatra::Base
     # end
 
   get '/operator/register' do
-    raise InviteRequired.new if session[:invite].nil?
+    raise InviteRequired.new('Регистрация только по приглашениям') if session[:invite].nil?
     slim :'operator/register'
   end
 
   post '/operator/register' do
-    raise InviteRequired.new if session[:invite].nil?
+    raise InviteRequired.new('Регистрация только по приглашениям') if session[:invite].nil?
+    invite = Invite.first(:code => session[:invite])
+    raise InviteRequired.new('Приглашение уже было использовано ранее') unless invite.invitee.nil?
+
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'operator', :name => params[:name]
+
+    invite.update(invitee: identity)
+    session[:invite] = nil
 
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"

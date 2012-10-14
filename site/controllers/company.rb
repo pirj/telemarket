@@ -3,18 +3,20 @@ require 'csv'
 
 class Site < Sinatra::Base
   get '/company/register' do
-    raise InviteRequired, 'lololo' if session[:invite].nil?
+    raise InviteRequired.new('Регистрация только по приглашениям') if session[:invite].nil?
     slim :'company/register'
   end
 
   post '/company/register' do
-    raise InviteRequired.new if session[:invite].nil?
+    raise InviteRequired.new('Регистрация только по приглашениям') if session[:invite].nil?
+    invite = Invite.first(:code => session[:invite])
+    raise InviteRequired.new('Приглашение уже было использовано ранее') unless invite.invitee.nil?
+
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'customer', :name => params[:name]
-    puts identity.errors.inspect
-    puts identity
     company = Company.create name: params[:company], :identity => identity
-    puts company.errors.inspect
-    puts company
+
+    invite.update(invitee: identity)
+    session[:invite] = nil
 
     session[:user_id] = identity.id
     flash[:info] = "Добро пожаловать!"
