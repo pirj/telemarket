@@ -1,0 +1,67 @@
+# freeswitch
+# zadarma / telphin
+# thin/goliath + cramp/async-sinatra = план-звонки
+# faye + https://github.com/ryanb/private_pub http://habrahabr.ru/post/124066/#comment_4078558
+
+/ виджет звонка на сайт http://code.google.com/p/siprtmp/ http://code.google.com/p/red5phone
+#!!! http://vk.it-sfera.com.ua/855.html http://wiki.freeswitch.org/wiki/Mod_rtmp
+
+#. 2 клиента на коробках
+#. 2 клиента на софтфонах
+
+# не держит параллельные запросы?? со sleep. так вроде ок
+
+# переделать аутентификацию? GET auth/identity/callback - плохо
+
+. launch countown curtain
+
+# приглашения
+
+. добавить информацию что это такое и зачем
+
+. gotelemarket.ru/com salesboostr? telemarkt.is? 
+
+. список телефонов для таргета, список емейлов
+
+. интерфейс оператора
+ . возможность довбить емейл и телефон+имя (контакт всё-таки нужен)
+ . перевод звонка на менеджера
+ . определение оператора по сессии
+ . обновление экрана по окончании звонка
+ ? предлагать ротацию проектов раз в час
+ ? обратный вызов на городской (меньше выплата звонящему)
+
+. тест оператора на дебила (тестовый say ответ, запись разговора, анализ оффлайн)
+ . тестовый план, доступный только новичкам
+ . ui модератора
+
+. покрыть ui тестами
+
+. db=>postgres+redis
+. migrations
+
+. yepnope
+. ajax
+
+#. звонок с сайта
+
+? загрузка XLS присланного Лёшей формата
+
+? Kamailio (зарегистрировать им kamail.io в прикол) (? нужна ruby обёртка)
+? уйти на телфин
+? Opus кодек (как дела у флеша? использовать SIP клиент для вызовов на наш номер?)
+? WebRTC
+
+? http://aozora.github.com/bootmetro/tiles-templates.html
+. icons attribution http://chrfb.deviantart.com/art/quot-ecqlipse-2-quot-PNG-59941546
+  http://www.iconfinder.com/icondetails/47543/128/call_phone_icon
+  http://www.iconfinder.com/icondetails/27626/128/9000_hal_light_ojo_red_space_icon
+  http://www.iconfinder.com/icondetails/47542/128/performance_settings_speed_icon
+  http://www.iconfinder.com/icondetails/17220/256/business_coins_money_payment_icon
+
+.план-дерево (редактор заказчику + чеклист звонящему)
+
+.интерфейс менеджера заказчика через mozilla chromeless
+ .получение звонка с сайта
+ .запись звонков (8кбит, 1мес=1 гиг)
+ .вызов менеджера заказчика на коробку/SIP (сокращаем затраты заказчика)
