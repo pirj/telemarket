@@ -27,9 +27,10 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
               a href="/sessions/logout"
                 | Выйти
           - unless current_identity
-            li
-              a.work href="/operator/register"
-                | Работа у нас
+            - if session[:invite]
+              li
+                a.work href="/operator/register"
+                  | Работа у нас
             li
               a href="/sessions/new"
                 | Войти

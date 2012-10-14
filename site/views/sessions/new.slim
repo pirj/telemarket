@@ -1,8 +1,10 @@
 - content_for :nav do
   == slim :'sessions/nav'
-p
-  a href='/company/register'
-    | Ещё не зарегистрированы?
+
+- if session[:invite]
+  p
+    a href='/company/register'
+      | Ещё не зарегистрированы?
 
 form.form-horizontal action='/sessions/create' method='post'
   fieldset

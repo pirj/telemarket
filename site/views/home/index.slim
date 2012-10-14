@@ -38,8 +38,12 @@ section
   div
     div.registertoday
       div
-        a.btn.btn-primary.btn-large href='/company/register'
-          | Начать пользоваться сегодня
+        - if session[:invite]
+          a.btn.btn-primary.btn-large href='/company/register'
+            | Начать пользоваться сегодня
+        - unless session[:invite]
+          p
+            | Регистрация только по приглашениям
       div
         ul
           li

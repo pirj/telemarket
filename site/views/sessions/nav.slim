@@ -14,9 +14,10 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
       div.nav-collapse.collapse
         ul.nav.pull-right
           - unless current_identity
-            li
-              a.work href="/operator/register"
-                | Работа у нас
+            - if session[:invite]
+              li
+                a.work href="/operator/register"
+                  | Работа у нас
             li
               a href="/sessions/new"
                 | Войти
