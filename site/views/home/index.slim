@@ -1,49 +1,23 @@
 - content_for :nav do
   == slim :'home/nav'
 
-div id="da-slider" class="da-slider"
-  div class="da-slide"
-    h2
-      | Просто
-    p
-      | Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
-    div class="da-img"
-      img src="img/1350062423_09.call.png" alt="image01"
-  div class="da-slide"
-    h2
-      | Быстро
-    p
-      | A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-    div class="da-img"
-      img src="/img/1350062671_08_settings.png" alt="image01"
-  div class="da-slide"
-    h2
-      | Качественно
-    p
-      | Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
-    div class="da-img"
-      img src="/img/1350062441_HAL-9000.png" alt="image01"
-  div class="da-slide"
-    h2
-      | Недорого
-    p
-      | Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
-    div class="da-img"
-      img src="/img/1350063378_coins.png" alt="image01"
-  nav class="da-arrows"
-    span class="da-arrows-prev"
-    span class="da-arrows-next"
+== slim :'home/slider'
 
 section
   div
     div.registertoday
-      div
-        - if session[:invite]
-          a.btn.btn-primary.btn-large href='/company/register'
-            | Начать пользоваться сегодня
-        - unless session[:invite]
+      - if session[:invite]
+        a.btn.btn-primary.btn-large href='/company/register'
+          | Начать пользоваться сегодня
+      - unless session[:invite]
+        div
           p
             | Регистрация только по приглашениям
+        form.subscribe action='/subscribe' method='post'
+          div.input-append
+            input name='email' type='text' placeholder='Оставьте свой емейл'
+            input.btn type='submit' value='Узнать первым'
+
       div
         ul
           li

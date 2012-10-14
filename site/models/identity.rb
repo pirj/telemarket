@@ -12,7 +12,7 @@ class Identity
 
   has n, :invites, :constraint => :destroy
 
-  validates_presence_of      :email,    :role
+  validates_presence_of      :email, :role, :name
   validates_format_of        :email,    :with => :email_address
   validates_uniqueness_of    :email
   validates_format_of        :role,     :with => /[A-Za-z]/

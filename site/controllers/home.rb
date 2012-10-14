@@ -13,4 +13,12 @@ class Site < Sinatra::Base
     flash['info'] = "Вы приглашены, воспользуйтесь регистрацией"
     redirect '/'
   end
+
+  post '/subscribe' do
+    subscriber = Subscriber.create(email: params[:email])
+
+    flash['error'] = subscriber.errors.values.join('. ') if subscriber.errors
+    flash['info'] = "Вы подписались на новости проекта и первым узнаете, когда регистрация будет открыта" unless subscriber.errors
+    redirect '/'
+  end
 end

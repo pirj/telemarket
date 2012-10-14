@@ -13,9 +13,11 @@
 
 # переделать аутентификацию? GET auth/identity/callback - плохо
 
-. launch countown curtain
+# launch countown curtain
 
 # приглашения
+
+. подписка на новости. настройка емейл
 
 . добавить информацию что это такое и зачем
 
