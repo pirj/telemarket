@@ -24,10 +24,11 @@ ol,ul {
 caption,th {
   text-align:left;
 }
-h1,h2,h3,h4,h5,h6 {
+/*h1,h2,h3,h4,h5,h6 {
   font-size:100%;
   font-weight:normal;
 }
+*/
 q:before,q:after {
   content:'';
 }
@@ -130,3 +131,6 @@ div.registertoday {
 div.registertoday div {
   padding: 0.5em;
 }
+
+.slogan {padding-top: 1em; margin-left: auto; margin-right: auto; }
+.slogan h2 {color: #999; font-family: 'Roboto Thin'; }

@@ -1,6 +1,11 @@
 - content_for :nav do
   == slim :'home/nav'
 
+section.slogan
+  div
+    h2
+      | Аутсорсинг телемаркетинга. Просто, быстро, качественно и недорого.
+
 == slim :'home/slider'
 
 section
@@ -15,7 +20,7 @@ section
             | Регистрация только по приглашениям
         form.subscribe action='/subscribe' method='post'
           div.input-append
-            input name='email' type='text' placeholder='Оставьте свой емейл'
+            input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
             input.btn type='submit' value='Узнать первым'
 
       div
