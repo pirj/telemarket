@@ -16,9 +16,21 @@ class Site < Sinatra::Base
 
   post '/subscribe' do
     subscriber = Subscriber.create(email: params[:email])
+    email = params[:email]
 
-    flash['error'] = subscriber.errors.values.join('. ') if subscriber.errors
-    flash['info'] = "Вы подписались на новости проекта и первым узнаете, когда регистрация будет открыта" unless subscriber.errors
+    Mail.new do
+      from     'info@gotelemarket.com'
+      to       email
+      subject  'Телемаркет'
+ 
+      html_part do
+        content_type 'text/html; charset=UTF-8'
+        body     "Вы подписались на новости проекта и первым узнаете, когда регистрация будет открыта."
+      end
+    end.deliver
+
+    flash['error'] = subscriber.errors.values.join('. ') unless subscriber.errors.empty?
+    flash['info'] = "Вы подписались на новости проекта и первым узнаете, когда регистрация будет открыта" if subscriber.errors.empty?
     redirect '/'
   end
 end

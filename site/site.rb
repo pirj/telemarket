@@ -75,4 +75,9 @@ class Site < Sinatra::Base
       end
     end
   end
+
+  environment = development? ? :development : production? ? production : :test
+  Mail.defaults do
+    delivery_method :smtp, YAML.load_file("#{Dir.pwd}/config/email.yml")[environment.to_s].symbolize_keys
+  end
 end

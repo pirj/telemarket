@@ -1,0 +1,16 @@
+development:
+  address: smtp.gmail.com
+  port: 587
+  authentication: plain
+  user_name: no-reply@gotelemarket.com
+  password: nfijnjien
+  enable_starttls_auto: true
+
+production:
+  address: smtp.gmail.com
+  port: 587
+  authentication: plain
+  user_name: no-reply@gotelemarket.com
+  domain: gotelemarket.com
+  password: neircnei
+  enable_starttls_auto: true

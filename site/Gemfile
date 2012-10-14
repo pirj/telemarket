@@ -11,6 +11,8 @@ gem 'sinatra-can', :require => 'sinatra/can'
 
 gem 'rack-protection'
 
+gem 'mail'
+
 gem 'slim'
 
 gem 'pg'
