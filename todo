@@ -14,7 +14,7 @@
 # добавить информацию что это такое и зачем
 
 . список телефонов для таргета, список емейлов
-. загрузка XLS присланного Лёшей формата
+. загрузка CSV
 
 . интерфейс оператора
  . возможность довбить емейл и телефон+имя (контакт всё-таки нужен)
@@ -35,6 +35,8 @@
 . ajax
 . CDN
 
+. загрузка XLS присланного Лёшей формата
+
 . тест оператора на дебила (тестовый say ответ, запись разговора, анализ оффлайн)
  . тестовый план, доступный только новичкам
  . ui модератора
@@ -48,6 +50,7 @@
    http://www.iconfinder.com/icondetails/27626/128/9000_hal_light_ojo_red_space_icon
    http://www.iconfinder.com/icondetails/47542/128/performance_settings_speed_icon
    http://www.iconfinder.com/icondetails/17220/256/business_coins_money_payment_icon
+ . http://vimeo.com/groups/freehd/videos/14870217
 
 = ПОЕХАЛИ открыто
 
