@@ -87,6 +87,10 @@
 	opacity: 0.6;
 	height: auto;
 }
+.da-slide p {
+  text-align: justify;
+}
+
 .da-slide .da-img{
 	text-align: center;
 	width: 30%;
