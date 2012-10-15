@@ -2,6 +2,7 @@ telemarket.sublime-project
 telemarket.sublime-workspace
 site/development.db
 site/config/*.yml
+site/public/userdata/*.png
 misc
 console
 *.db
