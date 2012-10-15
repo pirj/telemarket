@@ -28,6 +28,10 @@ class Identity
       invites << invite
       invite.save
     end
+
+    avatar = Cheers::Avatar.new email
+    digest = Digest::SHA1.hexdigest email
+    avatar.avatar_file File.join Dir.pwd, "public/userdata/#{digest}.png"
   end
 
   def password= password
@@ -38,5 +42,10 @@ class Identity
     instance = first(:email => email)
     return false unless instance
     BCrypt::Password.new(instance.crypted_password) == password ? instance : nil
+  end
+
+  def avatar_file
+    digest = Digest::SHA1.hexdigest email
+    "/userdata/#{digest}.png"
   end
 end

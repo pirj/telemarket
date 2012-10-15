@@ -12,6 +12,8 @@ GEM
     backports (2.6.4)
     bcrypt-ruby (3.0.1)
     cancan (1.6.8)
+    cheers (0.0.1)
+      rmagick
     coderay (1.0.7)
     daemons (1.1.9)
     data_objects (0.10.8)
@@ -96,6 +98,7 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    rmagick (2.13.1)
     sinatra (1.3.3)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
@@ -133,6 +136,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby
+  cheers
   datamapper
   dm-aggregates
   dm-constraints
