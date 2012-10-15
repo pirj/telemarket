@@ -27,6 +27,8 @@
 . db=>postgres+redis
 . migrations
 
+. совместить вход и регистрацию
+
 = ПОЕХАЛИ beta
 
 . покрыть ui тестами
@@ -34,6 +36,7 @@
 . yepnope
 . ajax
 . CDN
+. less/sass (prefix/fonts)
 
 . загрузка XLS присланного Лёшей формата
 

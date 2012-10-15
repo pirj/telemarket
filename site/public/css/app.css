@@ -134,3 +134,7 @@ div.registertoday div {
 
 .slogan {padding-top: 1em; margin-left: auto; margin-right: auto; }
 .slogan h2 {color: #999; font-family: 'Roboto Thin'; }
+
+.register-ads p {
+  padding-left: 2em;
+}
