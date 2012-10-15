@@ -9,7 +9,7 @@ section.slogan
 == slim :'home/slider'
 
 section
-  div
+  - unless current_identity
     div.registertoday
       - if session[:invite]
         a.btn.btn-primary.btn-large href='/company/register'
