@@ -15,6 +15,7 @@ gem 'slim'
 
 # Misc tools
 gem 'cheers'
+gem 'roo'
 
 # Mail
 gem 'mail'

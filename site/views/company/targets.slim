@@ -12,21 +12,32 @@ section
           th
             | Контакты
           th
-            | Результат
-      -company.targets.each do |target|
+            | Статус
+      - company.targets.each do |target|
         tr class=({true => 'success', false => 'error'}[target.status])
           td
             = target.name
           td
-            = target.phone
+            = target.target_contacts.map(&:phone).join(', ')
           td
-            = target.result
+            = target.status
 
-    form.form-inline method='post' action="/company/target/create"
-      input name='name' type='text' placeholder="Наименование"
-      input name='phone' type='text' placeholder="Телефон"
-      input.btn type='submit' value='Добавить'
-
-    form.form-inline method='post' action="/company/target/upload"
-      input name='file' type='file' placeholder="Наименование"
-      input.btn type='submit' value='Загрузить из CSV файла'
+section
+  form.form-horizontal method='post' action="/company/target/upload" enctype="multipart/form-data"
+    div.control-group
+      label.control-label for='file'
+        | Загрузить файл
+      div.controls.fileupload.fileupload-new data-provides="fileupload"
+        div.input-append
+          div.uneditable-input.span3
+            i.icon-file.fileupload-exists
+            span.fileupload-preview
+          span.btn.btn-file
+            span.fileupload-new
+              | Выбрать
+            span.fileupload-exists
+              | Изменить
+            input type="file" name="file"
+          input.btn.btn-primary.fileupload-exists type='submit' value='Загрузить'
+        p.help-block
+          | Файл в формате XLS, XLSX или CSV

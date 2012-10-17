@@ -4,7 +4,6 @@ class TargetContact
 
   belongs_to :target
 
-  property :name, String, :length => 128
   property :phone, String, :length => 16
 
   property :status, Boolean

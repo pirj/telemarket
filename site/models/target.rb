@@ -4,7 +4,13 @@ class Target
 
   belongs_to :company
 
+  property :name, String, :length => 128
   property :status, Boolean
+
+  has n, :target_contacts
+
+  property :ceo_name, String, :length => 128
+  property :ceo_phone, String, :length => 16
 
   property :deleted_at, ParanoidDateTime
   timestamps :at

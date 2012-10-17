@@ -50,24 +50,40 @@ class Site < Sinatra::Base
     slim :'company/targets', locals: {company: company}
   end
 
-  post '/company/target/create' do
-    authorize! :create, Target
-    company = current_identity.company
-
-    Target.create name: params[:name], phone: params[:phone], company: company
-    redirect '/company/targets'
+  def convert_phone phone, prefix
+    digits = phone.gsub(/[\s\(\)-]/, '')
+    digits = digits[-([digits.length, 10].min)..-1]
+    "+#{prefix[0..(10-digits.length)]}#{digits}"[0..11]
   end
+
+  def extract_phones phones, prefix
+    return if phones.nil?
+    phones.scan(/((\d+[-\(\)]{,1}[\s]{,1})+)/).map(&:first).map do |phone|
+      convert_phone phone, prefix
+    end
+  end
+
+  def parse_file file
+
+  end
+
+  # CSV.parse(File.new(File.join(Dir.pwd, "../misc/eurooffice.csv")).read) do |r|
+  #   r.shift # number
+  #   company_name = r.shift
+  #   public_phones = extract_phones r.shift, "7812"
+  #   last_phone = extract_phones r.shift, "7812"
+
+  #   puts "#{public_phones} #{last_phone}"
+  # end
 
   post '/company/target/upload' do
     authorize! :create, Target
     company = current_identity.company
 
-    puts params.inspect
-    file = File.new params[:file]
+    # file = File.new 
+    params[:file]
 
-    CSV.parse(file.read) do |row|
-      target = Target.create name: row[0], phone: row[1], company: company
-    end
+    STDOUT.puts params #[:file]
 
     redirect '/company/targets'
   end
