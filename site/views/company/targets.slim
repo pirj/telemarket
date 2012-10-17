@@ -11,16 +11,12 @@ section
             | Наименование
           th
             | Контакты
-          th
-            | Статус
       - company.targets.each do |target|
         tr class=({true => 'success', false => 'error'}[target.status])
           td
             = target.name
           td
             = target.target_contacts.map(&:phone).join(', ')
-          td
-            = target.status
 
 section
   form.form-horizontal method='post' action="/company/target/upload" enctype="multipart/form-data"
@@ -38,6 +34,21 @@ section
             span.fileupload-exists
               | Изменить
             input type="file" name="file"
-          input.btn.btn-primary.fileupload-exists type='submit' value='Загрузить'
         p.help-block
           | Файл в формате XLS, XLSX или CSV
+          br
+          a name="xlsformat" href="xlsformat"
+            | Подробнее о формате файла
+
+    div.control-group
+      label.control-label for='prefix'
+        | Префикс
+      div.controls
+        input name='prefix' type='text'
+          p.help-block
+            | Например, +7-812
+            br
+            | Номера вида 123-4567 будут преобразованы в +7-812-123-4567
+
+    div.form-actions
+      input.btn.btn-primary.fileupload-exists type='submit' value='Загрузить'

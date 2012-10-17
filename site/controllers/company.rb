@@ -50,40 +50,15 @@ class Site < Sinatra::Base
     slim :'company/targets', locals: {company: company}
   end
 
-  def convert_phone phone, prefix
-    digits = phone.gsub(/[\s\(\)-]/, '')
-    digits = digits[-([digits.length, 10].min)..-1]
-    "+#{prefix[0..(10-digits.length)]}#{digits}"[0..11]
-  end
-
-  def extract_phones phones, prefix
-    return if phones.nil?
-    phones.scan(/((\d+[-\(\)]{,1}[\s]{,1})+)/).map(&:first).map do |phone|
-      convert_phone phone, prefix
-    end
-  end
-
-  def parse_file file
-
-  end
-
-  # CSV.parse(File.new(File.join(Dir.pwd, "../misc/eurooffice.csv")).read) do |r|
-  #   r.shift # number
-  #   company_name = r.shift
-  #   public_phones = extract_phones r.shift, "7812"
-  #   last_phone = extract_phones r.shift, "7812"
-
-  #   puts "#{public_phones} #{last_phone}"
-  # end
-
   post '/company/target/upload' do
     authorize! :create, Target
     company = current_identity.company
 
-    # file = File.new 
-    params[:file]
+    targets = TargetExtractor.new(params[:file], params[:prefix]).extract
 
-    STDOUT.puts params #[:file]
+    # STDOUT.puts targets.inspect
+    STDOUT.puts targets.size
+    STDOUT.puts targets[1][0].encoding
 
     redirect '/company/targets'
   end

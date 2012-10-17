@@ -7,7 +7,7 @@ require 'sinatra/streaming'
 require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 
-Dir['*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
+Dir['*.rb', 'lib/*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
 
 class Site < Sinatra::Base
   class InviteRequired < StandardError
@@ -50,6 +50,7 @@ class Site < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
     also_reload './*.rb'
+    also_reload './lib/*.rb'
     also_reload './models/*.rb'
     also_reload './controllers/*.rb'
   end
