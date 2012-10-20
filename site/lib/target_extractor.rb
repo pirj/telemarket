@@ -7,22 +7,32 @@ class TargetExtractor
     sheet_from_file(@file).rows.map do |row|
       company_name = row[1]
       public_phones = extract_phones row[2], @prefix
-      last_phone = extract_phones row[3], @prefix
-      [company_name, public_phones, last_phone]
+      ceo_phones = extract_phones row[3], @prefix
+      ceo_name = extract_name row[3]
+      [company_name, public_phones, ceo_phones, ceo_name]
     end
   end
 
-  def convert_phone phone, prefix
-    digits = phone.gsub(/[\s\(\)-]/, '')
+  def normalize_phone phone, prefix
+    digits = phone.gsub(/[^\d]/, '')
     digits = digits[-([digits.length, 10].min)..-1]
     "+#{prefix[0..(10-digits.length)]}#{digits}"[0..11]
   end
 
   def extract_phones phones, prefix
-    return if phones.nil?
-    phones.scan(/((\d+[-\(\)]{,1}[\s]{,1})+)/).map(&:first).map do |phone|
-      convert_phone phone, prefix
+    return [] if phones.nil? or phones.empty?
+    phones.scan(/([\+]*(\d+[-\(\)]{,1}[\s]{,1})+)/).map(&:first).map do |phone|
+      normalize_phone phone, prefix
     end
+  end
+
+  def extract_name phones
+    return '' if phones.nil? or phones.empty?
+    name = phones.dup
+    phones.scan(/([\+]*(\d+[-\(\)]{,1}[\s]{,1})+)/).map(&:first).each do |phone|
+      name.gsub! phone, ''
+    end
+    name
   end
 
   def sheet_from_file file
@@ -36,7 +46,8 @@ class TargetExtractor
       FileUtils.mv file[:tempfile], new_name 
       XLSheet.new Excel.new(new_name)
     elsif extension == 'csv'
-      CSVSheet.new File.new(file[:tempfile].path).read
+      # CSVSheet.new File.new(file[:tempfile].path).read
+      CSVSheet.new file[:tempfile].read.force_encoding Encoding::UTF_8
     else
       nil
     end

@@ -47,18 +47,17 @@ class Site < Sinatra::Base
   get '/company/targets' do
     authorize! :index, Target
     company = current_identity.company
-    slim :'company/targets', locals: {company: company}
+    slim :'company/targets', locals: {company: company, prefix: '+7-812'}
   end
 
   post '/company/target/upload' do
     authorize! :create, Target
     company = current_identity.company
 
-    targets = TargetExtractor.new(params[:file], params[:prefix]).extract
+    prefix = params[:prefix]
+    prefix = prefix.nil? || prefix.empty? ? '7' : prefix
+    targets = TargetExtractor.new(params[:file], prefix).extract
 
-    # STDOUT.puts targets.inspect
-    STDOUT.puts targets.size
-    STDOUT.puts targets[1][0].encoding
 
     redirect '/company/targets'
   end
