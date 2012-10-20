@@ -58,6 +58,31 @@ class Site < Sinatra::Base
     prefix = prefix.nil? || prefix.empty? ? '7' : prefix
     targets = TargetExtractor.new(params[:file], prefix).extract
 
+    p targets
+
+    loaded = []
+    targets.each do |t|
+      name, public_phones, ceo_phones, ceo_name = t
+
+      next if name.nil?
+      next unless company.targets.first(name: name).nil?
+
+      target = Target.new company: company, name: name
+      next unless target.save
+
+      public_phones.each do |phone|
+        puts phone
+        contact = TargetContact.create target: target, phone: phone
+      end
+
+      ceo_phones.each do |phone|
+        contact = TargetContact.create target: target, phone: phone, name: ceo_name, ceo: true
+      end
+
+      loaded << target
+    end
+
+    flash[:info] = "Загружено #{loaded.size} целей"
 
     redirect '/company/targets'
   end

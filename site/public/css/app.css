@@ -52,7 +52,6 @@ section, header{
 /* App css */
 html, body {
   font-family: 'Roboto Light', sans-serif;
-  overflow: hidden;
 }
 
 .navbar .logo {

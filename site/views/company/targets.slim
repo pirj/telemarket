@@ -11,12 +11,16 @@ section
             | Наименование
           th
             | Контакты
+          th
+            | Дата загрузки
       - company.targets.each do |target|
         tr class=({true => 'success', false => 'error'}[target.status])
           td
             = target.name
           td
             = target.target_contacts.map(&:phone).join(', ')
+          td
+            = target.created_at.strftime "%B %d"
 
 section
   form.form-horizontal method='post' action="/company/target/upload" enctype="multipart/form-data"
