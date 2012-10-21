@@ -31,7 +31,7 @@ class CallListener < Librevox::Listener::Outbound
   # end
 
   def session_initiated
-    # puts "si #{session.inspect}"
+    puts "call cd# #{session[:channel_destination_number]}"
     bridge "sofia/external/+79643857131@sip.zadarma.com" do
       puts "bridged"
     end
