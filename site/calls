@@ -3,7 +3,10 @@ require 'bundler'
 require 'logger'
 Bundler.require
 
-Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
+Dir['models/*.rb'].each { |file| require File.join Dir.pwd, file }
+
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
+DataMapper.finalize
 
 class CallListener < Librevox::Listener::Outbound
   event :channel_answer do |e|
@@ -26,16 +29,21 @@ class CallListener < Librevox::Listener::Outbound
     puts "hup!"
   end
 
-  # def on_event e
-  #   puts e.inspect
-  # end
+  def on_event e
+    # puts e.inspect
+  end
 
   def session_initiated
-    puts "call cd# #{session[:channel_destination_number]}"
+    user_id = Rack::Session::Redis.new(nil).get_session({'rack.multithread' => false}, session[:channel_destination_number]).last['user_id'] rescue nil
+    (hangup; return) if user_id.nil?
+    user = Identity.first(id: user_id) rescue nil
+    (hangup; return) if user.nil?
+
+    puts "user #{user.name} calling"
+
     bridge "sofia/external/+79643857131@sip.zadarma.com" do
       puts "bridged"
     end
-#    answer
   end
 end
 

@@ -4,14 +4,14 @@ section#top
   div.page-header
     p
       = company.instructions
-    input#session_id type='hidden' value=session[:session_id]
+    input#session_id type='hidden' value=env['rack.session.options'][:id]
 
   script src="/js/swfobject.js"
   script src="/js/calls.js"
 
   div.row
     a#call_button.btn.disabled
-      | Звонить
+      | Инициализация ...
     
     div#flash
       h1 Alternative content

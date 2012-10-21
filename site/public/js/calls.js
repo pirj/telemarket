@@ -15,11 +15,11 @@ function hangup() {
 function onCallState(uuid, state) {
   current_uuid = uuid
   if(state == 'RINGING')
-    $('#call_button').attr('rel', 'ringing').text('Идёт вызов')
+    $('#call_button').attr('rel', 'ringing').text('Вызов ...')
   else if(state == 'ACTIVE')
     $('#call_button').attr('rel', 'talking').text('Разговор')
   else if(state == 'HANGUP')
-    $('#call_button').attr('rel', 'hangup').text('Звонить')
+    $('#call_button').attr('rel', 'hangup').text('Вызов')
 }
 
 function onDisconnected() {
@@ -43,7 +43,7 @@ function onConnected(sessionid) {
   if (!checkMic())
     $('#flash')[0].showPrivacy()
   else {
-    $('#call_button').removeClass('disabled').addClass('enabled').attr('rel', 'hangup')
+    $('#call_button').removeClass('disabled').addClass('enabled').attr('rel', 'hangup').text("Вызов")
   }
 }
 

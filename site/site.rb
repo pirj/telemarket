@@ -7,7 +7,11 @@ require 'sinatra/streaming'
 require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 
-Dir['*.rb', 'lib/*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
+Dir['lib/*.rb', 'models/*.rb', 'controllers/*.rb'].each { |file| require File.join Dir.pwd, file }
+
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
+DataMapper.finalize
+# DataMapper.auto_upgrade!
 
 class Site < Sinatra::Base
   class InviteRequired < StandardError
@@ -27,7 +31,6 @@ class Site < Sinatra::Base
   use Rack::Session::Redis
   use Rack::Protection, except: :session_hijacking
 
-
   register Sinatra::Can
 
   enable :logging
@@ -43,10 +46,6 @@ class Site < Sinatra::Base
   error(InviteRequired) do
     slim :"errors/noinvite"
   end
-
-  DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
-  DataMapper.finalize
-  # DataMapper.auto_upgrade!
 
   configure :development do
     register Sinatra::Reloader
