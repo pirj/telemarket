@@ -12,6 +12,7 @@ gem 'sinatra-flash', :require => 'sinatra/flash'
 gem 'sinatra-can', :require => 'sinatra/can'
 gem 'rack-protection'
 gem 'slim'
+gem 'redis-rack', :require => 'rack/session/redis'
 
 # Misc tools
 gem 'cheers'
