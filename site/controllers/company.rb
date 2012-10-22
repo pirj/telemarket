@@ -58,8 +58,6 @@ class Site < Sinatra::Base
     prefix = prefix.nil? || prefix.empty? ? '7' : prefix
     targets = TargetExtractor.new(params[:file], prefix).extract
 
-    p targets
-
     loaded = []
     targets.each do |t|
       name, public_phones, ceo_phones, ceo_name = t

@@ -9,16 +9,16 @@ input#session_id type='hidden' value=env['rack.session.options'][:id]
 section#top
   div.row
     div.span4
-      = company.instructions
+      div
+        p
+          | Вы звоните в компанию
+          span
+            | Лесопил, Архангельск
+        textarea.span4 rows=10 placeholder="Кратко о содержании звонка"
 
-    div.span8
       div
         a#call_button.btn.disabled
           | Инициализация ...
-
-      div
-        textarea.span8 rows=5 placeholder="Кратко о содержании звонка"
-
       div
         button.btn.btn-primary
           | Перевести на менеджера
@@ -28,6 +28,10 @@ section#top
           | Не заинтересовались
         button.btn.btn-danger
           | Неверный номер
+
+    div.span8
+      pre
+        = company.instructions
 
   div#flash
     p

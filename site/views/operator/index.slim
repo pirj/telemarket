@@ -22,7 +22,8 @@ section#top
                 = company.name
             div.accordion-body.collapse.in id="collapseOne" 
               div.accordion-inner
-                = company.instructions
+                pre
+                  = company.instructions
                 p
                   a.btn.btn-primary href="/operator/call/#{company.id}"
                     | Это мне подходит
