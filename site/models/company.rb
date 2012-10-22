@@ -6,7 +6,7 @@ class Company
 
   property :name, String, :length => 128
 
-  property :instructions, String
+  property :instructions, Text
 
   has n, :targets, :constraint => :destroy
 
