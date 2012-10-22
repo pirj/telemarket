@@ -137,3 +137,8 @@ div.registertoday div {
 .register-ads p {
   padding-left: 2em;
 }
+
+#flash {
+  position: absolute;
+  visibility: hidden;
+}

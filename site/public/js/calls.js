@@ -54,9 +54,9 @@ $(document).ready(function() {
     $("#flash").css("top", "-500px") 
     $("#flash").css("left", "-500px")        
   } else {
-    $("#flash").css("visibility", "hidden")        
+    $("#flash").css("visibility", "hidden")
   }
- 
+
   $('#call_button[rel=hangup]').live('click', function(){
     makeCall($('#session_id').val())
   })
