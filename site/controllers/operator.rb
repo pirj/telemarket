@@ -55,12 +55,16 @@ class Site < Sinatra::Base
 
   get '/operator/call/who' do
     authorize! :make, :calls
-    json company: 'fdsdfgs', name: 'afdsgfdg'
+    target_contact = TargetContact.get session['target_contact_id']
+    json title: (target_contact.name || ''), name: target_contact.target.name
   end
 
   get '/operator/call/:company' do
     authorize! :make, :calls
     company = Company.get params[:company]
+
+    session[:calling_to_company_id] = company.id
+
     slim :'operator/call', locals: {company: company}
   end
 end

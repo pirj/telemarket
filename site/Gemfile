@@ -27,7 +27,7 @@ gem 'datamapper'
 %w(core postgres-adapter validations timestamps migrations constraints aggregates types pager is-tree).each do |g|
   gem 'dm-' + g
 end
-gem 'bcrypt-ruby', :require => "bcrypt"
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Misc dev tools
 group :development do

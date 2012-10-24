@@ -8,6 +8,23 @@ Dir['models/*.rb'].each { |file| require File.join Dir.pwd, file }
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
 DataMapper.finalize
 
+module Librevox
+  module Listener
+    class Outbound
+      def send_data data
+        STDOUT.puts "SEND DATA #{data}"
+        super
+      end
+
+      def receive_request header, content
+    STDOUT.puts "RECV: #{header[0]}" #['Event-Name'] #, content
+        # STDOUT.puts content #header #, content
+        super
+      end
+    end
+  end
+end
+
 class CallListener < Librevox::Listener::Outbound
   event :channel_answer do |e|
     puts "answered"
@@ -18,6 +35,10 @@ class CallListener < Librevox::Listener::Outbound
 
   event :channel_bridge do |e|
     puts "bridged!"
+    # sleep 3
+    puts "deflecting"
+    deflect "sofia/external/+78124569440@sip.zadarma.com"
+    puts "deflected"
   end
 
   event :channel_unbridge do |e|
@@ -34,16 +55,21 @@ class CallListener < Librevox::Listener::Outbound
   end
 
   def session_initiated
-    user_id = Rack::Session::Redis.new(nil).get_session({'rack.multithread' => false}, session[:channel_destination_number]).last['user_id'] rescue nil
-    (hangup; return) if user_id.nil?
-    user = Identity.first(id: user_id) rescue nil
+    rack_session = Rack::Session::Redis.new(nil)
+    rack = rack_session.get_session({}, session[:channel_destination_number]).last
+
+    user = Identity.get rack['user_id']
     (hangup; return) if user.nil?
 
-    puts "user #{user.name} calling"
+    company = Company.get rack['calling_to_company_id']
 
-    bridge "sofia/external/+79643857131@sip.zadarma.com" do
-      puts "bridged"
-    end
+    target_contact = company.targets.target_contacts.first(status: nil)
+    (hangup; return) if target_contact.nil?
+
+    rack['target_contact_id'] = target_contact.id
+    rack_session.set_session({}, session[:channel_destination_number], rack, {})
+
+    bridge "sofia/external/#{target_contact.phone}@sip.zadarma.com"
   end
 end
 

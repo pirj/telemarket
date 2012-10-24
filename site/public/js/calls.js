@@ -7,8 +7,9 @@ var current_uuid
 function makeCall(number) {
   $("#flash")[0].makeCall(number, null, [])
   var who = $.ajax('/operator/call/who').done(function(data){
-    $('#company-name').text(data.company)
-    $('#company-contact').text(data.name)
+    $('#target-title').text(data.title)
+    $('#target-contact-name').text(data.name)
+    console.log(data.title)
   })
 }
 
