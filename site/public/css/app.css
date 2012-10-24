@@ -106,7 +106,7 @@ div.registertoday div {
   visibility: hidden;
 }
 
-#company-name {
+#company-contact, #company-name {
   margin-left: .5em;
   font-weight: bold;
 }

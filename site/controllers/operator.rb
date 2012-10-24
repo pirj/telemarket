@@ -53,6 +53,11 @@ class Site < Sinatra::Base
     slim :'operator/index', locals: {companies: companies}
   end
 
+  get '/operator/call/who' do
+    authorize! :make, :calls
+    json company: 'fdsdfgs', name: 'afdsgfdg'
+  end
+
   get '/operator/call/:company' do
     authorize! :make, :calls
     company = Company.get params[:company]

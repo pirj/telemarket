@@ -6,6 +6,10 @@ var current_uuid
 
 function makeCall(number) {
   $("#flash")[0].makeCall(number, null, [])
+  var who = $.ajax('/operator/call/who').done(function(data){
+    $('#company-name').text(data.company)
+    $('#company-contact').text(data.name)
+  })
 }
 
 function hangup() {
@@ -91,6 +95,6 @@ $(document).ready(function() {
   })
 
   $('#wrong-number').live('click', function(){
-    
+
   })
 })
