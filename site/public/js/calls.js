@@ -16,10 +16,13 @@ function onCallState(uuid, state) {
   current_uuid = uuid
   if(state == 'RINGING')
     $('#call_button').attr('rel', 'ringing').text('Вызов ...')
-  else if(state == 'ACTIVE')
+  else if(state == 'ACTIVE'){
     $('#call_button').attr('rel', 'talking').text('Разговор')
-  else if(state == 'HANGUP')
+    $('.actions button').removeClass('hidden')
+  } else if(state == 'HANGUP') {
     $('#call_button').attr('rel', 'hangup').text('Вызов')
+    $('#transfer').addClass('hidden')
+  }
 }
 
 function onDisconnected() {
@@ -74,4 +77,20 @@ $(document).ready(function() {
   })
 
   $('#call_button').tooltip()
+
+  $('#transfer').live('click', function(){
+
+  })
+
+  $('#success').live('click', function(){
+
+  })
+
+  $('#not-interested').live('click', function(){
+
+  })
+
+  $('#wrong-number').live('click', function(){
+    
+  })
 })
