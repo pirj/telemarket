@@ -3,6 +3,7 @@
 
 script src="/js/swfobject.js"
 script src="/js/calls.js"
+script src="/js/mousetrap.min.js"
 
 input#session_id type='hidden' value=env['rack.session.options'][:id]
 
@@ -12,22 +13,28 @@ section#top
       div
         p
           | Вы звоните в компанию
-          span
+          span#company-name
             | Лесопил, Архангельск
-        textarea.span4 rows=10 placeholder="Кратко о содержании звонка"
+        textarea.span4.mousetrap rows=10 placeholder="Кратко о содержании звонка" autofocus=true
 
-      div
-        a#call_button.btn.disabled
-          | Инициализация ...
-      div
-        button.btn.btn-primary
-          | Перевести на менеджера
-        button.btn.btn-success
-          | Звонок удался
-        button.btn.btn-warning
-          | Не заинтересовались
-        button.btn.btn-danger
-          | Неверный номер
+      .actions
+        div
+          p
+            button#call_button.btn.disabled data-placement='right' data-original-title="Быстрый доступ Ctrl-C"
+              | Инициализация ...
+        div
+          p
+            button.btn.btn-primary.hidden
+              | Перевести на менеджера
+          p
+            button.btn.btn-success.hidden
+              | Звонок удался
+          p
+            button.btn.btn-warning.hidden
+              | Не заинтересовались
+          p
+            button.btn.btn-danger.hidden
+              | Неверный номер
 
     div.span8
       pre

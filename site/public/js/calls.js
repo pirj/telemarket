@@ -47,6 +47,14 @@ function onConnected(sessionid) {
   }
 }
 
+function callButton() {
+  var state = $('#call_button').attr('rel')
+  if(state == 'hangup')
+    makeCall($('#session_id').val())
+  else if(state == 'ringing' || state == 'talking')
+    hangup()
+}
+
 $(document).ready(function() {
   swfobject.embedSWF("/freeswitch.swf", "flash", "250", "150", "9.0.0", "/expressInstall.swf", flashvars, {allowScriptAccess: 'always'}, [])
   
@@ -58,10 +66,12 @@ $(document).ready(function() {
   }
 
   $('#call_button[rel=hangup]').live('click', function(){
-    makeCall($('#session_id').val())
+    callButton()
   })
 
-  $('#call_button[rel=ringing], #call_button[rel=talking]').live('click', function(){
-    hangup()
+  Mousetrap.bind('ctrl+c', function() {
+    callButton()
   })
+
+  $('#call_button').tooltip()
 })

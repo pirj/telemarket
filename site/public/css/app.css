@@ -105,3 +105,8 @@ div.registertoday div {
   position: absolute;
   visibility: hidden;
 }
+
+#company-name {
+  margin-left: .5em;
+  font-weight: bold;
+}
