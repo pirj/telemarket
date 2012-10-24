@@ -1,3 +1,6 @@
+ol,ul {
+  list-style:none;
+}
 /* Fonts */
 @font-face {
   font-family: 'Roboto Light';

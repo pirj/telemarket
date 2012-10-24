@@ -63,7 +63,7 @@
 	z-index: 10;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 	font-family: 'Roboto Light';
-	/*font-weight: 700;*/
+	font-weight:normal; 
 }
 .da-slide p{
 	width: 45%;
