@@ -102,7 +102,7 @@ module CallListener
 
         manager_uuid = command("api create_uuid\nevent-lock:true")['Body']
         puts "manager_uuid #{manager_uuid}"
-        command("api originate sofia/external/sip:#{manager_phone}@sip.zadarma.com &park()")
+        command("api originate {origination_uuid=#{manager_uuid}}sofia/external/sip:#{manager_phone}@sip.zadarma.com &park() inline")
 
         # puts "transfer:", command("api uuid_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com inline")
         # puts "transfer:", command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
@@ -112,16 +112,19 @@ module CallListener
           puts "listen"
           @current_fiber = Fiber.current
           event_headers = Fiber.yield
-          puts "EH: [#{event_headers['Event-Name']}] [#{event_headers['Content-Type']}] [#{event_headers['Body'][0..100]}]"
           break if event_headers.nil?
           if event_headers['Content-Type'] == "text/disconnect-notice"
             break
           elsif event_headers['Event-Name'] == "CHANNEL_ANSWER"
-            intercept "-bleg #{operator_uuid}", manager_uuid
+            intercept manager_uuid, "-bleg #{operator_uuid}"
             # command "api intercept -bleg #{manager_uuid}"
             # command "api uuid_bridge #{manager_uuid} #{target_call_uuid}"
             # command "api uuid_kill #{operator_uuid}"
             # break
+
+            # command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
+            # command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
+
           elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
             # command "api uuid_kill #{operator_uuid}"
             break
@@ -185,7 +188,9 @@ SET
       hash
     end
     content_length = Integer(headers['Content-Length']) rescue nil
-    headers['Body'] = data[(data.size-content_length)..-1] if content_length
+    headers['Body'] = content_length ? data[(data.size-content_length)..-1] : ''
+    # puts "RECV: [#{headers['Event-Name']}] [#{headers['Content-Type']}]"
+    # puts "BODY: [#{headers['Body'][0..100]}]" rescue nil
     @current_fiber.resume headers if @current_fiber && @current_fiber.alive?
   end
 
