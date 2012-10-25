@@ -28,6 +28,9 @@ gem 'datamapper'
   gem 'dm-' + g
 end
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'redis'
+gem 'hiredis'
+gem 'em-hiredis'
 
 # Misc dev tools
 group :development do

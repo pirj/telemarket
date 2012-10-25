@@ -59,6 +59,12 @@ class Site < Sinatra::Base
     json title: (target_contact.name || ''), name: target_contact.target.name
   end
 
+  post '/operator/call/transfer' do
+    redis = EM::Hiredis.connect
+    session_id = env['rack.session.options'][:id]
+    redis.publish "transfer.#{session_id}", "dummy"
+  end
+
   get '/operator/call/:company' do
     authorize! :make, :calls
     company = Company.get params[:company]

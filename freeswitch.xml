@@ -239,12 +239,20 @@
       </extension>
       
       <extension name="rtmp_site_calls">
-        <condition field="destination_number" expression="^(.+)$">
+        <condition field="destination_number" expression="^session-(.+)$">
           <action application="socket" data="127.0.0.1:8084 async full"/>
           <!--action application="bridge" data="user/phone1@$${domain}"/-->
         </condition>
       </extension>
-    </context>
+
+<!--       <extension name="outbound_calls">
+        <condition field="direction" expression="^outbound$">
+          <action application="answer"/>
+          <action application="playback" data="local_stream://moh"/>
+          <action application="transfer" data="$1 XML default"/>
+        </condition>
+      </extension>
+ -->    </context>
 
   </section>
 

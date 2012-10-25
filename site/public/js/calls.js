@@ -59,7 +59,7 @@ function onConnected(sessionid) {
 function callButton() {
   var state = $('#call_button').attr('rel')
   if(state == 'hangup')
-    makeCall($('#session_id').val())
+    makeCall("session-"+$('#session_id').val())
   else if(state == 'ringing' || state == 'talking')
     hangup()
 }
@@ -85,7 +85,7 @@ $(document).ready(function() {
   $('#call_button').tooltip()
 
   $('#transfer').live('click', function(){
-
+    $.post('/operator/call/transfer')
   })
 
   $('#success').live('click', function(){

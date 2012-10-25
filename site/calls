@@ -21,7 +21,9 @@ module CallListener
       command("filter Event-Name CHANNEL_ANSWER")
       command("filter Event-Name CHANNEL_HANGUP")
 
-      rack_sid = connection_headers['Channel-Destination-Number']
+      rack_sid = connection_headers['Channel-Destination-Number'][8..-1]
+
+      puts "INCOMING CALL TO: #{rack_sid}"
 
       rack_session = Rack::Session::Redis.new(nil)
       rack = rack_session.get_session({}, rack_sid).last
@@ -37,17 +39,18 @@ module CallListener
           rack_session.set_session({}, rack_sid, rack, {})
 
           puts "Bridging #{user.name} with #{target_contact.phone}"
-          bridge("sofia/external/#{target_contact.phone}@sip.zadarma.com")
+          bridge("sofia/external/sip:#{target_contact.phone}@sip.zadarma.com")
 
           loop do
-            event_headers = listen
+            @current_fiber = Fiber.current
+            event_headers = Fiber.yield
             if event_headers['Content-Type'] == "text/disconnect-notice"
               break
             elsif event_headers['Event-Name'] == "CHANNEL_ANSWER"
               # in case uuid is same as operator_uuid, skip to next CHANNEL_ANSWER
               target_call_uuid = event_headers['Caller-Unique-ID']
-              bridged_call operator_uuid, target_call_uuid
-              command "uuid_kill #{target_call_uuid}"
+              bridged_call operator_uuid, target_call_uuid, rack_sid, company.manager_phone
+              # command "api uuid_kill #{target_call_uuid}"
               break
             elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
               break
@@ -57,14 +60,83 @@ module CallListener
         end
       end
 
-      command "uuid_kill #{operator_uuid}"
+      # command "api uuid_kill #{operator_uuid}"
       close_connection_after_writing
     end.resume
   end
 
-  def bridged_call operator_uuid, target_call_uuid
+  def bridged_call operator_uuid, target_call_uuid, rack_sid, manager_phone
+    puts "operator_uuid #{operator_uuid}, target_call_uuid #{target_call_uuid}"
+    # subscriber = EM::Hiredis.connect
+    # subscriber.subscribe "transfer.#{rack_sid}"
+    # subscriber.on(:message) do |channel, message|
+    #   puts "TRANSFER MESSAGE RECV"
+    #   puts "Bridging with #{manager_phone}"
+    #   Fiber.new do
+    #     # puts "park:", command("api uuid_park #{target_call_uuid}")
+    #     # puts "kill op:", command("api uuid_kill #{operator_uuid}")
+    #     puts "transfer:", command("api uuid_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com")
+
+    #     @current_fiber = Fiber.current
+    #     puts "transfer reply:", Fiber.yield
+    #   end.resume
+
+    #   @current_fiber.resume nil if @current_fiber && @current_fiber.alive?
+    # end
+
+    EM.add_timer(3) do
+      puts "TRANSFERING to #{manager_phone}"
+      Fiber.new do
+        # puts "park:", command("api uuid_park #{target_call_uuid}")
+        # puts "kill op:", command("api uuid_kill #{operator_uuid}")
+
+        # puts "set hangup_after_bridge to false:", set('hangup_after_bridge', 'false')
+        # puts "transfer:", command("api uuid_transfer #{operator_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com")
+        # puts "transfer:", command("api uuid_deflect #{operator_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com")
+
+        # puts "dual transfer:", command("api uuid_dual_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com sofia/external/sip:+78124569440@sip.zadarma.com")
+
+        # command("api uuid_transfer #{operator_uuid} -both park inline")
+
+        # todo: play tones to target_uuid
+
+        manager_uuid = command("api create_uuid\nevent-lock:true")['Body']
+        puts "manager_uuid #{manager_uuid}"
+        command("api originate sofia/external/sip:#{manager_phone}@sip.zadarma.com &park()")
+
+        # puts "transfer:", command("api uuid_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com inline")
+        # puts "transfer:", command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
+        # bridge("sofia/external/sip:#{manager_phone}@sip.zadarma.com")
+
+        loop do
+          puts "listen"
+          @current_fiber = Fiber.current
+          event_headers = Fiber.yield
+          puts "EH: [#{event_headers['Event-Name']}] [#{event_headers['Content-Type']}] [#{event_headers['Body'][0..100]}]"
+          break if event_headers.nil?
+          if event_headers['Content-Type'] == "text/disconnect-notice"
+            break
+          elsif event_headers['Event-Name'] == "CHANNEL_ANSWER"
+            intercept "-bleg #{operator_uuid}", manager_uuid
+            # command "api intercept -bleg #{manager_uuid}"
+            # command "api uuid_bridge #{manager_uuid} #{target_call_uuid}"
+            # command "api uuid_kill #{operator_uuid}"
+            # break
+          elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
+            # command "api uuid_kill #{operator_uuid}"
+            break
+          end
+        end
+
+        # @current_fiber = Fiber.current
+        # puts "transfer reply:", Fiber.yield
+      end.resume
+    end
+
     loop do
-      event_headers = listen
+      @current_fiber = Fiber.current
+      event_headers = Fiber.yield
+      break if event_headers.nil?
       if event_headers['Content-Type'] == "text/disconnect-notice"
         break
       elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
@@ -82,9 +154,21 @@ execute-app-arg: #{phone}\n\n
 BRIDGE
   end
 
-  def listen
-    @current_fiber = Fiber.current
-    Fiber.yield
+  def intercept inbound_uuid, outbound_uuid
+  command <<-INTERCEPT
+sendmsg #{inbound_uuid}
+call-command: execute
+execute-app-name: intercept
+execute-app-arg: #{outbound_uuid}\n\n
+INTERCEPT
+  end
+
+  def set var, value
+  command <<-SET
+sendmsg 
+call-command: set
+execute-app-name: #{var}=#{value}\n\n
+SET
   end
 
   def command data
@@ -101,8 +185,13 @@ BRIDGE
       hash
     end
     content_length = Integer(headers['Content-Length']) rescue nil
-    # headers['Body'] = data[(data.size-content_length)..-1] if content_length
+    headers['Body'] = data[(data.size-content_length)..-1] if content_length
     @current_fiber.resume headers if @current_fiber && @current_fiber.alive?
+  end
+
+  def send_data data
+    puts "SNDING: #{data}"
+    super
   end
 end
 
