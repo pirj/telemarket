@@ -31,6 +31,7 @@ function onCallState(uuid, state) {
 }
 
 function onDisconnected() {
+  $('#call_button').addClass('disabled').removeClass('enabled').attr('rel', 'hangup').text("Инициализация ...")
   setTimeout(function() {
     $("#flash")[0].connect()
   }, 5000)
