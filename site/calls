@@ -13,61 +13,78 @@ module CallListener
   def post_init
     Fiber.new do
       connection_headers = command('connect')
-      caller_uuid = connection_headers['Caller-Unique-ID']
-      puts "caller_uuid = [#{caller_uuid}]"
+      operator_uuid = connection_headers['Caller-Unique-ID']
+
+      command("events plain all")
+      # command("filter Unique-ID #{operator_uuid}")
+      command("filter Core-UUID #{operator_uuid}")
+      command("filter Event-Name CHANNEL_ANSWER")
+      command("filter Event-Name CHANNEL_HANGUP")
 
       rack_sid = connection_headers['Channel-Destination-Number']
+
       rack_session = Rack::Session::Redis.new(nil)
       rack = rack_session.get_session({}, rack_sid).last
 
       user = Identity.get rack['user_id']
-      (hangup; return) if user.nil?
+      unless user.nil?
+        company = Company.get rack['calling_to_company_id']
 
-      company = Company.get rack['calling_to_company_id']
+        target_contact = company.targets.target_contacts.first(status: nil)
+        unless target_contact.nil?
 
-      target_contact = company.targets.target_contacts.first(status: nil)
-      (hangup; return) if target_contact.nil?
+          rack['target_contact_id'] = target_contact.id
+          rack_session.set_session({}, rack_sid, rack, {})
 
-      rack['target_contact_id'] = target_contact.id
-      rack_session.set_session({}, rack_sid, rack, {})
+          puts "Bridging #{user.name} with #{target_contact.phone}"
+          bridge("sofia/external/#{target_contact.phone}@sip.zadarma.com")
 
+          loop do
+            event_headers = listen
+            if event_headers['Content-Type'] == "text/disconnect-notice"
+              break
+            elsif event_headers['Event-Name'] == "CHANNEL_ANSWER"
+              # in case uuid is same as operator_uuid, skip to next CHANNEL_ANSWER
+              target_call_uuid = event_headers['Caller-Unique-ID']
+              bridged_call operator_uuid, target_call_uuid
+              command "uuid_kill #{target_call_uuid}"
+              break
+            elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
+              break
+            end
+          end
 
-      command("filter Unique-ID #{caller_uuid}")
+        end
+      end
 
-      puts command(bridge("sofia/external/+79643857131@sip.zadarma.com"))
-
-#     STDOUT.puts "in"
-
-#       api.originate2 target_contact.phone, uuid do
-#         command "filter Unique-ID #{uuid}"
-#         puts "originated"
-#         # answer do
-#         #   puts "answered"
-#         # end
-#       end
-#     end
-#     # answer
-#     # bridge "sofia/external/#{target_contact.phone}@sip.zadarma.com" do
-#     #   STDOUT.puts "fd;uaierohgaweiroahszoiahjzshoeofish"
-#     # end
-#   end
-
-#     send_data <<-BRIDGE
-# sendmsg
-# call-command: execute
-# execute-app-name: bridge
-# execute-app-arg: sofia/external/+79643857131@sip.zadarma.com\n\n
-# BRIDGE
+      command "uuid_kill #{operator_uuid}"
+      close_connection_after_writing
     end.resume
   end
 
+  def bridged_call operator_uuid, target_call_uuid
+    loop do
+      event_headers = listen
+      if event_headers['Content-Type'] == "text/disconnect-notice"
+        break
+      elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
+        break
+      end
+    end
+  end
+
   def bridge phone
-<<-BRIDGE
+  command <<-BRIDGE
 sendmsg
 call-command: execute
 execute-app-name: bridge
 execute-app-arg: #{phone}\n\n
 BRIDGE
+  end
+
+  def listen
+    @current_fiber = Fiber.current
+    Fiber.yield
   end
 
   def command data
@@ -83,12 +100,9 @@ BRIDGE
       hash[row[0..(ri-1)]] = row[(ri+2)..-1] unless ri.nil?
       hash
     end
+    content_length = Integer(headers['Content-Length']) rescue nil
+    # headers['Body'] = data[(data.size-content_length)..-1] if content_length
     @current_fiber.resume headers if @current_fiber && @current_fiber.alive?
-  end
-
-  def send_data data
-    puts "SENT: #{data}"
-    super
   end
 end
 

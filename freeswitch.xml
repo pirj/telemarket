@@ -240,7 +240,7 @@
       
       <extension name="rtmp_site_calls">
         <condition field="destination_number" expression="^(.+)$">
-          <action application="socket" data="127.0.0.1:8084 sync full"/>
+          <action application="socket" data="127.0.0.1:8084 async full"/>
           <!--action application="bridge" data="user/phone1@$${domain}"/-->
         </condition>
       </extension>
