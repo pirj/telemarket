@@ -13,42 +13,27 @@ html
 
     link rel="stylesheet" href="/css/bootstrap.min.css"
     link rel="stylesheet" href="/css/bootstrap-responsive.min.css"
-    link rel="stylesheet" href="/css/cslider.css"
     link rel="stylesheet" href="/css/app.css"
-
-    link rel="stylesheet" href="/css/bigvideo.css"
 
     link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans+Caption'
 
     script src="/js/jquery-1.7.2.min.js"
-    script src="/js/jquery-anchorscroll.js"
-
-    script src="/js/jquery-ui-1.8.22.custom.min.js"
-    script src="/js/jquery.imagesloaded.min.js"
-
-    script src="/js/modernizr.custom.28468.js"
 
     script src="/js/bootstrap.min.js"
     script src="/js/app.js"
     script src="/js/home.js"
 
-    script src="/js/video.js"
-    script src="/js/bigvideo.js"
-
-    script src="/js/jquery.cslider.js"
-
   body data-spy="scroll" data-target="#navbar" data-offset="30"
-    == yield_content :nav
+    .container-fluid
+      == yield_content :nav
 
-    div#transparent
+      #main
+        .row-fluid
+          - if flash
+            - flash.keys.each do |type|
+              div.alert class="alert-#{type}"
+                a.close data-dismiss="alert" href="#"
+                  | ×
+                =flash[type]
 
-    div#main.container.main
-      - if flash
-        - flash.keys.each do |type|
-          div.alert class="alert-#{type}"
-            a.close data-dismiss="alert" href="#"
-              | ×
-            =flash[type]
-
-      .contents
         == yield

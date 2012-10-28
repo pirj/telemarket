@@ -1,31 +1,50 @@
 - content_for :nav do
   == slim :'home/nav'
 
-section.slogan
-  div
-    h2
-      | Аутсорсинг телемаркетинга. Просто, быстро, удобно, качественно и недорого.
-
-== slim :'home/slider'
-
-section
-  - unless current_identity
-    div.registertoday
+.row-fluid
+  .span9
+    .hero-unit.less-heroic
+      h2
+        | Аутсорсинг телемаркетинга
+        small
+          | Ваш личный колл-центр в "облаке"
+      h4
+        | Что это?
+      p
+        | Альтернатива традиционным колл-центрам для малого бизнеса позволяющая избавить сотрудников от холодных звонков и быстро проинформировать о чём бы то ни было существующих клиентов и выяснить потребность потенциальных.
+  .span3.hero-right-hand
+    - unless current_identity
       - if session[:invite]
         a.btn.btn-primary.btn-large href='/company/register'
           | Начать пользоваться сегодня
       - unless session[:invite]
-        div
-          p
-            | Регистрация только по приглашениям
         form.subscribe action='/subscribe' method='post'
-          div.input-append
-            input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
-            input.btn type='submit' value='Узнать первым'
+          input.span12 name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл здесь'
+          p
+            | Мы оповестим вас о начале открытой регистрации
+          input.btn type='submit' value='Узнать первым'
 
-      div
-        ul
-          li
-            | sales@telemaket.ru
-          li
-            | +7 (812) 123-4567
+.row-fluid
+  div.panel.one.span3
+    h2
+      img src="img/1350062423_09.call.png"
+    p
+      | Успешный звонок нашего оператора немедленно переводится на вашего сотрудника, которому остаётся только выставить счёт.
+  div.panel.two.span3
+    h2
+      img src="img/1350062671_08_settings.png"
+      | Просто
+    p
+      | Загружаете список контактов и информационный текст. Ваше задание сразу же видят все свободные операторы и начинают обзвон.
+  div.panel.three.span3
+    h2
+      img src="/img/1350062441_HAL-9000.png"
+      | Качественно
+    p
+      | Наши операторы заинтересованы в качестве и количестве звонков, в отличии от офисных коллег. Вы не платите операторам, которые ушли пить чай.
+  div.panel.four.span3
+    h2
+      img src="/img/1350063378_coins.png"
+      | Недорого
+    p
+      | Вы платите только за звонки. Ни за офис, ни абонентскую плату за телефонные линии, ни столичные зарплаты операторам колл-центров. Мы используем новейшие технологии, чтобы снизить ваши затраты.

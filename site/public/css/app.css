@@ -31,41 +31,9 @@ h2 small {
   padding-left: 1em;
 }
 
-#main.container.main {
-  color: #ddd;
+#main {
   padding-top: 60px;
   padding-bottom: 60px;
-
-  width: 100%;
-  position: relative;
-  text-align: center;
-}
-
-#main.container {
-  padding-top: 60px;
-}
-
-#transparent {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #060606;
-}
-
-#transparent.loaded {
-  opacity: 0.7;
-  -webkit-transition: opacity 5s ease-in-out;
-  -moz-transition: opacity 5s ease-in-out;
-  -o-transition: opacity 5s ease-in-out;
-  -ms-transition: opacity 5s ease-in-out;    
-  transition: opacity 5s ease-in-out;
-}
-
-section img {
-  min-width: 100px;
-  min-height: 100px;
 }
 
 .navbar .nav > li > a.work {
@@ -81,21 +49,7 @@ span.success {
 }
 
 div.registertoday {
-  font-size: 110%;
-  width: 25em;
-  margin: 0 auto;
-  padding: 1em;
-  background: black;
-  border-radius: 10px;
-  opacity: 0.8;
 }
-
-div.registertoday div {
-  padding: 0.5em;
-}
-
-.slogan {padding-top: 1em; margin-left: auto; margin-right: auto; }
-.slogan h2 {color: #999; font-family: 'Roboto Thin'; }
 
 .register-ads p {
   padding-left: 2em;
@@ -109,4 +63,38 @@ div.registertoday div {
 #target-title, #target-contact-name {
   margin-left: .5em;
   font-weight: bold;
+}
+
+.panel.one { background-color: #53b388; }
+.panel.two { background-color: #5a69a9; }
+.panel.three { background-color: #c26468; }
+.panel.four { background-color: #bf7cc7; }
+
+.panel {
+  padding: 1em;
+  border-radius: 2px;
+}
+
+.panel img {
+  width: 64px;
+  height: 64px;
+  padding-right: 0.5em;
+}
+
+.panel p {
+  font-size: 120%;
+}
+
+.less-heroic {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.hero-right-hand {
+  background-color: #666;
+  color: #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  height: 100%;
 }

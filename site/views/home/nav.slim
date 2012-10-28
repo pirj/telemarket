@@ -1,6 +1,6 @@
 div#navbar.navbar.navbar-inverse.navbar-fixed-top
   div.navbar-inner
-    div.container
+    div.container-fluid
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
         span.icon-bar
         span.icon-bar
@@ -22,6 +22,9 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
                 a href="/operator"
                   | Главная
         ul.nav.pull-right
+          li
+            a
+              | sales@telemaket.ru
           - if current_identity
             li
               a href="/sessions/logout"
