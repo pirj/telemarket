@@ -145,3 +145,7 @@ p.campaign_title img {
   margin-right: .5em;
   box-shadow: 0 0 10px 5px white;
 }
+
+.actions button {
+  margin: 1em 1em 0 0;
+}
