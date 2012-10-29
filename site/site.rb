@@ -13,6 +13,13 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/developme
 DataMapper.finalize
 # DataMapper.auto_upgrade!
 
+environment = development? ? :development : production? ? production : :test
+
+CONFIG = {}
+[:email, :security].each do |file|
+  CONFIG[file] = YAML.load_file("#{Dir.pwd}/config/#{file}.yml")[environment.to_s].symbolize_keys
+end
+
 class Site < Sinatra::Base
   class InviteRequired < StandardError
     def code
@@ -77,8 +84,7 @@ class Site < Sinatra::Base
     end
   end
 
-  environment = development? ? :development : production? ? production : :test
   Mail.defaults do
-    delivery_method :smtp, YAML.load_file("#{Dir.pwd}/config/email.yml")[environment.to_s].symbolize_keys
+    delivery_method :smtp, CONFIG[:email]
   end
 end
