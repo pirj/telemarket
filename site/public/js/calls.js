@@ -127,7 +127,7 @@ function check_filled() {
 function disconnected() {
   state = 'disconnected'
   $('#company').hide()
-  $('#result').attr('disabled', 'disabled').attr('rows', 1)
+  $('#result-div').hide()
   $('#state').text('Инициализация').addClass('active')
   $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
 }
@@ -135,7 +135,7 @@ function disconnected() {
 function connected() {
   state = 'connected'
   $('#company').hide()
-  $('#result').attr('disabled', 'disabled').attr('rows', 1)
+  $('#result-div').hide().removeClass('hidden')
   $('#state').text('Готово к вызовам').removeClass('active')
   $('#call').show()
   $('#hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
@@ -144,7 +144,6 @@ function connected() {
 
 function ringing() {
   state = 'ringing'
-  $('#result').attr('disabled', 'disabled').attr('rows', 1)
   $('#state').text('Идёт вызов').addClass('active')
   $('#hangup').show()
   $('#call, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
@@ -158,7 +157,9 @@ function talking() {
   })
 
   state = 'talking'
-  $('#result').attr('disabled', null).attr('rows', 5)
+  $('#result').text('')
+  $('#result-div').show()
+  $('#result').focus()
   $('#state').text('Разговор').addClass('active')
   $('#hangup, #transfer').show()
   $('#call, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
@@ -166,11 +167,10 @@ function talking() {
 
 function filling() {
   state = 'filling'
-  $('#result').attr('disabled', null).attr('rows', 5)
+  $('#result').focus()
   $('#state').text('Заполнение отчёта').removeClass('active')
   $('#success, #not-interested, #wrong-number, #has-been-disconnected').show()
   $('#call, #hangup, #transfer').hide()
-  $('#result').focus()
 }
 
 function hangedup() {
