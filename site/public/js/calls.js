@@ -157,6 +157,7 @@ function filling() {
   $('#state').text('Заполнение отчёта').removeClass('active')
   $('#success, #not-interested, #wrong-number, #has-been-disconnected').show()
   $('#call, #hangup, #transfer').hide()
+  $('#result').focus()
 }
 
 function hangedup() {
