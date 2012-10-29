@@ -76,6 +76,9 @@ $(document).ready(function() {
 
   $('#has-been-disconnected').live('click', has_been_disconnected)
   Mousetrap.bind('s m', has_been_disconnected, 'keyup')
+
+  $('#add-new-contact').live('click', new_contact)
+  Mousetrap.bind('s x', new_contact, 'keyup')
 })
 
 // Actions
@@ -118,9 +121,18 @@ function has_been_disconnected() {
     connected()
 }
 
+function new_contact() {
+  if(check_contact_filled() && state == 'filling')
+    connected()
+}
+
 // Checks
 function check_filled() {
-  return $('#result').text() == ''
+  return $('#result').text() != ''
+}
+
+function check_contact_filled() {
+  return $('#name').val() != '' && $('#phone').val() != ''
 }
 
 // States
@@ -129,7 +141,7 @@ function disconnected() {
   $('#company').hide()
   $('#result-div').hide()
   $('#state').text('Инициализация').addClass('active')
-  $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
+  $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
 }
 
 function connected() {
@@ -138,15 +150,15 @@ function connected() {
   $('#result-div').hide().removeClass('hidden')
   $('#state').text('Готово к вызовам').removeClass('active')
   $('#call').show()
-  $('#hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
-  $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').removeClass('hidden')
+  $('#hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
+  $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').removeClass('hidden')
 }
 
 function ringing() {
   state = 'ringing'
   $('#state').text('Идёт вызов').addClass('active')
   $('#hangup').show()
-  $('#call, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
+  $('#call, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
 }
 
 function talking() {
@@ -162,14 +174,14 @@ function talking() {
   $('#result').focus()
   $('#state').text('Разговор').addClass('active')
   $('#hangup, #transfer').show()
-  $('#call, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
+  $('#call, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
 }
 
 function filling() {
   state = 'filling'
   $('#result').focus()
   $('#state').text('Заполнение отчёта').removeClass('active')
-  $('#success, #not-interested, #wrong-number, #has-been-disconnected').show()
+  $('#success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').show()
   $('#call, #hangup, #transfer').hide()
 }
 

@@ -149,3 +149,13 @@ p.campaign_title img {
 .actions button {
   margin: 1em 1em 0 0;
 }
+
+#new-contact {
+  border: 1px solid lightgray;
+  padding: 0 1em 1em 1em;
+  margin-top: 1em;
+}
+
+#new-contact input, #new-contact button {
+  margin: 1em 1em 0 0;
+}

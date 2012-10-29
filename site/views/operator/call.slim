@@ -52,6 +52,14 @@ section#top
         button#has-been-disconnected.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>M</b>"
           i.icon-remove
           | Связь оборвалась
+      
+        form#new-contact.form-inline.hidden
+          input#name.input-small type='text' placeholder='Имя'
+          input#phone.input-small type='text' placeholder='Телефон'
+          input#email.input-small type='text' placeholder='Емейл'
+          button#add-new-contact.btn.btn-info type="submit" data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>X</b>"
+            i.icon-user
+            | Новый контакт
 
     pre.instructions.span8
       = company.instructions

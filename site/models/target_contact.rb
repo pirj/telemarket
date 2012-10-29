@@ -11,6 +11,9 @@ class TargetContact
   property :status, Boolean
   property :result, String, :length => 256
 
+  # Added by a call operator
+  belongs_to :added_by_operator, 'Identity', :required => false
+
   property :deleted_at, ParanoidDateTime
   timestamps :at
 end
