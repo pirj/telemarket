@@ -29,8 +29,8 @@ class Identity
       invite.save
     end
 
-    avatar = Cheers::Avatar.new email
-    digest = Digest::SHA1.hexdigest email
+    avatar = Cheers::Avatar.new "#{CONFIG[:security][:salt]}#{email}"
+    digest = Digest::SHA1.hexdigest "#{CONFIG[:security][:salt]}#{email}"
     avatar.avatar_file File.join Dir.pwd, "public/userdata/#{digest}.png"
   end
 
@@ -45,7 +45,7 @@ class Identity
   end
 
   def avatar_file
-    digest = Digest::SHA1.hexdigest email
+    digest = Digest::SHA1.hexdigest "#{CONFIG[:security][:salt]}#{email}"
     "/userdata/#{digest}.png"
   end
 end
