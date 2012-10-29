@@ -22,10 +22,6 @@ html, body {
   font-family: 'Roboto Light', sans-serif;
 }
 
-body {
-  background-image: url('/img/stripe.png');
-}
-
 .navbar .logo {
   float: left;
   padding: 5px;
@@ -55,9 +51,6 @@ span.error {
 
 span.success {
   color: green;
-}
-
-div.registertoday {
 }
 
 .register-ads p {
@@ -105,9 +98,9 @@ div.registertoday {
 }
 
 .less-heroic {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 pre.instructions {
@@ -128,6 +121,13 @@ pre.instructions {
   padding: 0 20px 0 0;
 }
 
-button i {
+i {
   margin-right: .5em;
+}
+
+b.key {
+  font-weight: bold;
+  color: darkblue;
+  background-color: #cc8;
+  padding: .1em .3em 0 .3em;
 }

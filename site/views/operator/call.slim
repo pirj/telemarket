@@ -10,40 +10,42 @@ input#session_id type='hidden' value=env['rack.session.options'][:id]
 section#top
   .row-fluid
     .span4
-      div
+      #company.hidden
         p
+          i.icon-calendar
           | Вы звоните в компанию
           span#target-title
         p
+          i.icon-user
           | Контактное лицо
           span#target-contact-name
 
-        textarea#result.mousetrap.span12 rows=5 placeholder="Кратко о содержании звонка" data-placement='right' data-original-title="Быстрый доступ клавишами F R"
-
+      div
+        textarea#result.mousetrap.span12 rows=1 disabled='disabled' placeholder="Кратко о содержании звонка" data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>F</b> <b class=key>R</b>"
 
       #state.active
         | Инициализация
 
       .actions
-        button#call.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей C"
+        button#call.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей <b class=key>C</b>"
           i.icon-play
           | Вызвать
-        button#hangup.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей H"
+        button#hangup.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей <b class=key>H</b>"
           i.icon-stop
           | Прервать
-        button#transfer.btn.btn-primary.hidden data-placement='right' data-original-title="Быстрый доступ клавишей T"
+        button#transfer.btn.btn-primary.hidden data-placement='right' data-original-title="Быстрый доступ клавишей <b class=key>T</b>"
           i.icon-share
           | Соединить с менеджером
-        button#success.btn.btn-success.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R S"
+        button#success.btn.btn-success.hidden data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>A</b>"
           i.icon-thumbs-up
           | Звонок удался
-        button#not-interested.btn.btn-warning.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R N"
+        button#not-interested.btn.btn-warning.hidden data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>U</b>"
           i.icon-thumbs-down
           | Не заинтересовались
-        button#wrong-number.btn.btn-danger.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R W"
+        button#wrong-number.btn.btn-danger.hidden data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>J</b>"
           i.icon-flag
           | Неверный номер
-        button#has-been-disconnected.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R D"
+        button#has-been-disconnected.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>M</b>"
           i.icon-remove
           | Связь оборвалась
 

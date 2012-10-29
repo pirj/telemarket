@@ -57,25 +57,25 @@ $(document).ready(function() {
   })
 
   $('#call').live('click', call_number)
-  Mousetrap.bind('c', call_number)
+  Mousetrap.bind('c', call_number, 'keyup')
 
   $('#hangup').live('click', hangup)
-  Mousetrap.bind('h', hangup)
+  Mousetrap.bind('h', hangup, 'keyup')
 
   $('#transfer').live('click', transfer)
-  Mousetrap.bind('t', transfer)
+  Mousetrap.bind('t', transfer, 'keyup')
 
   $('#success').live('click', success)
-  Mousetrap.bind('z s', success)
+  Mousetrap.bind('s a', success, 'keyup')
 
   $('#not-interested').live('click', not_interested)
-  Mousetrap.bind('z n', not_interested)
+  Mousetrap.bind('s u', not_interested, 'keyup')
 
   $('#wrong-number').live('click', wrong_number)
-  Mousetrap.bind('z w', wrong_number)
+  Mousetrap.bind('s j', wrong_number, 'keyup')
 
   $('#has-been-disconnected').live('click', has_been_disconnected)
-  Mousetrap.bind('z d', has_been_disconnected)
+  Mousetrap.bind('s m', has_been_disconnected, 'keyup')
 })
 
 // Actions
@@ -92,41 +92,50 @@ function hangup() {
 }
 
 function transfer() {
-  if(state == 'talking'){
+  if(check_filled() && state == 'talking'){
     $.post('/operator/call/transfer')
     connected()
   }
 }
 
 function success() {
-  if(state == 'filling')
+  if(check_filled() && state == 'filling')
     connected()
 }
 
 function not_interested() {
-  if(state == 'filling')
+  if(check_filled() && state == 'filling')
     connected()
 }
 
 function wrong_number() {
-  if(state == 'filling')
+  if(check_filled() && state == 'filling')
     connected()  
 }
 
 function has_been_disconnected() {
-  if(state == 'filling')
+  if(check_filled() && state == 'filling')
     connected()
+}
+
+// Checks
+function check_filled() {
+  return $('#result').text() == ''
 }
 
 // States
 function disconnected() {
   state = 'disconnected'
+  $('#company').hide()
+  $('#result').attr('disabled', 'disabled').attr('rows', 1)
   $('#state').text('Инициализация').addClass('active')
   $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
 }
 
 function connected() {
   state = 'connected'
+  $('#company').hide()
+  $('#result').attr('disabled', 'disabled').attr('rows', 1)
   $('#state').text('Готово к вызовам').removeClass('active')
   $('#call').show()
   $('#hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
@@ -135,6 +144,7 @@ function connected() {
 
 function ringing() {
   state = 'ringing'
+  $('#result').attr('disabled', 'disabled').attr('rows', 1)
   $('#state').text('Идёт вызов').addClass('active')
   $('#hangup').show()
   $('#call, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
@@ -144,9 +154,11 @@ function talking() {
   var who = $.ajax('/operator/call/who').done(function(data){
     $('#target-title').text(data.title)
     $('#target-contact-name').text(data.name)
+    $('#company').removeClass('hidden').show()
   })
 
   state = 'talking'
+  $('#result').attr('disabled', null).attr('rows', 5)
   $('#state').text('Разговор').addClass('active')
   $('#hangup, #transfer').show()
   $('#call, #success, #not-interested, #wrong-number, #has-been-disconnected').hide()
@@ -154,6 +166,7 @@ function talking() {
 
 function filling() {
   state = 'filling'
+  $('#result').attr('disabled', null).attr('rows', 5)
   $('#state').text('Заполнение отчёта').removeClass('active')
   $('#success, #not-interested, #wrong-number, #has-been-disconnected').show()
   $('#call, #hangup, #transfer').hide()
