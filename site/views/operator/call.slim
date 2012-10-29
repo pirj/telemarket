@@ -18,32 +18,40 @@ section#top
           | Контактное лицо
           span#target-contact-name
 
-        textarea.span12.mousetrap rows=10 placeholder="Кратко о содержании звонка" autofocus=true
+        textarea#result.mousetrap.span12 rows=5 placeholder="Кратко о содержании звонка" data-placement='right' data-original-title="Быстрый доступ клавишами F R"
+
+
+      #state.active
+        | Инициализация
 
       .actions
-        div
-          p
-            button#call_button.btn.disabled data-placement='right' data-original-title="Быстрый доступ Ctrl-C"
-              | Инициализация ...
-        div
-          p
-            button#transfer.btn.btn-primary.hidden
-              | Перевести на менеджера
-          p
-            button#success.btn.btn-success.hidden
-              | Звонок удался
-          p
-            button#not-interested.btn.btn-warning.hidden
-              | Не заинтересовались
-          p
-            button#wrong-number.btn.btn-danger.hidden
-              | Неверный номер
+        button#call.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей C"
+          i.icon-refresh
+          | Вызвать
+        button#hangup.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей H"
+          i.icon-refresh
+          | Прервать
+        button#transfer.btn.btn-primary.hidden data-placement='right' data-original-title="Быстрый доступ клавишей T"
+          i.icon-refresh
+          | Соединить с менеджером
+        button#success.btn.btn-success.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R S"
+          i.icon-refresh
+          | Звонок удался
+        button#not-interested.btn.btn-warning.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R N"
+          i.icon-refresh
+          | Не заинтересовались
+        button#wrong-number.btn.btn-danger.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R W"
+          i.icon-refresh
+          | Неверный номер
+        button#has-been-disconnected.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишами R D"
+          i.icon-refresh
+          | Связь оборвалась
 
-    .span8
-      pre
-        = company.instructions
+    pre.instructions.span8
+      = company.instructions
 
-  #flash
-    p
-      a href="http://www.adobe.com/go/getflashplayer"
-        img src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"
+  #flashwrap
+    #flash
+      p
+        a href="http://www.adobe.com/go/getflashplayer"
+          img src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"

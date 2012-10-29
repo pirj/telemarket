@@ -2,27 +2,17 @@
   == slim :'home/nav'
 
 .row-fluid
-  .span9
-    .hero-unit.less-heroic
+  .span12
+    .hero-unit
       h2
         | Аутсорсинг телемаркетинга
         small
           | Ваш личный колл-центр в "облаке"
+      hr
       h4
         | Что это?
       p
         | Альтернатива традиционным колл-центрам для малого бизнеса, позволяющая избавить сотрудников от холодных звонков, быстро проинформировать существующих клиентов и выяснить потребность потенциальных.
-  .span3.panel.hero-right-hand
-    - unless current_identity
-      - if session[:invite]
-        a.btn.btn-primary.btn-large href='/company/register'
-          | Начать пользоваться сегодня
-      - unless session[:invite]
-        form.subscribe action='/subscribe' method='post'
-          input.span12 name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл здесь'
-          p
-            | Мы оповестим вас о начале открытой регистрации
-          input.btn.btn-primary type='submit' value='Узнать первым'
 
 .row-fluid
   div.panel.panel-1.span3
@@ -49,3 +39,19 @@
       | Недорого
     p
       | Вы платите только за звонки. Ни за офис, ни абонентскую плату за телефонные линии, ни столичные зарплаты операторам колл-центров.
+
+hr
+
+.row-fluid
+  .span12.panel.hero-right-hand
+    - unless current_identity
+      - if session[:invite]
+        a.btn.btn-primary.btn-large href='/company/register'
+          | Начать пользоваться сегодня
+      - unless session[:invite]
+        h4.span6
+          | Мы оповестим вас о начале открытой регистрации
+        form.span6.subscribe action='/subscribe' method='post'
+          div.input-append
+            input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
+            input.btn.btn-primary type='submit' value='Узнать первым'

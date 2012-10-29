@@ -56,7 +56,7 @@ class Site < Sinatra::Base
   get '/operator/call/who' do
     authorize! :make, :calls
     target_contact = TargetContact.get session['target_contact_id']
-    json title: (target_contact.name || ''), name: target_contact.target.name
+    json title: target_contact.target.name, name: (target_contact.name || '')
   end
 
   post '/operator/call/transfer' do
