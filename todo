@@ -32,6 +32,7 @@
 = ПОЕХАЛИ beta
 
 . совместить вход и регистрацию
+# убрать слайдер и заменить аккордион компаний. http://devsmash.com/projects/kwicks/examples/horizontal
 
 . покрыть ui тестами
 
@@ -39,6 +40,7 @@
 . ajax
 . CDN
 . less/sass (prefix/fonts)
+. http://nijikokun.github.com/bootstrap-notify/
 
 . клавиатурная навигация ccampbell/mousetrap
 
@@ -68,6 +70,8 @@
    http://www.iconfinder.com/icondetails/47542/128/performance_settings_speed_icon
    http://www.iconfinder.com/icondetails/17220/256/business_coins_money_payment_icon
  . http://vimeo.com/groups/freehd/videos/14870217
+
+. FS -> Plivo ???
 
 = ПОЕХАЛИ открыто
 

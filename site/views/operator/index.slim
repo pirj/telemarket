@@ -1,29 +1,20 @@
 - content_for :nav do
   == slim :'operator/nav'
-section#top
-  div.page-header
-    h3
-      | Добрый день,
-      = current_identity.name
 
-    p
-      | С чего начать?
-        У нас есть для вас на выбор несколько разных заказов, каждый со своей спецификой и аудиторией.
-        Выберите себе наиболее подходящего, и начинайте звонить.
-        Заносите результаты звонка.
+.page-header
+  h3
+    | С чего начать?
+  p
+    | У нас есть для вас на выбор несколько разных заказов, каждый со своей спецификой и аудиторией. Выберите себе наиболее подходящий, и начинайте звонить. Заносите результаты звонков.
 
-  div.row
-    div.span12
-      div.accordion id="accordion2"
-        - companies.each do |company|
-          div.accordion-group
-            div.accordion-heading
-              a.accordion-toggle data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-                = company.name
-            div.accordion-body.collapse.in id="collapseOne" 
-              div.accordion-inner
-                pre
-                  = company.instructions
-                p
-                  a.btn.btn-primary href="/operator/call/#{company.id}"
-                    | Это мне подходит
+.row-fluid
+  - companies.each do |company|
+    div.panel.span3 class="panel-#{(rand(5)+1)}"
+      h4
+        = company.campaign_name
+      p
+        = company.instructions[0..100]
+        | ...
+      p
+        a.btn.btn-primary href="/operator/call/#{company.id}"
+          | Это мне подходит

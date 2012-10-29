@@ -1,7 +1,7 @@
 # coding: utf-8
 class Site < Sinatra::Base
   get '/' do
-    slim :'home/index', layout: :'home/layout'
+    slim :'home/index'
   end
 
   get '/invite/:invite' do

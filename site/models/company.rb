@@ -6,6 +6,7 @@ class Company
 
   property :name, String, :length => 128
 
+  property :campaign_name, Text
   property :instructions, Text
   property :manager_phone, String, :length => 16
 

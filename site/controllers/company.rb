@@ -29,16 +29,18 @@ class Site < Sinatra::Base
     slim :'company/index', locals: {company: company}
   end
 
-  get '/company/instructions' do
+  get '/company/project' do
     authorize! :view, Company
     company = current_identity.company
-    slim :'company/instructions', locals: {company: company}
+    slim :'company/project', locals: {company: company}
   end
 
-  post '/company/instructions' do
+  post '/company/project' do
     authorize! :edit, Company
     company = current_identity.company
-    company.instructions = params[:text]
+    company.campaign_name = params['campaign-name']
+    company.instructions = params['instructions']
+    company.manager_phone = params['manager-phone']
     company.save
 
     redirect '/company'

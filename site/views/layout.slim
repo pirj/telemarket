@@ -11,6 +11,8 @@ html
 
     link rel="icon" href="/img/favicon.ico"
 
+    link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans+Caption'
+
     link rel="stylesheet" href="/css/bootstrap.min.css"
     link rel="stylesheet" href="/css/bootstrap-responsive.min.css"
     link rel="stylesheet" href="/css/bootstrap.fileupload.min.css"
@@ -22,14 +24,16 @@ html
     script src="/js/app.js"
 
   body
-    == yield_content :nav
+    .container-fluid
+      == yield_content :nav
 
-    div#main.container
-      - if flash
-        - flash.keys.each do |type|
-          div.alert class="alert-#{type}"
-            a.close data-dismiss="alert" href="#"
-              | ×
-            =flash[type]
+      #main
+        .row-fluid
+          - if flash
+            - flash.keys.each do |type|
+              div.alert class="alert-#{type}"
+                a.close data-dismiss="alert" href="#"
+                  | ×
+                =flash[type]
 
-      == yield
+        == yield

@@ -1,20 +1,20 @@
 div#navbar.navbar.navbar-inverse.navbar-fixed-top
-  div.navbar-inner
-    div.container
+  .navbar-inner
+    .container-fluid
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
         span.icon-bar
         span.icon-bar
         span.icon-bar
       
-      div.logo
+      .logo
         img src="/img/1350062423_09.call.png"
-      div.scroll.brand
+      .scroll.brand
         | Телемаркет
 
-      div.nav-collapse.collapse
+      .nav-collapse.collapse
         ul.nav
           li
-            a  href="/company"
+            a href="/company"
               | Главная
           li
             a href="/company/targets"
@@ -28,8 +28,8 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
               = current_identity.company.targets.size
               | )
           li
-            a href="/company/instructions"
-              | Инструкции оператору
+            a href="/company/project"
+              | Настройки проекта
 
         ul.nav.pull-right
           li

@@ -1,0 +1,44 @@
+- content_for :nav do
+  == slim :'company/nav'
+section#top
+  .page-header
+    h3
+      | Настройки проекта
+
+  .row-fluid
+    .span6
+      form.form-horizontal method='post' action='/company/project'
+        fieldset
+          .control-group
+            label.control-label for='campaign-name'
+              | Название проекта
+            .controls
+              input.span12 name='campaign-name' type='text' placeholder="Продажа картриджей" value=company.campaign_name
+
+          .control-group
+            label.control-label for='instructions'
+              | Инструкции оператору
+            .controls
+              textarea.span12 name='instructions' rows='20'
+                = company.instructions
+
+          .control-group
+            label.control-label for='manager-phone'
+              | Телефон менеджера
+            .controls
+              input.span4 name='manager-phone' type='text' placeholder="+7-812-1234567" value=company.manager_phone
+              p.help-block
+                | Supporting help text
+
+        .form-actions
+          input type='submit' value='Сохранить' class='btn btn-primary'
+          a href='/company'
+            | Отменить
+
+    .span6
+      h3
+        | Пример
+      p
+        | А тут шикарный образец инструкций
+      p
+        | Мы такая-то компания, занимаемся тем-то. Хотим поговорить с таким-то таким-то и продать ему то сё.

@@ -8,8 +8,8 @@ script src="/js/mousetrap.min.js"
 input#session_id type='hidden' value=env['rack.session.options'][:id]
 
 section#top
-  div.row
-    div.span4
+  .row-fluid
+    .span4
       div
         p
           | Вы звоните в компанию
@@ -18,7 +18,7 @@ section#top
           | Контактное лицо
           span#target-contact-name
 
-        textarea.span4.mousetrap rows=10 placeholder="Кратко о содержании звонка" autofocus=true
+        textarea.span12.mousetrap rows=10 placeholder="Кратко о содержании звонка" autofocus=true
 
       .actions
         div
@@ -39,11 +39,11 @@ section#top
             button#wrong-number.btn.btn-danger.hidden
               | Неверный номер
 
-    div.span8
+    .span8
       pre
         = company.instructions
 
-  div#flash
+  #flash
     p
       a href="http://www.adobe.com/go/getflashplayer"
         img src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"

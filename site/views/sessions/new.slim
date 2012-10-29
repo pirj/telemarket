@@ -8,16 +8,16 @@
 
 form.form-horizontal action='/sessions/create' method='post'
   fieldset
-    div.control-group
+    .control-group
       label.control-label for='auth_key'
         | Электронная почта
-      div.controls
+      .controls
         input name='auth_key' type='text'
-    div.control-group
+    .control-group
       label.control-label for='password'
         | Пароль
-      div.controls
+      .controls
         input name='password' type='password'
 
-  div.form-actions
+  .form-actions
     input.btn.btn-primary type='submit' value='Войти'

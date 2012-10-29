@@ -1,17 +1,17 @@
 div#navbar.navbar.navbar-inverse.navbar-fixed-top
-  div.navbar-inner
-    div.container-fluid
+  .navbar-inner
+    .container-fluid
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
         span.icon-bar
         span.icon-bar
         span.icon-bar
       
-      div.logo
+      .logo
         img src="/img/1350062423_09.call.png"
-      div.scroll.brand
+      .scroll.brand
         | Телемаркет
 
-      div.nav-collapse.collapse
+      .nav-collapse.collapse
         ul.nav
           - if current_identity
             li
@@ -24,7 +24,7 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
         ul.nav.pull-right
           li
             a
-              | sales@telemaket.ru
+              | sales@gotelemaket.ru
           - if current_identity
             li
               a href="/sessions/logout"

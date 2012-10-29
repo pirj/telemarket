@@ -1,17 +1,17 @@
 div#navbar.navbar.navbar-inverse.navbar-fixed-top
-  div.navbar-inner
-    div.container
+  .navbar-inner
+    .container-fluid
       button.btn.btn-navbar type="button" data-toggle="collapse" data-target=".nav-collapse"
         span.icon-bar
         span.icon-bar
         span.icon-bar
       
-      div.logo
+      .logo
         img src="/img/1350062423_09.call.png"
-      div.scroll.brand
+      .scroll.brand
         | Телемаркет
 
-      div.nav-collapse.collapse
+      .nav-collapse.collapse
         ul.nav
           li
             a href="/operator"
@@ -19,6 +19,9 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
 
         ul.nav.pull-right
           - if current_identity
+            li
+              a
+                = current_identity.name
             li
               a href="/sessions/logout"
                 | Выйти
