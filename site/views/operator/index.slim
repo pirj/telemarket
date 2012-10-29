@@ -9,8 +9,9 @@
 
 .row-fluid
   - companies.each do |company|
-    div.panel.span3 class="panel-#{(rand(5)+1)}"
+    .panel.campaign_mosaic.span4 class="panel-#{(rand(5)+1)}"
       h4
+        img.img-circle src=company.identity.avatar_file
         = company.campaign_name
       p
         = company.instructions[0..100]

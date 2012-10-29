@@ -131,3 +131,17 @@ b.key {
   background-color: #cc8;
   padding: .1em .3em 0 .3em;
 }
+
+p.campaign_title img {
+  width: 32px;
+  margin-right: 16px;
+}
+
+.campaign_mosaic img {
+  width: 48px;
+  height: 48px;
+  border-color: white;
+  padding-right: 0;
+  margin-right: .5em;
+  box-shadow: 0 0 10px 5px white;
+}

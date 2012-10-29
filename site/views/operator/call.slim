@@ -10,6 +10,10 @@ input#session_id type='hidden' value=env['rack.session.options'][:id]
 section#top
   .row-fluid
     .span4
+      p.campaign_title
+        img.img-circle src=company.identity.avatar_file
+        = company.campaign_name
+
       #company.hidden
         p
           i.icon-calendar
