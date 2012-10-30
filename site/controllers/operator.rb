@@ -60,9 +60,72 @@ class Site < Sinatra::Base
   end
 
   post '/operator/call/transfer' do
+    authorize! :make, :calls
     redis = EM::Hiredis.connect
     session_id = env['rack.session.options'][:id]
     redis.publish "transfer.#{session_id}", "dummy"
+
+    target_contact = TargetContact.get session['target_contact_id']
+    target_contact.status = :transferred
+    target_contact.result = params[:result]
+    target_contact.save
+    target = target_contact.target
+    target.status = :success
+    target.save
+  end
+
+  get '/operator/call/success' do
+    authorize! :make, :calls
+
+    target_contact = TargetContact.get session['target_contact_id']
+    target_contact.status = :success
+    target_contact.result = params[:result]
+    target_contact.save
+    target = target_contact.target
+    target.status = :success
+    target.save
+  end
+
+  get '/operator/call/not_interested' do
+    authorize! :make, :calls
+
+    target_contact = TargetContact.get session['target_contact_id']
+    target_contact.status = :not_interested
+    target_contact.result = params[:result]
+    target_contact.save
+    target = target_contact.target
+    target.status = :not_interested
+    target.save
+  end
+
+  get '/operator/call/wrongnumber' do
+    authorize! :make, :calls
+    target_contact = TargetContact.get session['target_contact_id']
+
+    target_contact = TargetContact.get session['target_contact_id']
+    target_contact.status = :wrongnumber
+    target_contact.result = params[:result]
+    target_contact.save
+    target = target_contact.target
+    if target.target_contact(status: :not_called).empty?
+      target.status = :no_numbers
+      target.save
+    end
+  end
+
+  get '/operator/call/disconnected' do
+    authorize! :make, :calls
+    # do nothing for now
+  end
+
+  get '/operator/call/newcontact' do
+    authorize! :make, :calls
+    target_contact = TargetContact.get session['target_contact_id']
+    target = target_contact.target
+    # TODO: normalize phone number
+    # TODO: add email
+    # TODO: ceo checkbox
+    TargetContact.create({target: target, name: params[:name], phone: params[:phone]})
   end
 
   get '/operator/call/:company' do

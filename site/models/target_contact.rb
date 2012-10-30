@@ -8,7 +8,8 @@ class TargetContact
   property :name, String, :length => 128
   property :phone, String, :length => 16
 
-  property :status, Boolean
+  property :status, DataMapper::Property::Enum[:not_called, :wrong_number, :not_interested, :success, :transferred], :default => :not_called
+
   property :result, String, :length => 256
 
   # Added by a call operator

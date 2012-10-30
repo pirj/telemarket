@@ -23,8 +23,6 @@ module CallListener
 
       rack_sid = connection_headers['Channel-Destination-Number'][8..-1]
 
-      puts "INCOMING CALL TO: #{rack_sid}"
-
       rack_session = Rack::Session::Redis.new(nil)
       rack = rack_session.get_session({}, rack_sid).last
 
@@ -32,7 +30,7 @@ module CallListener
       unless user.nil?
         company = Company.get rack['calling_to_company_id']
 
-        target_contact = company.targets.target_contacts.first(status: nil)
+        target_contact = company.targets.first(status: :in_progress).target_contacts.first(status: :not_called)
         unless target_contact.nil?
 
           rack['target_contact_id'] = target_contact.id
@@ -67,46 +65,15 @@ module CallListener
 
   def bridged_call operator_uuid, target_call_uuid, rack_sid, manager_phone
     puts "operator_uuid #{operator_uuid}, target_call_uuid #{target_call_uuid}"
-    # subscriber = EM::Hiredis.connect
-    # subscriber.subscribe "transfer.#{rack_sid}"
-    # subscriber.on(:message) do |channel, message|
-    #   puts "TRANSFER MESSAGE RECV"
-    #   puts "Bridging with #{manager_phone}"
-    #   Fiber.new do
-    #     # puts "park:", command("api uuid_park #{target_call_uuid}")
-    #     # puts "kill op:", command("api uuid_kill #{operator_uuid}")
-    #     puts "transfer:", command("api uuid_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com")
-
-    #     @current_fiber = Fiber.current
-    #     puts "transfer reply:", Fiber.yield
-    #   end.resume
-
-    #   @current_fiber.resume nil if @current_fiber && @current_fiber.alive?
-    # end
-
-    EM.add_timer(3) do
-      puts "TRANSFERING to #{manager_phone}"
+    subscriber = EM::Hiredis.connect
+    subscriber.subscribe "transfer.#{rack_sid}"
+    subscriber.on(:message) do |channel, message|
+      puts "TRANSFER MESSAGE RECV"
+      puts "Bridging with #{manager_phone}"
       Fiber.new do
-        # puts "park:", command("api uuid_park #{target_call_uuid}")
-        # puts "kill op:", command("api uuid_kill #{operator_uuid}")
-
-        # puts "set hangup_after_bridge to false:", set('hangup_after_bridge', 'false')
-        # puts "transfer:", command("api uuid_transfer #{operator_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com")
-        # puts "transfer:", command("api uuid_deflect #{operator_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com")
-
-        # puts "dual transfer:", command("api uuid_dual_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com sofia/external/sip:+78124569440@sip.zadarma.com")
-
-        # command("api uuid_transfer #{operator_uuid} -both park inline")
-
-        # todo: play tones to target_uuid
-
         manager_uuid = command("api create_uuid\nevent-lock:true")['Body']
         puts "manager_uuid #{manager_uuid}"
         command("api originate {origination_uuid=#{manager_uuid}}sofia/external/sip:#{manager_phone}@sip.zadarma.com &park() inline")
-
-        # puts "transfer:", command("api uuid_transfer #{target_call_uuid} sofia/external/sip:#{manager_phone}@sip.zadarma.com inline")
-        # puts "transfer:", command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
-        # bridge("sofia/external/sip:#{manager_phone}@sip.zadarma.com")
 
         loop do
           puts "listen"
@@ -117,23 +84,14 @@ module CallListener
             break
           elsif event_headers['Event-Name'] == "CHANNEL_ANSWER"
             intercept manager_uuid, "-bleg #{operator_uuid}"
-            # command "api intercept -bleg #{manager_uuid}"
-            # command "api uuid_bridge #{manager_uuid} #{target_call_uuid}"
-            # command "api uuid_kill #{operator_uuid}"
-            # break
-
-            # command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
-            # command("api uuid_transfer #{target_call_uuid} #{manager_phone} inline")
-
           elsif event_headers['Event-Name'] == "CHANNEL_HANGUP"
             # command "api uuid_kill #{operator_uuid}"
             break
           end
         end
-
-        # @current_fiber = Fiber.current
-        # puts "transfer reply:", Fiber.yield
       end.resume
+
+      @current_fiber.resume nil if @current_fiber && @current_fiber.alive?
     end
 
     loop do
@@ -166,14 +124,6 @@ execute-app-arg: #{outbound_uuid}\n\n
 INTERCEPT
   end
 
-  def set var, value
-  command <<-SET
-sendmsg 
-call-command: set
-execute-app-name: #{var}=#{value}\n\n
-SET
-  end
-
   def command data
     send_data "#{data}\n\n"
 
@@ -194,10 +144,10 @@ SET
     @current_fiber.resume headers if @current_fiber && @current_fiber.alive?
   end
 
-  def send_data data
-    puts "SNDING: #{data}"
-    super
-  end
+  # def send_data data
+  #   puts "SNDING: #{data}"
+  #   super
+  # end
 end
 
 EM.run do

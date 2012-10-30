@@ -102,28 +102,38 @@ function transfer() {
 }
 
 function success() {
-  if(check_filled() && state == 'filling')
+  if(check_filled() && state == 'filling') {
+    $.post('/operator/call/success', {result: $('#result').text()})
     connected()
+  }
 }
 
 function not_interested() {
-  if(check_filled() && state == 'filling')
+  if(check_filled() && state == 'filling') {
+   $.post('/operator/call/success', {result: $('#result').text()})
     connected()
+  }
 }
 
 function wrong_number() {
-  if(check_filled() && state == 'filling')
-    connected()  
+  if(check_filled() && state == 'filling') {
+    $.post('/operator/call/wrongnumber', {result: $('#result').text()})
+    connected()
+  }
 }
 
 function has_been_disconnected() {
-  if(check_filled() && state == 'filling')
+  if(check_filled() && state == 'filling') {
+    $.post('/operator/call/disconnected')
     connected()
+  }
 }
 
 function new_contact() {
-  if(check_contact_filled() && state == 'filling')
+  if(check_filled() && state == 'filling') {
+    $.post('/operator/call/newcontact', {name: $('#name').val(), name: $('#phone').val(), name: $('#email').val()})
     connected()
+  }
 }
 
 // Checks
