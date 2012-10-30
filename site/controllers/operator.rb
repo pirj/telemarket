@@ -49,7 +49,7 @@ class Site < Sinatra::Base
 
   get '/operator' do
     authorize! :list, :calls
-    companies = Target.all(status: nil).company
+    companies = Target.all(status: :in_progress).company
     slim :'operator/index', locals: {companies: companies}
   end
 
