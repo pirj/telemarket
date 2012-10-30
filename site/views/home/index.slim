@@ -49,8 +49,9 @@ hr
         a.btn.btn-primary.btn-large href='/company/register'
           | Начать пользоваться сегодня
       - unless session[:invite]
-        h4.span6
-          | Мы оповестим вас о начале открытой регистрации
+        .span6
+          h4.pull-right
+            | Мы оповестим вас о начале открытой регистрации
         form.span6.subscribe action='/subscribe' method='post'
           div.input-append
             input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
