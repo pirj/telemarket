@@ -24,16 +24,20 @@
 
 . telemarketnow.ru/com gotelemarket.ru/com salesboostr? telemarkt.is?
 
-. учёт времени звонков
-
 . migrations
 . db=>postgres+redis
 
 . вынести rtmp_url
 
+. provision
+
+#selectel
+
 = ПОЕХАЛИ beta
 
-. совместить вход и регистрацию
+. учёт времени звонков
+
+. совместить вход и регистрацию http://tympanus.net/Tutorials/CustomLoginFormStyling/index2.html
 # убрать слайдер и заменить аккордион компаний. http://devsmash.com/projects/kwicks/examples/horizontal
 
 . покрыть ui тестами
@@ -41,7 +45,7 @@
 . yepnope
 . ajax
 . CDN
-. less/sass (prefix/fonts)
+. less (prefix/fonts)
 . http://nijikokun.github.com/bootstrap-notify/
 . проверка на старый браузер
 
@@ -52,6 +56,8 @@
  . ui модератора
 
 . раздача инвайтов
+
+. блог
 
 . обучающее видео для операторов
 
@@ -67,8 +73,9 @@
  . блокировать открытие нескольких закладок и сессий
  . сообщать о всех нарушениях
 
-.интерфейс менеджера заказчика через mozilla chromeless
- .получение звонка с сайта
+. безопасность - пересмотреть хранение паролей
+
+. безопасность - HTTPS
 
 . humans.txt
  . icons attribution http://chrfb.deviantart.com/art/quot-ecqlipse-2-quot-PNG-59941546
@@ -78,9 +85,12 @@
    http://www.iconfinder.com/icondetails/17220/256/business_coins_money_payment_icon
  . http://vimeo.com/groups/freehd/videos/14870217
 
-. FS -> Plivo ???
-
 = ПОЕХАЛИ открыто
+
+. оплаты/выплаты
+
+.интерфейс менеджера заказчика через mozilla chromeless
+ .получение звонка с сайта
 
 ? список емейлов для таргета
 ? план-дерево (редактор заказчику + чеклист звонящему)
