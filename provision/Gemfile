@@ -1,0 +1,6 @@
+source :rubygems
+
+gem 'net-ssh'
+gem 'net-scp'
+gem 'highline'
+gem 'hashie'

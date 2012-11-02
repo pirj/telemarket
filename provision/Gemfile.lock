@@ -1,0 +1,17 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    hashie (1.2.0)
+    highline (1.6.15)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.6.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hashie
+  highline
+  net-scp
+  net-ssh

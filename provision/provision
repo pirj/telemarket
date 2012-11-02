@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+require 'bundler'
+Bundler.require
+
+require 'yaml'
+
+class Provisioner
+  attr_reader :server
+
+  def initialize server
+    @server = server
+  end
+
+  def ssh user, &block
+    Net::SSH.start server.host, user.name, {password: user.password}, &block
+  end
+
+  def root &block
+    ssh server.root, &block
+  rescue Net::SSH::AuthenticationFailed
+    puts "root seems to be disabled"
+  end
+
+  def su &block
+    ssh server.sudoer, &block
+  end
+end
+
+server_name = ARGV.shift
+
+config = Hashie::Mash.new YAML.load_file "#{Dir.pwd}/servers.yml"
+server = config[server_name]
+
+provisioner = Provisioner.new server
+
+std = proc do |channel, stream, data|
+  $stdout << data if stream == :stdout
+  $stderr << data if stream == :stderr
+end
+
+begin
+  provisioner.root do |sh|
+    sh.exec! 'which curl || apt-get install -y curl', &std
+    sh.exec! 'which babushka || sh -c "`curl https://babushka.me/up`"', &std
+    sh.exec! 'babushka sources -l | grep pirj || babushka sources -a pirj git://github.com/pirj/babushka-deps.git', &std
+
+    sh.exec! "sudo babushka pirj:system host_name=#{server_name} locale_name=#{server.locale}", &std
+
+    pubkey = File.new(File.join(Dir.home, '.ssh', server.sudoer.pubkey)).read
+    sh.exec! "babushka --defaults 'pirj:user setup for provisioning' username=#{server.sudoer.name} key='#{pubkey}'", &std
+  end
+rescue Net::SSH::AuthenticationFailed
+  puts "root seems to be disabled"
+end
+
+provisioner.su do |sh|
+  sh.exec! 'babushka sources -l | grep pirj || babushka sources -a pirj git://github.com/pirj/babushka-deps.git', &std
+  sh.exec! "which rvm || curl -L https://get.rvm.io | bash -s stable --ruby", &std
+  sh.exec! "sudo babushka pirj:postgres.managed version=9.1", &std
+#   sh.exec! "sudo babushka zsh username=#{server.sudoer.name}", &std
+end
+
+provisioner.su do |sh|
+  sh.exec! "sudo babushka --default 'pirj:existing postgres db' username='#{server.db.user}' db_name=#{server.db.name}", &std
+end
+
+# restrict ssh for deployer, use su - to log in
+# override `` in ssh block, provide stout/stderr
