@@ -88,6 +88,11 @@ span.success {
   box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
 }
 
+/*.panel p {
+  text-align: justify;
+  text-justify: auto;
+}
+*/
 .panel img {
   width: 64px;
   height: 64px;
@@ -160,4 +165,8 @@ p.campaign_title img {
 
 #new-contact input, #new-contact button {
   margin: 1em 1em 0 0;
+}
+
+.navbar-fixed-bottom {
+  position: relative;
 }
