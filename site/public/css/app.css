@@ -45,6 +45,10 @@ h2 small {
   color: #264;
 }
 
+.navbar .nav {
+  margin: 0;
+}
+
 span.error {
   color: darkred;
 }
