@@ -1,5 +1,6 @@
+var host = /http[s]*:\/\/(.+)(:\d+)\//.exec(location.href)[1]
 var flashvars = { 
-  rtmp_url: 'rtmp://192.168.1.34'
+  rtmp_url: ('rtmp://' + host)
 }
 
 var current_uuid
