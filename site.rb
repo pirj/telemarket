@@ -27,7 +27,7 @@ class Site < Sinatra::Base
     end
   end
 
-  use Rack::FiberPool
+#  use Rack::FiberPool
 
   register Sinatra::Contrib
   register Sinatra::Flash
