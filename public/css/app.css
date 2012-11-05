@@ -71,14 +71,14 @@ span.success {
   font-weight: bold;
 }
 
-.panel-1 { background-color: #7DC24B; }
-.panel-2 { background-color: #D8DEAE; }
+.panel-1 { background-color: #DFB262; }
+.panel-2 { background-color: #DFCC62; }
 .panel-3 { background-color: #DDC23F; }
 .panel-4 { background-color: #8EBD99; }
-.panel-5 { background-color: #C84D5F; }
+.panel-5 { background-color: #DFCC62; }
 
 .hero-right-hand {
-  background-color: #A38E6F;
+  background-color: #7DC24B;
 }
 
 .hero-right-hand form {
