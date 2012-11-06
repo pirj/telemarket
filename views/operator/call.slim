@@ -26,6 +26,9 @@ section#top
 
       #result-div.hidden
         textarea#result.mousetrap.span12 rows=5 placeholder="Кратко о содержании звонка" data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>F</b> <b class=key>R</b>"
+      #result-empty.hidden
+        span.label.label-warning
+          | Необходимо заполнить поле результата
 
       #state.active
         | Инициализация
@@ -53,18 +56,25 @@ section#top
           i.icon-remove
           | Связь оборвалась
       
-        form#new-contact.form-inline.hidden
-          input#name.input-small type='text' placeholder='Имя'
-          input#phone.input-small type='text' placeholder='Телефон'
-          input#email.input-small type='text' placeholder='Емейл'
-          button#add-new-contact.btn.btn-info type="submit" data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>X</b>"
+        #new-contact.hidden
+          form.form-inline
+            input#name.input-small type='text' placeholder='Имя'
+            input#phone.input-small type='text' placeholder='Телефон'
+            input#email.input-small type='text' placeholder='Емейл'
+          button#add-new-contact.btn.btn-info data-placement='right' data-original-title="Быстрый доступ клавишами <b class=key>S</b> <b class=key>X</b>"
             i.icon-user
             | Новый контакт
+          #new-contact-empty.hidden
+            span.label.label-warning
+              | Необходимо заполнить имя и номер телефона
 
     pre.instructions.span8
       = company.instructions
 
   #flashwrap
+    #security.hidden
+      | Вам необходимо разрешить доступ к микрофону для совершения звонков.
+
     #flash
       p
         a href="http://www.adobe.com/go/getflashplayer"

@@ -44,6 +44,7 @@ function onConnected(sessionid) {
     connected()
 }
 
+// Init
 $(document).ready(function() {
   swfobject.embedSWF("/freeswitch.swf", "flash", "250", "150", "9.0.0", "/expressInstall.swf", flashvars, {allowScriptAccess: 'always'}, [])
 
@@ -124,14 +125,14 @@ function wrong_number() {
 }
 
 function has_been_disconnected() {
-  if(check_filled() && state == 'filling') {
+  if(state == 'filling') {
     $.post('/operator/call/disconnected')
     connected()
   }
 }
 
 function new_contact() {
-  if(check_filled() && state == 'filling') {
+  if(check_contact_filled() && state == 'filling') {
     $.post('/operator/call/newcontact', {name: $('#name').val(), name: $('#phone').val(), name: $('#email').val()})
     connected()
   }
@@ -139,11 +140,19 @@ function new_contact() {
 
 // Checks
 function check_filled() {
-  return $('#result').text() != ''
+  if($('#result').text() == '') {
+    $('#result-empty').removeClass('hidden')
+    return false
+  } else
+    return true
 }
 
 function check_contact_filled() {
-  return $('#name').val() != '' && $('#phone').val() != ''
+  if($('#name').val() == '' || $('#phone').val() == '') {
+    $('#new-contact-empty').removeClass('hidden')
+    return false
+  } else
+    return true  
 }
 
 // States
@@ -157,6 +166,7 @@ function disconnected() {
 
 function connected() {
   state = 'connected'
+  $('#new-contact-empty, #result-empty').addClass('hidden')
   $('#company').hide()
   $('#result-div').hide().removeClass('hidden')
   $('#state').text('Готово к вызовам').removeClass('active')
