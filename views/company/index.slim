@@ -1,5 +1,5 @@
 - content_for :nav do
-  == slim :'company/nav'
+  == slim :'company/nav', locals: {company: company}
 section#top
   div.page-header
     h1
