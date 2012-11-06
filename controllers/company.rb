@@ -71,7 +71,6 @@ class Site < Sinatra::Base
       next unless target.save
 
       public_phones.each do |phone|
-        puts phone
         contact = TargetContact.create target: target, phone: phone
       end
 
