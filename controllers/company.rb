@@ -15,12 +15,29 @@ class Site < Sinatra::Base
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'customer', :name => params[:name]
     company = Company.create name: params[:company], :identity => identity
 
-    invite.update(invitee: identity)
-    session[:invite] = nil
+    if identity.errors.empty?
+      invite.update(invitee: identity)
+      session[:invite] = nil
 
-    session[:user_id] = identity.id
-    flash[:info] = "Добро пожаловать!"
-    redirect '/company'
+      session[:user_id] = identity.id
+      flash[:info] = "Добро пожаловать!"
+
+      Mail.new do
+        from     'info@gotelemarket.com'
+        to       params[:auth_key]
+        subject  'Телемаркет'
+   
+        html_part do
+          content_type 'text/html; charset=UTF-8'
+          body     "Добро пожаловать!"
+        end
+      end.deliver
+
+      redirect '/company'
+    else
+      flash['error'] = identity.errors.values.join('. ')
+      redirect '/'
+    end
   end
 
   get '/company' do

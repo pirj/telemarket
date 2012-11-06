@@ -31,7 +31,7 @@ class Site < Sinatra::Base
         end
       end.deliver
     else
-      flash['error'] = subscriber.errors.values.join('. ') unless subscriber.errors.empty?
+      flash['error'] = subscriber.errors.values.join('. ')
     end
     redirect '/'
   end
