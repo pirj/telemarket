@@ -14,7 +14,7 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/developme
 DataMapper.finalize
 # DataMapper.auto_upgrade!
 
-environment = development? ? :development : production? ? production : :test
+environment = development? ? :development : production? ? :production : :test
 
 CONFIG = {}
 [:email, :security].each do |file|
