@@ -19,13 +19,16 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
           li
             a href="/company/targets"
               | Цели (
-              span.success
-                = current_identity.company.targets(:status => true).size
-              | /
-              span.error
-                = current_identity.company.targets(:status => false).size
-              | /
-              = current_identity.company.targets.size
+              span.badge.badge-success
+                = company.targets(:status => :success).size
+              span.badge.badge-info
+                = company.targets(:status => :in_progress).size
+              span.badge.badge-warning
+                = company.targets(:status => :not_interested).size
+              span.badge.badge-important
+                = company.targets(:status => :no_numbers).size
+              span.badge
+                = company.targets.size
               | )
           li
             a href="/company/project"

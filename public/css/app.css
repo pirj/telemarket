@@ -49,14 +49,6 @@ h2 small {
   margin: 0;
 }
 
-span.error {
-  color: darkred;
-}
-
-span.success {
-  color: green;
-}
-
 .register-ads p {
   padding-left: 2em;
 }
