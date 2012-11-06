@@ -30,7 +30,7 @@ module CallListener
       unless user.nil?
         company = Company.get rack['calling_to_company_id']
 
-        target_contact = company.targets.first(status: :in_progress).target_contacts.first(status: :not_called)
+        target_contact = next_target_contact company
         unless target_contact.nil?
 
           rack['target_contact_id'] = target_contact.id
@@ -148,6 +148,12 @@ INTERCEPT
   #   puts "SNDING: #{data}"
   #   super
   # end
+
+  def next_target_contact company
+    targets = company.targets(status: :in_progress)
+    target = targets[rand(targets.size)]
+    target.target_contacts.first(status: :not_called)
+  end
 end
 
 EM.run do
