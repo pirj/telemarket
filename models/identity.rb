@@ -2,13 +2,13 @@ class Identity
   include DataMapper::Resource
   property :id,               Serial
 
-  property :email,            String
+  property :email,            String, :length => 127
   property :crypted_password, String, :length => 60
 
   property :role,             String
 
   property :name, String
-  has 1, :company
+  has 1, :company, :constraint => :destroy
 
   has n, :invites, :constraint => :destroy
 

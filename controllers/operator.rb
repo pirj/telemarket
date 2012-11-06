@@ -40,12 +40,6 @@ class Site < Sinatra::Base
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'operator', :name => params[:name]
 
     if identity.errors.empty?
-      invite.update(invitee: identity)
-      session[:invite] = nil
-
-      session[:user_id] = identity.id
-      flash[:info] = "Добро пожаловать!"
-
       Mail.new do
         from     'info@gotelemarket.com'
         to       params[:auth_key]
@@ -56,6 +50,12 @@ class Site < Sinatra::Base
           body     "Добро пожаловать!"
         end
       end.deliver
+
+      invite.update(invitee: identity)
+      session[:invite] = nil
+
+      session[:user_id] = identity.id
+      flash[:info] = "Добро пожаловать!"
 
       redirect '/operator'
     else

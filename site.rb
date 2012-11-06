@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'bundler'
 require 'logger'
 Bundler.require
@@ -86,5 +87,10 @@ class Site < Sinatra::Base
 
   Mail.defaults do
     delivery_method :smtp, CONFIG[:email]
+  end
+
+  error(Net::SMTPFatalError) do
+    flash['error'] = "Неправильно задан адрес"
+    redirect '/'
   end
 end

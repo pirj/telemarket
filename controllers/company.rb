@@ -16,12 +16,6 @@ class Site < Sinatra::Base
     company = Company.create name: params[:company], :identity => identity
 
     if identity.errors.empty?
-      invite.update(invitee: identity)
-      session[:invite] = nil
-
-      session[:user_id] = identity.id
-      flash[:info] = "Добро пожаловать!"
-
       Mail.new do
         from     'info@gotelemarket.com'
         to       params[:auth_key]
@@ -32,6 +26,12 @@ class Site < Sinatra::Base
           body     "Добро пожаловать!"
         end
       end.deliver
+
+      invite.update(invitee: identity)
+      session[:invite] = nil
+
+      session[:user_id] = identity.id
+      flash[:info] = "Добро пожаловать!"
 
       redirect '/company'
     else
