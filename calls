@@ -20,6 +20,7 @@ logger.info "Starting Calls"
 module CallListener
 
   def post_init
+    logger = Logging.logger['CallListener']
     Fiber.new do
       connection_headers = command('connect')
       operator_uuid = connection_headers['Caller-Unique-ID']
