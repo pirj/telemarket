@@ -33,8 +33,8 @@ class Identity
       invite.save
     end
 
-    avatar = Cheers::Avatar.new "#{CONFIG[:security][:salt]}#{email}"
-    digest = Digest::SHA1.hexdigest "#{CONFIG[:security][:salt]}#{email}"
+    avatar = Cheers::Avatar.new "#{CONFIG[:security][:salt]}#{identity.email}"
+    digest = Digest::SHA1.hexdigest "#{CONFIG[:security][:salt]}#{identity.email}"
     avatar.avatar_file File.join Dir.pwd, "public/userdata/#{digest}.png"
   end
 
