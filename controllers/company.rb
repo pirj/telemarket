@@ -84,6 +84,7 @@ class Site < Sinatra::Base
       next if name.nil?
       next unless company.targets.first(name: name).nil?
 
+      next if public_phones.empty? and ceo_phones.empty?
       target = Target.new company: company, name: name
       next unless target.save
 
