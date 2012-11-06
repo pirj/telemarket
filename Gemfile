@@ -17,6 +17,7 @@ gem 'redis-rack', :require => 'rack/session/redis'
 # Misc tools
 gem 'cheers'
 gem 'roo'
+gem 'logging'
 
 # Mail
 gem 'mail'

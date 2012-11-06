@@ -1,12 +1,21 @@
 #!/usr/bin/env ruby
 require 'bundler'
-require 'logger'
+require 'logging'
 Bundler.require
 
 Dir['models/*.rb'].each { |file| require File.join Dir.pwd, file }
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.db")
 DataMapper.finalize
+
+logger = Logging.logger['CallListener']
+logger.level = :info
+logger.add_appenders(
+  Logging.appenders.stdout(layout: Logging.layouts.pattern(pattern: '[%d] %-5l: %m\n')),
+  Logging.appenders.rolling_file('log/calls.log', age: 'daily', layout: Logging.layouts.pattern(pattern: '[%d] %-5l: %m\n'))
+)
+
+logger.info "Starting Calls"
 
 module CallListener
 
@@ -36,7 +45,7 @@ module CallListener
           rack['target_contact_id'] = target_contact.id
           rack_session.set_session({}, rack_sid, rack, {})
 
-          puts "Bridging #{user.name} with #{target_contact.phone}"
+          logger.info "Bridging #{user.name} with #{target_contact.phone}"
           bridge("sofia/external/sip:#{target_contact.phone}@sip.zadarma.com")
 
           loop do
