@@ -22,6 +22,10 @@ class Identity
   property :deleted_at,      ParanoidDateTime
   timestamps :at
 
+  before :save do |identity|
+    identity.email = identity.email.downcase
+  end
+
   after :create do |identity|
     3.times do
       invite = Invite.new
@@ -39,7 +43,7 @@ class Identity
   end
 
   def self.authenticate(email, password)
-    instance = first(:email => email)
+    instance = first(:email => email.downcase)
     return false unless instance
     BCrypt::Password.new(instance.crypted_password) == password ? instance : nil
   end
