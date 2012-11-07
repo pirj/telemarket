@@ -1,4 +1,4 @@
-var host = /http[s]*:\/\/(.+)(:\d+)\//.exec(location.href)[1]
+var host = /http[s]*:\/\/(.+)(:\d+)*\//.exec(location.href)[1]
 var flashvars = { 
   rtmp_url: ('rtmp://' + host)
 }
