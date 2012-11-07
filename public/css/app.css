@@ -53,6 +53,12 @@ h2 small {
   padding-left: 2em;
 }
 
+#flashwrap {
+  width: 250px;
+  height: 150px;
+  padding: 5px;
+}
+
 #flash {
   position: absolute;
   visibility: hidden;
