@@ -1,4 +1,4 @@
-var host = /http[s]*:\/\/(.+)(:\d+)*\//.exec(location.href)[1]
+var host = /http[s]*:\/\/([^\/^:]+)/.exec(location.href)[1]
 var flashvars = { 
   rtmp_url: ('rtmp://' + host)
 }
@@ -40,8 +40,16 @@ function checkMic() {
 function onConnected(sessionid) {
   if (!checkMic())
     $('#flash')[0].showPrivacy()
-  else
+  else {
+    if (swfobject.ua.ie) {
+      $("#flash").css("top", "-500px")
+      $("#flash").css("left", "-500px")
+    } else {
+      $("#flash").css("visibility", "hidden")
+    }
+
     connected()
+  }
 }
 
 // Init
@@ -81,6 +89,8 @@ $(document).ready(function() {
 
   $('#add-new-contact').live('click', new_contact)
   Mousetrap.bind('s x', new_contact, 'keyup')
+
+  $('#settings').live('click', flash_settings)
 })
 
 // Actions
@@ -138,6 +148,16 @@ function new_contact() {
   }
 }
 
+function flash_settings() {
+  if (swfobject.ua.ie) {
+    $("#flash").css("top", "auto")
+    $("#flash").css("left", "auto")
+  } else {
+    $("#flash").css("visibility", "visible")
+  }
+  $('#flash')[0].showPrivacy()
+}
+
 // Checks
 function check_filled() {
   if($('#result').text() == '') {
@@ -161,7 +181,7 @@ function disconnected() {
   $('#company').hide()
   $('#result-div').hide()
   $('#state').text('Инициализация').addClass('active')
-  $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
+  $('#callgrp, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
 }
 
 function connected() {
@@ -170,16 +190,16 @@ function connected() {
   $('#company').hide()
   $('#result-div').hide().removeClass('hidden')
   $('#state').text('Готово к вызовам').removeClass('active')
-  $('#call').show()
+  $('#callgrp').show()
   $('#hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
-  $('#call, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').removeClass('hidden')
+  $('#callgrp, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').removeClass('hidden')
 }
 
 function ringing() {
   state = 'ringing'
   $('#state').text('Идёт вызов').addClass('active')
   $('#hangup').show()
-  $('#call, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
+  $('#callgrp, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
 }
 
 function talking() {
@@ -195,7 +215,7 @@ function talking() {
   $('#result').focus()
   $('#state').text('Разговор').addClass('active')
   $('#hangup, #transfer').show()
-  $('#call, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
+  $('#callgrp, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
 }
 
 function filling() {
@@ -203,7 +223,7 @@ function filling() {
   $('#result').focus()
   $('#state').text('Заполнение отчёта').removeClass('active')
   $('#success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').show()
-  $('#call, #hangup, #transfer').hide()
+  $('#callgrp, #hangup, #transfer').hide()
 }
 
 function hangedup() {

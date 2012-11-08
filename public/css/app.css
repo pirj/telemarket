@@ -56,12 +56,12 @@ h2 small {
 #flashwrap {
   width: 250px;
   height: 150px;
-  padding: 5px;
-}
-
-#flash {
-  position: absolute;
-  visibility: hidden;
+  padding: 10px;
+  position: fixed;
+  top: 45%;
+  bottom: 45%;
+  left: 45%;
+  right: 45%;
 }
 
 #target-title, #target-contact-name {
@@ -157,6 +157,10 @@ p.campaign_title img {
 
 .actions button {
   margin: 1em 1em 0 0;
+}
+
+#callgrp button, #settings i {
+  margin: 0;
 }
 
 #new-contact {

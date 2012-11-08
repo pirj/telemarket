@@ -34,9 +34,12 @@ section#top
         | Инициализация
 
       .actions
-        button#call.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей <b class=key>C</b>"
-          i.icon-play
-          | Вызвать
+        .btn-group#callgrp.hidden
+          button#call.btn data-placement='right' data-original-title="Быстрый доступ клавишей <b class=key>C</b>"
+            i.icon-play
+            | Вызвать
+          button#settings.btn data-placement='bottom' data-original-title="Настройки громкости и доступа к микрофону"
+            i.icon-wrench
         button#hangup.btn.hidden data-placement='right' data-original-title="Быстрый доступ клавишей <b class=key>H</b>"
           i.icon-stop
           | Прервать
@@ -71,12 +74,10 @@ section#top
     pre.instructions.span8
       = company.instructions
 
-    #flashall
-      #security.hidden
-        | Вам необходимо разрешить доступ к микрофону для совершения звонков.
+#flashwrap
+  
 
-      #flashwrap
-        #flash
-          p
-            a href="http://www.adobe.com/go/getflashplayer"
-              img src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"
+  #flash
+    p
+      a href="http://www.adobe.com/go/getflashplayer"
+        img src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"
