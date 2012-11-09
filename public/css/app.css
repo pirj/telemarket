@@ -69,14 +69,14 @@ h2 small {
   font-weight: bold;
 }
 
-.panel-1 { background-color: #DFB262; }
-.panel-2 { background-color: #DFCC62; }
-.panel-3 { background-color: #DDC23F; }
-.panel-4 { background-color: #8EBD99; }
-.panel-5 { background-color: #DFCC62; }
+.panel-1 { background-color: #DFCA62; }
+.panel-2 { background-color: #A9D05C; }
+.panel-3 { background-color: #DF9D62; }
+.panel-4 { background-color: #EFDE8A; }
+.panel-5 { background-color: #66891F; }
 
 .hero-right-hand {
-  background-color: #7DC24B;
+  background-color: #D0E7A0;
 }
 
 .hero-right-hand form {
