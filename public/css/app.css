@@ -49,6 +49,10 @@ h2 small {
   margin: 0;
 }
 
+.navbar-fixed-bottom {
+  position: relative;
+}
+
 .register-ads p {
   padding-left: 2em;
 }
