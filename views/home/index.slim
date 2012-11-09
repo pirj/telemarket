@@ -9,7 +9,7 @@
         small
           | Ваш личный колл-центр в "облаке"
       hr
-      h4
+      h3
         | Что это?
       p
         | Альтернатива традиционным колл-центрам для малого бизнеса, позволяющая избавить сотрудников от холодных звонков, быстро проинформировать или опросить существующих клиентов и выяснить потребность потенциальных.
@@ -32,7 +32,7 @@
       img src="/img/1350062441_HAL-9000.png"
       | Качественно
     p
-      | Наши операторы заинтересованы в качестве и количестве звонков, в отличии от офисных коллег. Вы не платите операторам, которые ушли пить чай.
+      | Наши операторы заинтересованы в качестве и количестве звонков, в отличии от офисных коллег. Вы не платите тем, кто ушёл пить чай.
   div.panel.panel-4.span3
     h2
       img src="/img/1350063378_coins.png"
@@ -42,17 +42,11 @@
 
 hr
 
-.row-fluid
-  .span12.panel.hero-right-hand
-    - unless current_identity
-      - if session[:invite]
-        a.btn.btn-primary.btn-large href='/company/register'
-          | Начать пользоваться сегодня
-      - unless session[:invite]
-        .span6
-          h4.pull-right
-            | Мы оповестим вас о начале открытой регистрации
-        form.span6.subscribe action='/subscribe' method='post'
-          div.input-append
-            input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
-            input.btn.btn-primary type='submit' value='Узнать первым'
+- unless current_identity or session[:invite]
+  .row-fluid.hero-ad
+    form.form-horizontal.span12.subscribe action='/subscribe' method='post'
+      label.control-label.span6 for='email'
+        | Мы оповестим вас о начале открытой регистрации
+      div.input-append.span6
+        input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
+        input.btn.btn-primary type='submit' value='Узнать первым'

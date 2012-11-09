@@ -4,7 +4,7 @@ ol,ul {
 /* Fonts */
 @font-face {
   font-family: 'Roboto';
-  src: url('/css/fonts/Roboto-Light.ttf') format('truetype');
+  src: url('/css/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -42,7 +42,13 @@ h2 small {
 }
 
 .navbar .nav > li > a.work {
-  color: #264;
+  color: #386;
+  font-weight: 700;
+}
+
+.navbar .nav > li > a.work {
+  color: #386;
+  font-weight: 700;
 }
 
 .navbar .nav {
@@ -79,34 +85,25 @@ h2 small {
 .panel-4 { background-color: #EFDE8A; }
 .panel-5 { background-color: #66891F; }
 
-.hero-right-hand {
-  background-color: #D0E7A0;
-}
-
-.hero-right-hand form {
-  margin-top: .5em;
-  margin-bottom: .5em;
-}
-
 .panel {
   padding: 1em;
   border-radius: 2px;
   box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
 }
 
-/*.panel p {
+.panel p {
+  font-family: 'Roboto';
+}
+
+.panel p {
   text-align: justify;
   text-justify: auto;
 }
-*/
+
 .panel img {
   width: 64px;
   height: 64px;
   padding-right: 0.5em;
-}
-
-.panel p {
-  font-size: 120%;
 }
 
 .less-heroic {
@@ -114,6 +111,27 @@ h2 small {
   padding-bottom: 30px;
   margin-bottom: 30px;
   box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
+}
+
+.less-heroic p {
+  font-family: 'Roboto Light';
+}
+
+.hero-ad {
+  background-color: #72C5BA;
+  border-radius: 2px;
+  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
+}
+
+.hero-ad form {
+  padding: 1em;
+  margin-bottom: 0;
+}
+
+.hero-ad label {
+  font-weight: 700;
+  font-size: 1.4em;
+  margin-bottom: 0;
 }
 
 pre.instructions {

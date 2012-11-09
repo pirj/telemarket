@@ -27,10 +27,12 @@ div#navbar.navbar.navbar-inverse.navbar-fixed-top
               a href="/sessions/logout"
                 | Выйти
           - unless current_identity
-            - if session[:invite]
-              li
-                a.work href="/operator/register"
-                  | Работа у нас
             li
               a href="/sessions/new"
                 | Войти
+            - if session[:invite]
+              a.btn.btn-primary href='/company/register'
+                | Начать пользоваться сегодня
+              li
+                a.work href="/operator/register"
+                  | Работа у нас
