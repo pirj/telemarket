@@ -38,7 +38,6 @@ h2 small {
 
 #main {
   padding-top: 60px;
-  padding-bottom: 60px;
 }
 
 .navbar .nav > li > a.work {
@@ -88,14 +87,11 @@ h2 small {
 .panel {
   padding: 1em;
   border-radius: 2px;
-  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.2);
 }
 
 .panel p {
   font-family: 'Roboto';
-}
-
-.panel p {
   text-align: justify;
   text-justify: auto;
 }
@@ -106,11 +102,13 @@ h2 small {
   padding-right: 0.5em;
 }
 
+.hero-unit {
+  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.2);
+}
+
 .less-heroic {
   padding-top: 30px;
   padding-bottom: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
 }
 
 .less-heroic p {
@@ -120,7 +118,7 @@ h2 small {
 .hero-ad {
   background-color: #72C5BA;
   border-radius: 2px;
-  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.2);
 }
 
 .hero-ad form {
@@ -129,8 +127,9 @@ h2 small {
 }
 
 .hero-ad label {
+  font-family: 'Roboto'
   font-weight: 700;
-  font-size: 1.4em;
+  font-size: 1.3em;
   margin-bottom: 0;
 }
 

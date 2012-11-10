@@ -40,13 +40,12 @@
     p
       | Вы платите только за звонки. Ни за офис, ни абонентскую плату за телефонные линии, ни столичные зарплаты операторам колл-центров.
 
-hr
-
 - unless current_identity or session[:invite]
-  .row-fluid.hero-ad
-    form.form-horizontal.span12.subscribe action='/subscribe' method='post'
-      label.control-label.span6 for='email'
-        | Мы оповестим вас о начале открытой регистрации
-      div.input-append.span6
-        input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
-        input.btn.btn-primary type='submit' value='Узнать первым'
+  .less-heroic
+    .row-fluid.hero-ad
+      form.form-horizontal.span12.subscribe action='/subscribe' method='post'
+        label.control-label.span6 for='email'
+          | Мы оповестим вас о начале открытой регистрации
+        div.input-append.span6
+          input name='email' autofocus='true' type='text' placeholder='Оставьте свой емейл'
+          input.btn.btn-primary type='submit' value='Узнать первым'
