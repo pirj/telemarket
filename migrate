@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'bundler'
+require 'logger'
+Bundler.require
+
+Dir['*.rb', 'models/*.rb'].each { |file| require File.join Dir.pwd, file }
+
+require 'dm-migrations/migration_runner'
+
+Dir['migrations/*.rb'].each { |file| require File.join Dir.pwd, file }
+
+migrate_up!
