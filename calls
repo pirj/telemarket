@@ -164,6 +164,13 @@ INTERCEPT
   # end
 end
 
-EM.run do
-  EventMachine.start_server '127.0.0.1', 8084, CallListener
+begin
+  EM.run do
+    EventMachine.start_server '127.0.0.1', 8084, CallListener
+  end
+rescue StandardError => e
+  logger.error ["Unhandled exception in EM loop, restarting", e.message, e.backtrace].join('\n')
+  retry
+rescue Exception => e
+  logger.fatal ["Unhandled FATAL exception in EM loop", e.message, e.backtrace].join('\n')
 end
