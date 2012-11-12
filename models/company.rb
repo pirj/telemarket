@@ -4,13 +4,13 @@ class Company
 
   belongs_to :identity
 
-  property :name, String, :length => 128
+  property :name, String, length: 128
 
   property :campaign_name, Text
   property :instructions, Text
-  property :manager_phone, String, :length => 16
+  property :manager_phone, String, length: 16
 
-  has n, :targets, :constraint => :destroy
+  has n, :targets, constraint: :destroy
 
   property :deleted_at, ParanoidDateTime
   timestamps :at
