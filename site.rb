@@ -1,6 +1,6 @@
 # coding: utf-8
 require 'bundler'
-require 'logger'
+require 'logging'
 Bundler.require
 
 require 'sinatra/contrib'
