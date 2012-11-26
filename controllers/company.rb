@@ -14,11 +14,12 @@ class Site < Sinatra::Base
 
     identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'customer', :name => params[:name]
     company = Company.create name: params[:company], :identity => identity
+    email = params[:auth_key]
 
     if identity.errors.empty?
       Mail.new do
         from     'info@gotelemarket.com'
-        to       params[:auth_key]
+        to       email
         subject  'Телемаркет'
    
         html_part do
