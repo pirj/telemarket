@@ -160,7 +160,7 @@ function flash_settings() {
 
 // Checks
 function check_filled() {
-  if($('#result').text() == '') {
+  if($('#result').val() == '') {
     $('#result-empty').removeClass('hidden')
     return false
   } else
@@ -193,6 +193,7 @@ function connected() {
   $('#callgrp').show()
   $('#hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').hide()
   $('#callgrp, #hangup, #transfer, #success, #not-interested, #wrong-number, #has-been-disconnected, #new-contact').removeClass('hidden')
+  $('#result, #name, #phone, #email').val('')
 }
 
 function ringing() {
