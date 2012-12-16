@@ -91,7 +91,7 @@ class Site < Sinatra::Base
     target.save
   end
 
-  get '/operator/call/success' do
+  post '/operator/call/success' do
     authorize! :make, :calls
 
     target_contact = TargetContact.get session['target_contact_id']
@@ -103,7 +103,7 @@ class Site < Sinatra::Base
     target.save
   end
 
-  get '/operator/call/not_interested' do
+  post '/operator/call/not_interested' do
     authorize! :make, :calls
 
     target_contact = TargetContact.get session['target_contact_id']
@@ -115,7 +115,7 @@ class Site < Sinatra::Base
     target.save
   end
 
-  get '/operator/call/wrongnumber' do
+  post '/operator/call/wrongnumber' do
     authorize! :make, :calls
     target_contact = TargetContact.get session['target_contact_id']
 
@@ -130,12 +130,12 @@ class Site < Sinatra::Base
     end
   end
 
-  get '/operator/call/disconnected' do
+  post '/operator/call/disconnected' do
     authorize! :make, :calls
     # do nothing for now
   end
 
-  get '/operator/call/newcontact' do
+  post '/operator/call/newcontact' do
     authorize! :make, :calls
     target_contact = TargetContact.get session['target_contact_id']
     target = target_contact.target
