@@ -23,7 +23,7 @@ class Site < Sinatra::Base
       Mail.new do
         from     'info@gotelemarket.com'
         to       email
-        subject  'Телемаркет'
+        subject  'Telemarket'
    
         html_part do
           content_type 'text/html; charset=UTF-8'
