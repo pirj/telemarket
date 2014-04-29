@@ -4,3 +4,4 @@ public/userdata/*.png
 *.db
 *.serial
 log
+config/*.yml
