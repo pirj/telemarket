@@ -28,7 +28,8 @@ class Site < Sinatra::Base
         end
       end.deliver
 
-      invite.update(invitee: identity)
+      invite.invitee_id = identity.id
+      invite.save
       session[:invite] = nil
 
       session[:user_id] = identity.id
