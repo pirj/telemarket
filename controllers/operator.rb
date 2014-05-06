@@ -37,12 +37,13 @@ class Site < Sinatra::Base
     invite = Invite.first(:code => session[:invite])
     raise InviteRequired.new('Приглашение уже было использовано ранее') unless invite.invitee.nil?
 
-    identity = Identity.create email: params[:auth_key], password: params[:password], :role => 'operator', :name => params[:name]
+    email = params[:auth_key]
+    identity = Identity.create email: email, password: params[:password], :role => 'operator', :name => params[:name]
 
     if identity.errors.empty?
       Mail.new do
         from     'info@gotelemarket.com'
-        to       params[:auth_key]
+        to       email
         subject  'Телемаркет'
    
         html_part do
