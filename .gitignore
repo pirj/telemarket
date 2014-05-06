@@ -5,3 +5,4 @@ public/userdata/*.png
 *.serial
 log
 config/*.yml
+tmp
