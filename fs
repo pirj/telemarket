@@ -1,1 +1,1 @@
-/usr/bin/freeswitch -g freeswitch -run /home/pirj/temp -log /home/pirj/temp -db /home/pirj/temp -conf .
+/usr/bin/freeswitch -g freeswitch -run ./tmp -log ./log -db ./tmp -conf .
