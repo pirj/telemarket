@@ -1,0 +1,1 @@
+thin -d -e production --chdir . -S ./thin.sock start
