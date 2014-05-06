@@ -5,7 +5,7 @@ migration 6, :create_target_contacts do
 
       column :target_id, Integer
 
-      column :ceo, Boolean, default: false
+      column :ceo, 'boolean', default: false
       column :name, String, length: 128
       column :phone, String, length: 16
 
