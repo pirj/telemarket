@@ -52,7 +52,7 @@ class Site < Sinatra::Base
         end
       end.deliver
 
-      invite.invitee_identity_id = identity.id
+      invite.invitee = identity
       invite.save
       session[:invite] = nil
 
