@@ -27,11 +27,11 @@ class Identity
   end
 
   after :create do |identity|
-    3.times do
-      invite = Invite.new
-      invites << invite
-      invite.save
-    end
+    # 3.times do
+    #   invite = Invite.new
+    #   invites << invite
+    #   invite.save
+    # end
 
     avatar = Cheers::Avatar.new "#{CONFIG[:security][:salt]}#{identity.email}"
     digest = Digest::SHA1.hexdigest "#{CONFIG[:security][:salt]}#{identity.email}"
