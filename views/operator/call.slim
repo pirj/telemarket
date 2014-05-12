@@ -5,7 +5,7 @@ script src="/js/swfobject.js"
 script src="/js/calls.js"
 script src="/js/mousetrap.min.js"
 
-input#session_id type='hidden' value=env['rack.session.options'][:id]
+input#session_id type='hidden' value=env["rack.request.cookie_hash"]["rack.session"]
 
 section#top
   .row-fluid
