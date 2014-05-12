@@ -9,6 +9,7 @@ GEM
     cancan (1.6.10)
     cheers (0.0.1)
       rmagick
+    coderay (1.1.0)
     daemons (1.1.9)
     data_objects (0.10.14)
       addressable (~> 2.1)
@@ -73,6 +74,7 @@ GEM
     eventmachine (1.0.3)
     fastercsv (1.5.5)
     hiredis (0.4.5)
+    interception (0.3)
     json (1.8.1)
     json_pure (1.8.1)
     little-plugger (1.1.3)
@@ -82,6 +84,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.3)
     multi_json (1.10.0)
@@ -89,6 +92,13 @@ GEM
       mini_portile (~> 0.5.0)
     pg (0.17.1)
     polyglot (0.3.4)
+    pry (0.9.12.4)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-rescue (1.2.0)
+      interception (>= 0.3)
+      pry
     rack (1.5.2)
     rack-fiber_pool (0.9.3)
     rack-protection (1.5.3)
@@ -127,6 +137,7 @@ GEM
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
+    slop (3.4.7)
     spreadsheet (0.9.7)
       ruby-ole (>= 1.0)
     stringex (1.5.1)
@@ -165,6 +176,8 @@ DEPENDENCIES
   logging
   mail
   pg
+  pry
+  pry-rescue
   rack-fiber_pool
   rack-protection
   redis

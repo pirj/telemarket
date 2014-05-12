@@ -32,3 +32,8 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'redis'
 gem 'hiredis'
 gem 'em-hiredis'
+
+group :development do
+  gem 'pry'
+  gem 'pry-rescue'
+end
