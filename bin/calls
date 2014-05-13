@@ -82,7 +82,7 @@ module CallListener
 
   def bridged_call operator_uuid, target_call_uuid, rack_sid, manager_phone
     puts "operator_uuid #{operator_uuid}, target_call_uuid #{target_call_uuid}"
-    subscriber = EM::Hiredis.connect
+    subscriber = EM::Hiredis.connect.pubsub
     subscriber.subscribe "transfer.#{rack_sid}"
     subscriber.on(:message) do |channel, message|
       puts "TRANSFER MESSAGE RECV"
